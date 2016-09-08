@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>{{ user.get_full_name|default:user.username }}</title>
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body>
+
+
+		
+      {% block header %}
+       <header id="header">
+						<h1>Scipy India 2016</h1>
+						<h2>Comment Abstract</h2>
+</header> 
+{% endblock %}
+
+
+
+<div id="wrapper">
+{% block nav %}
+
+          <nav id="nav" class="alt">
+            <ul>
+              <li><a href="{% url 'website:home' %}" class="active">Scip India 2016</a></li>
+              
+              {%   if user and not user.is_anonymous %}
+               <li class="dropdown">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.get_full_name|default:user.username }}<b class="caret"></b></a>
+               <ul class="dropdown-menu">
+                   <li><a href="{% url 'auth:logout' %}?next=/2016/cfp">Logout</a></li>
+                   <li><a href="{% url 'website:cfp' %}">Call For Proposal</a></li>
+               </ul>           
+           {% endif %}
+            </ul>
+          </nav>
+{% endblock %}
+
+
+{% block content %}
+			<div id="wrapper">
+			<div id="main">
+			<section id="content" class="main">
+				<h3>{{ proposal.user.first_name }} {{ proposal.user.last_name }}</h3>
+			<p><b>Title: </b>&nbsp;{{ proposal.title }}</p>
+     		<p><b>About Me: </b>&nbsp;{{ proposal.about_me }}</p>
+        	<p><b>Abstract: </b>&nbsp;{{ proposal.abstract }}</p>
+        	{% if proposal.prerequisite %}
+        		<p><b>Prerequisite: </b>&nbsp;{{ proposal.prerequisite }}</p>
+        	{% endif%}
+          {% if proposal.attachment.url %}
+           <a href="{{ proposal.attachment.url }}" class="btn btn-info" target="_blank">Attachment</a>
+           {% endif %}
+   		    <p><b>Date Created: </b>&nbsp;{{ proposal.date_created }}</p>      
+        <hr>
+        <h4>Comments</h4>
+             <h4>Comments</h4>
+        <hr>
+        {% for comment in comments %}
+            <div>
+                <strong>Comment By:</strong>
+                {{ comment.user.first_name }} {{ comment.user.last_name }}
+                <p>{{ comment.comment|safe }}</p>
+            </div>
+            <hr>
+        {% endfor %}
+        <form action="{% url 'website:comment_abstract' proposal.id %}" method='POST' enctype="multipart/form-data">
+            {% csrf_token %}
+            <textarea rows="5" cols="100" name="comment"></textarea><br>
+            <button type="submit" class="btn btn-info">
+            Comment
+            </button>
+        </form>
+
+		</section> 
+		</div>
+
+{% endblock %}
+					
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

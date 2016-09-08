@@ -1,0 +1,486 @@
+{% load static %}
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+    	<title>Scipy India 2016</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="{% static 'js/ie/html5shiv.js' %}"></script>
+		<link rel="stylesheet" href="{% static 'css/main.css'%}" />
+		<link rel="stylesheet" href="{% static 'css/fileuploader.css'%}" />
+		<link rel="stylesheet" href="{% static 'css/ie9.css' %}" />
+		<link rel="stylesheet" href="{% static 'css/ie8.css' %}" />
+		<link href="{% static 'css/base.css' %}" rel="stylesheet">
+		<link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+{% block header %}
+
+<header id="header" class="alt">
+						<span class="logo"><img src="{% static 'img/logo.png' %}" alt="" /></span>
+						<h1 >Scipy India 2016</h1>
+						<p >DECEMBER 9, 10 & 11</p><br><br>
+						<cente
+            			<table class="table" style="border-spacing: 40px 10px;">
+
+                	<tr>
+                			
+                    	<td>
+                       		 <a href="{% url 'website:cfp' %}" class="button" style="width : 220px;" >Attend</a>
+                    	</td>
+                    	<!-- <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> -->
+                    	<td>
+                        <a href="#callforabstract" class="button"  style="width : 220px;">Submit Abstract</a>
+                    	</td>
+                    	<!-- <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td> -->
+                    	<td>
+                       		 <a href="#callforabstract" class="button" style="width : 220px;" >Propose Workshop</a>
+                    	</td>
+                    	
+                	</tr>
+            	</table>
+            	</center>
+					</header>
+{% endblock %}
+
+
+
+
+{% block nav %}
+					<nav id="nav" class="alt">
+						<ul>
+							<li><a href="{% url 'website:home' %}" class="active">Home</a></li>
+							<li><a href="#about" >About</a></li>
+							<li><a href="#speakers" >Speakers</a></li>
+							<li><a href="#attend" >Attend</a></li>
+							<li><a href="#schedule" >Schedule</a></li>
+							<li><a href="#venue">Venue</a></li>
+							<li><a href="#callforabstract">Call for Proposal</a></li>
+							<li><a href="#sponsors" >Sponsors</a></li>
+							<li><a href="#contact" >Contact</a></li>
+							
+							
+        
+              
+              {%   if user and not user.is_anonymous %}
+               <li class="dropdown">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.get_full_name|default:user.username }}<b class="caret"></b></a>
+               <ul class="dropdown-menu">
+                   <li><a href="{% url 'auth:logout' %}?next=/2016/cfp">Logout</a></li>
+               </ul>   
+               {% else %}        <li><a href="{% url 'website:cfp' %}" >Login</a></li>
+           {% endif %}
+           
+   
+   
+						</ul>
+					</nav>
+{% endblock %}
+				<!-- Main -->
+			{% block content %}
+					<div id="main">
+
+						<!-- Introduction -->
+							<section id="about" class="main special">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>ABOUT</h2>
+										</header>
+										<p>We look forward to your proposals. Conference aims to promote Python for Scientific Computing and Education. Topics like pedagogy, exploration, modeling or from both applied and developmental perspectives are welcome. Contributions from academia as well as industry are welcome. If you wish to propose a talk at the conference, kindly follow the guidelines given below.</p>
+										
+									</div>
+								</div>
+							</section>
+
+
+
+					<section id="speakers" class="main special">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>SPEAKERS</h2>
+						
+	
+				
+					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+							<div class="item active centered">
+							<table class="tile_table">
+              				  <tr>
+                			    <td>
+								<img class="img-responsive" src="{% static 'img/c1.png' %}" alt="">
+								</td>
+								<td>
+									<p>Dr. Ajith Kumar</p>
+									Information about the person. His topic or anythhin related to. Filed of work etc.
+									<p></p>
+									<a href="https://github.com/expeyes" targer"_blank"><i class="icon-github" style="font-size:30px;"></i></a>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+        							<a href="http://expeyes.in/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a>
+
+								</td>
+							</tr>
+						</table>
+
+							</div>
+							<div class="item centered">
+								<table class="tile_table">
+              				  <tr>
+                			    <td>
+								<img class="img-responsive" src="{% static 'img/c2.png' %}" alt="">
+								</td>
+								<td>
+									<p>PQR UVW</p>
+									<hr>
+									Information about the person. His topic or anythhin related to talk. Filed of work etc.
+
+								</td>
+							</tr>
+						</table>
+							</div>
+							<div class="item centered">
+								<table class="tile_table">
+              				  <tr>
+                			    <td>
+								<img class="img-responsive" src="{% static 'img/c3.png' %}" alt="">
+								</td>
+								<td>
+									<p>ABC XYZ</p>
+									<hr>
+									Information about the person. His topic or anythhin related to talk. Filed of work etc.
+
+								</td>
+							</tr>
+						</table>
+							</div>
+						</div>
+						<ol class="carousel-indicators">
+						    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+						    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+						    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+						</ol>
+					</div>
+				</div>
+			
+			</div>
+					</section>
+
+
+
+	<section id="attend" class="main special">
+								<header class="major">
+									<h2>ATTEND</h2>
+								</header>
+								<ul class="statistics">
+									<a onmouseover="getElementById('demo').innerHTML= 'This ticket includes conference (tutorials + talks), lunch and snacks for 3 days. It does not include Accommodation & T-Shirt. This is a non-refundable ticket.'">
+										<li class="style1">
+										<p>Early Bird</p>
+										<strong>&#8377;1000</strong>Till 14 Nov</a>
+									</li>
+									<a onmouseover="getElementById('demo').innerHTML= 'This Ticket allows you to ONLY attend the conference for 3 Days. Does not include any conference amenities (Accommodation, Kit, Food & T-shirt). This is a non-refundable ticket.'">
+										<li class="style2">
+										<p>Light</p>
+										<strong>&#8377;300</strong>Till 14 Nov</a>
+									</li>
+									<a onmouseover="getElementById('demo').innerHTML= 'This ticket includes conference (tutorials + talks), lunch and snacks for 3 days. It does not include Accommodation & T-Shirt. This is a non-refundable ticket.'">
+										<li class="style3">
+										<p>Regular</p>
+										<strong>&#8377;1200</strong>Till 14 Nov</a>
+									</li>
+									<a onmouseover="getElementById('demo').innerHTML= 'Change of size, exchange at the venue is not available. This is a non-refundable ticket.'">
+										<li class="style4">
+										<p>T-shirt</p>
+										<strong>&#8377;250</strong>&nbsp;</a>
+									</li>
+									<a onmouseover="getElementById('demo').innerHTML= 'Accommodation is provided on a shared basis (twin sharing) inside IIT-B campus (Boys/Girls hostel). Accommodation will be provided for 3 days, i.e, 13-14, 14-15 and 15-16 December. Accommodation does not include other amenities like dinner, etc. Extension of period of stay is not available. This is a non-refundable ticket.'">
+										<li class="style5">
+										<p>Accomodation</p>
+										<strong>&#8377;750</strong>&nbsp;</a>
+									</li>
+								</ul>
+								
+								<p id="demo"></p>
+								<footer class="major">
+									<ul class="actions">
+										<li><a href="#" class="button">Register</a></li>
+									</ul>
+								</footer>
+							</section>
+
+
+
+		<section id="schedule" class="main special">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>SCHEDULE</h2>	
+											<div id="schedule" name="schedule">
+  
+      <div >
+       <center>
+           <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="http://scipy.in/2015#day1">Day 1</a></li>
+        <li><a data-toggle="tab" href="http://scipy.in/2015#day2">Day 2</a></li>
+        <li><a data-toggle="tab" href="http://scipy.in/2015#day3">Day 3</a></li>
+ <li><a data-toggle="tab" href="http://scipy.in/2015#paper">Workshop Resources</a></li>  <li><a data-toggle="tab" href="http://scipy.in/2015#workshop">Workshop Instructions</a></li>
+
+    
+</ul>
+    <div class="tab-content">
+        <div id="day1" class="tab-pane fade in active">
+            <p>
+        </p><center><h4>14 Dec 2015: Day 1</h4></center>
+              <table class="table table-bordered">
+                                <tbody><tr style="background-color:#f0f0f0"><td>08:30 AM - 09:00 AM</td><td>Registration and Breakfast</td><td></td>
+                                </tr>
+                                <tr><td>09:00 AM - 10:00 AM</td><td>Inauguration and Setup</td>
+                                </tr>
+                                <tr><td width="25%"> 10:00 AM - 12:00 PM</td><td width="45%"><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work1"> Workshop: IPython, NumPy, SciPy, MPL Introduction</a></td>
+<td width="30%"> by Jarrod Millman &amp; Prof. Prabhu Ramachandran</td>
+                                </tr>
+                                <tr><td>12:00 PM - 01:00 PM</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work2">Workshop: Introduction to BioPython</a></td>
+				<td> by Sourav Singh</td>
+                                </tr>
+                                <tr style="background-color:#f0f0f0"><td>01:00 PM - 02:00 PM</td><td>Lunch</td>  <td></td>
+
+                                </tr>
+                                <tr><td>02:00 PM - 04:00 PM</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work3">Workshop: Symbolic computation with Python, SymPy</a> </td>
+				<td> by Sumith</td>
+                                </tr>
+                                <tr><td> 04:00 PM - 06:00 PM</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work4">Workshop: Introduction to Data Analysis using Pandas</a></td>
+				<td>by Bargava Subramanian</td>
+                                </tr>
+              </tbody></table>
+         
+            <p></p>
+        </div>
+        <div id="day2" class="tab-pane fade">
+            <p>
+              </p><center><h4>15 Dec 2015: Day 2</h4></center>
+               <table class="table table-bordered">
+                                <tbody><tr style="background-color:#f0f0f0"><td>08:30 AM - 09:00 AM</td><td>Breakfast</td>  <td></td>
+
+                                </tr>
+                                <tr><td width="25%">09:00 AM - 11:00 AM</td><td width="45%"><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work5">Workshop: Complex Network analysis using NetworkX</a></td>
+<td width="40%">by Mridul Seth &amp; Himanshu Mishra</td>
+                                </tr>
+                                <tr><td>11:00 AM - 01:00 PM</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work6">Workshop: Domain-specific languages and high performance:<br>
+                                                Generating high-performance code in Python</a></td>
+				<td>by Dr. Andreas Kloeckner</td>
+                                </tr>
+                                <tr style="background-color:#f0f0f0">
+                                <td>01:00 PM - 02:00 PM</td><td>Lunch</td><td></td>
+
+                                </tr><tr><td>02:00 PM - 03:00 PM</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work8">Workshop: Application of Pandas for some allocation problems</a> </td>
+				<td>by Prof. Madhu Belur, Saurabh Kumar &amp; Shana Moothedath</td>
+                                </tr>
+                                <tr><td>03:00 PM - 04:00 PM</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work7">Workshop: Modeling and solving mathematical optimization problems with Pyomo</a> </td>
+<td>by Prof. Ashutosh Mahajan, Prof. Jayendran Venkateswaran &amp; Mr. Atul Kumar</td>
+                                </tr>
+                                <tr><td>04:00 PM - 06:00 PM</td><td>Python in Schools Track: Details TBA</td>
+                                </tr>
+               </tbody></table>
+            <p></p>
+        </div>
+        <div id="day3" class="tab-pane fade">
+            <p>
+              </p><center><h4>16 Dec 2015: Day 3</h4></center>
+ <table class="table table-bordered">
+                                <tbody><tr style="background-color:#f0f0f0"><td>08:30 AM - 09:00 AM</td><td>Breakfast</td>
+                                </tr>
+                                <tr><td width="25%">09:00 AM - 09:15 AM</td><td width="45%">Conference inauguration</td>
+
+                                </tr>
+                                <tr><td>09:15 AM - 10:15 AM</td><td>Keynote Address - Prof. Andreas Klöckner</td>
+                                
+                                </tr>
+<tr><td>10:15 AM - 11:00 AM</td><td>Python for Statisticians - Jarrod Millman</td>
+                                
+                                </tr>
+                                <tr style="background-color:#f0f0f0">
+                                <td>11:00 AM - 11:15 AM</td><td>Tea</td>
+
+
+                                </tr><tr><td>11:15 AM - 11:45 PM</td><td>Concept of a Python based Laboratory - Dr. Ajith Kumar</td>
+                                
+                                </tr>
+                                <tr><td>11:45 AM - 12:10 PM</td><td>SymPy, SymEngine and the interface! - Sumith</td>
+
+                                </tr>
+                                <tr><td>12:10 PM - 12:35 PM</td><td>Sandhi - Visual Programming Editor - Ambikeshwar Srivastava</td>
+                                </tr>
+  <tr><td>12:35 PM - 12:50PM</td><td>Time Series Satellite Data Visualizer - Umang Gupta</td>
+                                </tr>
+  <tr style="background-color:#f0f0f0"><td>12:50 PM - 02:00 PM</td><td>	Lunch</td>
+                                </tr>
+  <tr><td>2:00PM - 2:20 PM</td><td>Python based implementation of Aqua Monitoring System using Raspberry Pi - Mohan Allam</td>
+                                </tr>
+  <tr><td>2:20PM - 2:40 PM</td><td>3D Scanner System Using Python - Neha Shinde</td>
+                                </tr>
+  <tr><td>02:40 PM - 03:10 PM</td><td>Talk - Prof. Ted Ralphs</td>
+                                </tr>
+<tr><td>03:10 PM - 03:40 PM</td><td>CFD simulations using OpenFOAM and PyFOAM - Prof. Shivasubramanian Gopalakrishnan</td>
+                                </tr>
+<tr style="background-color:#f0f0f0"><td>3:40 PM - 4:00 PM</td><td>	Tea</td>
+                                </tr>
+<tr><td>4:00 PM - 4:25 PM</td><td>Osdag: A python-based open source steel design and graphics software - Deepa</td>
+                                </tr>
+<tr><td>4:25 PM - 5:00 PM</td><td>Python for Microcontrollers - Srikant Patnaik</td>
+                                </tr>
+<tr><td>5:00 PM - 5:30 PM</td><td>	Lightning Talks</td>
+                                </tr>
+<tr><td>5:30 PM - 5:45 PM</td><td>	Vote of thanks and closing</td>
+                              
+               </tr></tbody></table>	
+           <p></p>
+        </div>
+ <div id="workshop" class="tab-pane fade">
+            <p>
+              </p><center><h4>Click on each title for more details</h4></center><br>
+			<h5 align="right"><a href="http://fossee.in/data/emails/SciPy-India-2015-Installation-Instruction-for-Workshop.pdf">SciPy 2015: Installation Instructions for Workshop</a></h5>
+               <table class="table table-bordered">
+		 <colgroup>
+                                <col width="220">
+                                <col width="720">
+                                </colgroup>
+
+		 <tbody><tr><th>Speaker</th>
+                <th>Title</th>
+                </tr><tr><td>Jarrod Millman &amp; Prof. Prabhu Ramachandran</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work1">IPython, NumPy, SciPy, MPL Introduction</a></td></tr>
+                <tr><td>Sourav Singh</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work2">Introduction to BioPython</a></td></tr> 
+                <tr><td>Sumith</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work3">Symbolic computation with Python, SymPy</a></td></tr>
+                <tr><td>Mr. Bargava Subramanian</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work4">Introduction to Data Analysis using Pandas</a></td></tr>
+                <tr><td>Mridul Seth &amp; Himanshu Mishra</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work5">Complex Network analysis using NetworkX</a></td></tr>
+                <tr><td>Dr. Andreas Kloeckner</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work6">Domain-specific languages to high performance: Code generation and transformation in Python</a></td></tr>
+                <tr><td>Prof. Ashutosh Mahajan, Prof. Jayendran Venkateswaran
+ &amp; Mr. Atul Kumar</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work7">Modeling and solving mathematical optimization problems with Pyomo</a></td></tr>
+                <tr><td>Prof. Madhu Belur, Saurabh Kumar &amp; Shana Moothedath</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work8">Application of Pandas for some allocation problems</a></td>
+               </tr></tbody></table>
+            <p></p>
+        </div>
+      </div>
+			</section>
+											
+
+											<section id="venue" class="main special">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>VENUE</h2>	
+											<center><h4>Lecture Hall Complex, IIT Bombay</h4>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.472585331343!2d72.916895!3d19.130779999999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c7f4215f57bf%3A0xcf0c03ea45a113e1!2sLecture+Hall+Complex+(LHC)!5e0!3m2!1sen!2sin!4v1434726932900" width="550" height="300" frameborder="0" style="border:0"></iframe></center>
+                </section>
+
+
+
+	<section id="callforabstract" class="main special">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>CALL FOR PROPOSAL</h2></header>
+											<div class="col-md-6">
+											 <p align="justify">We look forward to your proposals. Conference aims to promote <strong>Python for Scientific Computing and Education</strong>. Topics like pedagogy, exploration, modeling or from both applied and developmental perspectives are welcome. Contributions from academia as well as industry are welcome. If you wish to propose a talk at the conference, kindly follow the guidelines given below.</p><br><br>
+											  {% if user and not user.is_anonymous and not login_required %}
+											<a class="button" href="{% url 'website:submitcfp' %}">Submit Abstract</a>
+											{% else %}
+											<a class="button" href="{% url 'website:cfp' %}">Submit Abstract</a>
+											{% endif %}
+										</div>
+										<div class="col-md-6">
+											 <p align="justify">We look forward to your proposals. Conference aims to promote <strong>Python for Scientific Computing and Education</strong>. Topics like pedagogy, exploration, modeling or from both applied and developmental perspectives are welcome. Contributions from academia as well as industry are welcome. If you wish to propose a talk at the conference, kindly follow the guidelines given below.</p><br><br>
+											 {% if user and not user.is_anonymous and not login_required %}
+											<a class="button" href="{% url 'website:submitcfw' %}">Propose Workshop</a>
+											{% else %}
+											<a class="button" href="{% url 'website:cfp' %}">Propose Workshop</a>
+											{% endif %}
+											
+										</div>
+										</section>
+
+
+											<section id="sponsors" class="main special">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>SPONSORS</h2></header>
+											<div class="col-md-4">
+        <a href="http://mhrd.gov.in/" target="_blank"><img width=200 height=70 src="{% static 'img/mhrd.png'%}" /></a>
+      </div>
+      <div class="col-md-8">
+        <p align="justify">The <a href="http://fossee.in/" target="_blank">FOSSEE</a> project undertaken by IIT Bombay is funded by <a href="http://mhrd.gov.in/" target="_blank">Ministry of Human Resource Development</a> (Govt. of India) under National Mission on Education through ICT. The essence of Human Resource Development is education, which plays a significant and remedial role in balancing the socio-economic fabric of the Country. Since citizens of India are its most valuable resource, our billion-strong nation needs the nurture and care in the form of basic education to achieve a better quality of life.</p><br><br>
+      </div>
+      <center><h3>Organiser</h3></center>
+      <div class="col-md-4">
+        <a href="http://fossee.in/" target="_blank"><img width=200 height=70 src="{% static 'img/fossee.png'%}" /></a>
+      </div>
+      <div class="col-md-8">
+        <p align="justify">The Annual SciPy India conference is organised by the team members of FOSSEE project which is part of the National Mission on Education through ICT with the thrust area being Adaptation and deployment of open source simulation packages equivalent to proprietary software, funded by MHRD, based at the Indian Institute of Technology Bombay (IITB).</p>
+      </div>
+										</section>
+--><br><br><br>
+					</div>
+
+				<section id="contact" name="contact"></section>
+  <div class="container">
+  
+      <header >
+      	<br>
+		<h2>CONTACT US</h2>
+      <br>
+      <div class="col-lg-8 col-lg-offset-2 centered"> <i class="icon-envelope" style="font-size:20px;">&nbsp; scipy[at]fossee[dot]in</i>
+      </div>
+      <div class="col-lg-8 col-lg-offset-2 centered">
+      	<br>
+        <p>Feel free to send us an email if you have any questions.</p>
+        <form id="contact" action="" class="form" role="form" method=POST enctype="multipart/form-data">
+          <div class="row">
+            <div class="col-xs-6 col-md-6 form-group">
+              <input class="form-control" id="name" name="name" placeholder="Name" type="text" required />
+            </div>
+            <div class="col-xs-6 col-md-6 form-group">
+              <input class="form-control" id="email" name="email" placeholder="Email" type="email" required />
+            </div>
+          </div>
+          <br>
+          <textarea class="form-control" id="message" name="message" placeholder="Message" rows="5"></textarea>
+          <div class="row">
+            <div class="col-xs-12 col-md-12">
+            	<br>	
+              <button class="button1" type="submit">Send Message</button>
+                <br><br>
+                <ul class="social-button">
+								<a href="https://www.facebook.com/scipydotin"><i class="icon-facebook" style="font-size:30px;"></i></a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="https://twitter.com/scipyindia"><i class="icon-twitter" style="font-size:30px;"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="#"><i class="icon-google-plus" style="font-size:30px;"></i></a>						
+							</ul><br><br>
+            </div>
+          </div>
+          {% csrf_token %}
+        </form>
+        <!-- form --> 
+      </div>
+    </div>
+    </div>
+			</div>
+			<!-- end wrapper -->
+								{% endblock %}
+
+
+		<!-- Scripts -->
+			<script src="{% static 'js/jquery.min.js' %}"></script>
+			<script src="{% static 'js/main.js' %}"></script>
+			<script src="{% static 'js/util.js' %}"></script>
+			<script src="{% static 'js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'js/skel.min.js' %}"></script>
+			<script src="{% static '/js/ie/respond.min.js' %}"></script>
+			<script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+	</body>
+</html>

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+    <title>Register</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+  </head>
+  <body>
+
+
+    
+      {% block header %}
+       <header id="header">
+            <h1>Scipy India 2016</h1>
+            <h2 style= "color:black;">Register</h2>
+</header> 
+{% endblock %}
+
+
+<div id="wrapper">
+{% block nav %}
+          <nav id="nav" class="alt">
+            <ul>
+              <li><a href="{% url 'website:home' %}" class="active">Scip India 2016</a></li>
+              
+              {%   if user and not user.is_anonymous %}
+               <li class="dropdown">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.get_full_name|default:user.username }}<b class="caret"></b></a>
+               <ul class="dropdown-menu">
+                   <li><a href="{% url 'auth:logout' %}?next=/2016/cfp">Logout</a></li>
+                   <li><a href="{% url 'website:cfp' %}">Call For Proposal</a></li>
+               </ul>           
+           {% endif %}
+            </ul>
+          </nav>
+{% endblock %}
+
+
+{% block content %}
+      <div id="wrapper">
+<div id="main">
+<section id="content" class="main">
+                
+                
+
+
+{% if email_registered %}
+          <center>
+            <div class="alert" style="width:300px;height:50px;">
+                <a class="close" data-dismiss="alert" href="#">&times;</a>
+                <p>Email ID is already registered !</p>
+            </div>
+            <p style="line-height:5px;">Have you already logged in using social logins ?</p>
+            <p style="line-height:5px;">or</p>
+            <p style="line-height:5px;"><a href="{% url 'website:forgotpassword' %}">Click Here</a> if you forgot your username or password</p>
+          </center>
+          {% endif %}
+          <div>
+            <form action="" method="POST">
+                {{ form.as_p }}
+                <div class="col-md-8">
+                    <button class="button" type="submit">SignUp</button>
+                    <a class="btn btn-primary" href="{% url 'website:cfp' %}">I have an account</a>
+                </div>
+                {% csrf_token %}
+            </form>
+          </div>
+
+              </section>
+
+          </div>
+
+{% endblock   %}
+          
+    <!-- Scripts -->
+      <script src="assets/js/jquery.min.js"></script>
+      <script src="assets/js/jquery.scrollex.min.js"></script>
+      <script src="assets/js/jquery.scrolly.min.js"></script>
+      <script src="assets/js/skel.min.js"></script>
+      <script src="assets/js/util.js"></script>
+      <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+      <script src="assets/js/main.js"></script>
+
+  </body>
+</html>
+
+
+  
