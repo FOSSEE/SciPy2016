@@ -18,29 +18,26 @@
 
     
       {% block header %}
-       <header id="header">
+       <header id="header1">
             <h1>Scipy India 2016</h1>
-            <h2 style= "color:black;">Register</h2>
+            <h2>Register</h2>
 </header> 
 {% endblock %}
 
 
 <div id="wrapper">
 {% block nav %}
-          <nav id="nav" class="alt">
-            <ul>
-              <li><a href="{% url 'website:home' %}" class="active">Scip India 2016</a></li>
-              
-              {%   if user and not user.is_anonymous %}
-               <li class="dropdown">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.get_full_name|default:user.username }}<b class="caret"></b></a>
-               <ul class="dropdown-menu">
-                   <li><a href="{% url 'auth:logout' %}?next=/2016/cfp">Logout</a></li>
-                   <li><a href="{% url 'website:cfp' %}">Call For Proposal</a></li>
-               </ul>           
-           {% endif %}
+<div id="navbar-main"> 
+  <!-- Fixed navbar -->
+  <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">            
+           <li><a href="{% url 'website:home' %}" class="active">Home</a></li>
             </ul>
-          </nav>
+         </div>
+      <!--/.nav-collapse --> 
+  </div>
+</div>
 {% endblock %}
 
 
@@ -63,11 +60,14 @@
             <p style="line-height:5px;"><a href="{% url 'website:forgotpassword' %}">Click Here</a> if you forgot your username or password</p>
           </center>
           {% endif %}
+         {% if registration_complete %}
+          <p> Your Account is Created Successfully !</p>
+           {% endif %}
           <div>
             <form action="" method="POST">
-                {{ form.as_p }}
+                {{ form.as_p}}
                 <div class="col-md-8">
-                    <button class="button" type="submit">SignUp</button>
+                    <button class="button" type="submit" >SignUp</button>
                     <a class="btn btn-primary" href="{% url 'website:cfp' %}">I have an account</a>
                 </div>
                 {% csrf_token %}

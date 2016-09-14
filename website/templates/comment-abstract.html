@@ -16,31 +16,35 @@
 
 		
       {% block header %}
-       <header id="header">
+       <header id="header1">
 						<h1>Scipy India 2016</h1>
-						<h2>Comment Abstract</h2>
+						<h2>Abstract Details</h2>
 </header> 
 {% endblock %}
 
-
-
-<div id="wrapper">
 {% block nav %}
-
-          <nav id="nav" class="alt">
-            <ul>
-              <li><a href="{% url 'website:home' %}" class="active">Scip India 2016</a></li>
-              
-              {%   if user and not user.is_anonymous %}
+<div id="wrapper">
+<div id="navbar-main"> 
+  <!-- Fixed navbar -->
+  <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+         <li><a href="{% url 'website:home' %}" class="active">Home</a></li>        
+               {% if user and not user.is_anonymous %}
                <li class="dropdown">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.get_full_name|default:user.username }}<b class="caret"></b></a>
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.get_full_name|default:user.username }}</a>
                <ul class="dropdown-menu">
                    <li><a href="{% url 'auth:logout' %}?next=/2016/cfp">Logout</a></li>
-                   <li><a href="{% url 'website:cfp' %}">Call For Proposal</a></li>
-               </ul>           
+                   <li><a href="{% url 'website:cfp' %}">Main Menu</a></li>
+               </ul>   
+               {% else %}       
+                <li><a href="{% url 'website:cfp' %}" >Login</a></li>
            {% endif %}
-            </ul>
-          </nav>
+        </ul>
+      </div>
+      <!--/.nav-collapse --> 
+  </div>
+</div>
 {% endblock %}
 
 
@@ -58,25 +62,31 @@
           {% if proposal.attachment.url %}
            <a href="{{ proposal.attachment.url }}" class="btn btn-info" target="_blank">Attachment</a>
            {% endif %}
-   		    <p><b>Date Created: </b>&nbsp;{{ proposal.date_created }}</p>      
+   		    <p><b>Date Created: </b>&nbsp;{{ proposal.date_created }}</p>  
+   		    <hr> 
+          <form action="{% url 'website:status' proposal.id %}" method='POST'>{% csrf_token %}
+
+    <input type="submit" value="Accept" name="accept"/>
+    <input type="submit" value="Reject" name="reject"/>
+
+     </form>
         <hr>
         <h4>Comments</h4>
-             <h4>Comments</h4>
-        <hr>
         {% for comment in comments %}
             <div>
                 <strong>Comment By:</strong>
                 {{ comment.user.first_name }} {{ comment.user.last_name }}
-                <p>{{ comment.comment|safe }}</p>
+                <p>{{ comment.comment|safe }}</p>   
+               <!--   <a href="#">Edit</a>
+                <a href="#">Delete</a> -->
             </div>
             <hr>
         {% endfor %}
         <form action="{% url 'website:comment_abstract' proposal.id %}" method='POST' enctype="multipart/form-data">
             {% csrf_token %}
-            <textarea rows="5" cols="100" name="comment"></textarea><br>
-            <button type="submit" class="btn btn-info">
-            Comment
-            </button>
+            <textarea rows="5" cols="100" id="comment" class= "comment" name="comment" placeholder = "Add commnet here..."></textarea><br>
+            <button type="submit" class="button">Comment</button>
+
         </form>
 
 		</section> 
@@ -93,5 +103,30 @@
 			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
 			<script src="assets/js/main.js"></script>
 
-	</body>
+
+<script>
+isFormHtml5Valid(form) {
+  for(var el of form.querySelectorAll('input,textarea,select')){
+    if(!el.checkValidity())
+      return false;
+  }
+  return true;
+}
+
+mySubmitButton.onclick = function() {
+  if(this.form && isFormHtml5Valid(this.form))
+    this.disabled=true;
+  this.form.submit();
+}</script>
+
+
+
+<script>
+$(function(){
+
+}
+)
+</script>
+
+</body>
 </html>
