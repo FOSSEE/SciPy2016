@@ -19,29 +19,36 @@
 
     
       {% block header %}
-       <header id="header">
+       <header id="header1">
             <h1>Scipy India 2016</h1>
-            <h2 style= "color:black;">View Proposals</h2>
+            <h2>View Proposals</h2>
 </header> 
 {% endblock %}
 
 
 <div id="wrapper">
 {% block nav %}
-          <nav id="nav" class="alt">
-            <ul>
-              <li><a href="{% url 'website:home' %}" class="active">Scip India 2016</a></li>
-              
-              {% if user and not user.is_anonymous %}
+         <div id="navbar-main"> 
+  <!-- Fixed navbar -->
+  <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+         <li><a href="{% url 'website:home' %}" class="active">Home</a></li>        
+               {% if user and not user.is_anonymous %}
                <li class="dropdown">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.get_full_name|default:user.username }}<b class="caret"></b></a>
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.get_full_name|default:user.username }}</a>
                <ul class="dropdown-menu">
                    <li><a href="{% url 'auth:logout' %}?next=/2016/cfp">Logout</a></li>
                    <li><a href="{% url 'website:cfp' %}">Main Menu</a></li>
-               </ul>           
+               </ul>   
+               {% else %}       
+                <li><a href="{% url 'website:cfp' %}" >Login</a></li>
            {% endif %}
-            </ul>
-          </nav>
+        </ul>
+      </div>
+      <!--/.nav-collapse --> 
+  </div>
+</div>
 {% endblock %}
 
 
@@ -52,43 +59,67 @@
                 
                 
 
-   <form action="" method="post"> {% csrf_token %}
+   <form action="{% url 'website:delete' %}" method="post"> {% csrf_token %}
     <table class="table">
           <colgroup>
-        <col width="20%" />
+                {% if user.is_superuser  %}
         <col width="10%" />
         <col width="20%" />
-        <col width="80%" />
-        <!-- <col width="20%" /> -->
+        <col width="60%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="20%" />
+        {% else %}
+         <col width="10%" />
+        <col width="60%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="20%" />
+
+        {% endif %}
     </colgroup>
-    <th> Select
-    <th> Sr
+    <th> <center>Select
+            {% if user.is_superuser  %}
     <th>Speaker
-    <th> Title
-    <!-- <th> Comments -->
+      {% endif %}
+    <th> <center>Title
+    <th> View
+    <th> Comments
+    <th> Status</center>
     {% for proposal in proposals %}
     <tr>
-      <td> <input type = "checkbox" name="delete_proposal" value = {{proposal.id}}></input></td>
-      <td>
-            {{ forloop.counter }}
-        </td>
+      <td><center> <input type = "checkbox" name="delete_proposal" value = {{proposal.id}}></input></center></td>
+            {% if user.is_superuser  %}
         <td>
             {{ proposal.user.get_full_name}}
         </td>
+        {% endif %}
+        <td style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:.5px;"> <center>{{proposal.title}}</td>
       {% if user.is_superuser  %}
-        <td style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:.5px;"><a href="{% url 'website:comment_abstract' proposal.id %}">{{proposal.title}}</a> </td>
+        <td ><a href="{% url 'website:comment_abstract' proposal.id %}">View</a> </td>
       {% else %}
-         <td style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:.5px;"><a href="{% url 'website:abstract_details' proposal.id %}">{{proposal.title}}</a> </td>
+         <td ><a href="{% url 'website:abstract_details' proposal.id %}">View</a> </td>
       {% endif %}
+      <td><center> 0 </center></td>
+
+      <td>
+         {% if proposal.status = 'Accepted' %}
+         <h5 style="color:green;">{{proposal.status}}</h5>
+         {% elif proposal.status = 'Rejected' %}
+          <h5 style="color:red;">{{proposal.status}}</h5>
+          {% else %}
+          <h5 style="color:blue;">{{proposal.status}}</h5>
+         {% endif %}
+
+       </td>
     </tr>
     {% endfor %}
     </table>
-    <center><button class="btn" type="submit">Delete</button></center>
+    <center><input type="submit" value="Delete" name="delete"/></center> 
                   </form>
               </section>
 
           </div>
-
 
 {% endblock   %}
           
@@ -101,5 +132,13 @@
       <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
       <script src="assets/js/main.js"></script>
 
-  </body>
+  
+
+<script>
+function hello(){
+  alert('hi');
+}
+</script>
+
+</body>
 </html>

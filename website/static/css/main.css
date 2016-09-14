@@ -1645,14 +1645,17 @@
 /* Type */
 
 	body {
+				/*background: url(../img/3.png) no-repeat center top;*/
+
 		background-color: #935d8c;
 		color: rgba(255, 255, 255, 0.65);
 	}
 
 	body, input, select, textarea {
-		font-family: "Source Sans Pro",  Helvetica, sans-serif;
+		font-family: Helvetica, sans-serif;
+				/*font-family: "Source Sans Pro", Helvetica, sans-serif;*/
 		font-size: 17pt;
-		font-weight: 500;
+		font-weight: 300;
 		line-height: 1.65;
 	}
 
@@ -1686,8 +1689,8 @@
 		-ms-transition: color 0.2s ease, border-bottom 0.2s ease;
 		transition: color 0.2s ease, border-bottom 0.2s ease;
 		text-decoration: none;
-		border-bottom: dotted 1px;
-		color: inherit;
+/*		border-bottom: dotted 1px;
+*/		color: blue;
 	}
 
 		a:hover {
@@ -1836,7 +1839,8 @@
 	}
 
 	strong, b {
-		color: #ffffff;
+		color: #595656;
+		font-weight: 600;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
@@ -1986,26 +1990,17 @@
 	button,
 	.button {
 		background-color: transparent;
-		/*box-shadow: inset 0 0 0 .51px black;*/
-		color: white !important;
-		font-weight: 500;
-		background-color: #D44727	
-
-	}
-
-.button1 {
-	
-		background-color: transparent;
 		box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
 		color: #ffffff !important;
 	}
-	/*	input[type="submit"]:hover,
+
+		input[type="submit"]:hover,
 		input[type="reset"]:hover,
 		input[type="button"]:hover,
 		button:hover,
 		.button:hover {
 			background-color: rgba(255, 255, 255, 0.075);
-		}*/
+		}
 
 		input[type="submit"]:active,
 		input[type="reset"]:active,
@@ -2028,9 +2023,10 @@
 		input[type="button"].special,
 		button.special,
 		.button.special {
-			background-color: #8cc9f0;
+			background-color: #D44727;
 			color: #ffffff !important;
 			box-shadow: none;
+			font-weight: 500;
 		}
 
 			input[type="submit"].special:hover,
@@ -2038,7 +2034,7 @@
 			input[type="button"].special:hover,
 			button.special:hover,
 			.button.special:hover {
-				background-color: #9acff2;
+				background-color: #333;
 			}
 
 			input[type="submit"].special:active,
@@ -2839,9 +2835,9 @@
 	}
 
 		.features li {
-			width: calc(33.33333% - 2em);
+			width: 20%;
 			margin-left: 2em;
-			margin-top: 3em;
+		
 			padding: 0;
 		}
 
@@ -2906,6 +2902,7 @@
 			padding: 1.5em;
 			color: #ffffff;
 			text-align: center;
+			font-weight: bold;
 		}
 
 			.statistics li.style1 {
@@ -3087,6 +3084,21 @@
 	}
 
 /* Header */
+#header1 {
+		/*background-size: 1500px 750px;*/
+		padding: 5em 5em 1em 5em ;
+		text-align: center;
+	}
+
+		#header1 h1 {
+			margin: 0 0 0.25em 0;
+			color: #ffffff;
+			font-weight: bold;
+		}
+		#header1 h2 {
+			margin: 0 0 0.25em 0;
+			color: #ffffff;
+		}
 
 	#header {
 		background: url(../img/3.png) no-repeat center top;
@@ -3097,24 +3109,17 @@
 
 		#header h1 {
 			margin: 0 0 0.25em 0;
-			color: black;
-			font-weight: 400;
-		}
-		#header h2 {
-			
-			color: black;
-	
+			color: #484848;
+			font-weight: bold;
 		}
 
 		#header p {
 			font-size: 1.25em;
 			letter-spacing: -0.025em;
-			color: black;
-			font-weight: bold;
 		}
 
 		#header.alt {
-			padding: 7em 5em 4em 5em ;
+			padding: 5em 5em 4em 5em ;
 		}
 
 			#header.alt h1 {
@@ -3150,6 +3155,7 @@
 					display: block;
 					margin: 0 auto;
 					max-width: 75%;
+					width: 14%;
 				}
 
 		@media screen and (max-width: 1280px) {
@@ -3244,12 +3250,12 @@
 		-ms-transition: background-color 0.2s ease, border-top-left-radius 0.2s ease, border-top-right-radius 0.2s ease, padding 0.2s ease;
 		transition: background-color 0.2s ease, border-top-left-radius 0.2s ease, border-top-right-radius 0.2s ease, padding 0.2s ease;
 		background-color: #ffffff;
-		color: white;
+		color: #fff;
 		position: absolute;
 		width: 64em;
 		max-width: calc(100% - 4em);
 		padding: 1em;
-		background-color: #f7f7f7;
+		background-color: #333;
 		border-top-left-radius: 0.25em;
 		border-top-right-radius: 0.25em;
 		cursor: default;
@@ -3321,11 +3327,11 @@
 				}
 
 					#nav ul li a:hover {
-						background-color: #BEBEBE;
+						background-color: rgba(222, 222, 222, 0.25);
 					}
 
 					#nav ul li a.active {
-						background-color: #D44727;
+						background-color: #656464;
 						box-shadow: none;
 					}
 
@@ -3333,7 +3339,7 @@
 			position: fixed;
 			top: 0;
 			padding: 0.5em 1em;
-			background-color: black;
+			background-color:#333;
 			border-top-left-radius: 0;
 			border-top-right-radius: 0;
 			z-index: 10000;
@@ -3457,7 +3463,7 @@
 				#main input[type="button"].special:active,
 				#main button.special:active,
 				#main .button.special:active {
-					background-color: #7ec3ee;
+					background-color: #000;
 				}
 
 				#main input[type="submit"].special.icon:before,

@@ -3,22 +3,22 @@
 
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<title>Call for Proposal</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-	</head>
-	<body>
+  <head>
+    <title>Call for Proposal</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+    <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+  </head>
+  <body>
 
 
       {% block header %}
-       <header id="header">
-						<h1>Scipy India 2016</h1>
-						<h2>Call For Proposal</h2>
+       <header id="header1">
+            <h1>Scipy India 2016</h1>
+            <h2>Call For Proposal</h2>
 </header> 
 {% endblock %}
 
@@ -26,26 +26,34 @@
 
 {% block nav %}
 
-					<nav id="nav" class="alt">
-            <ul>
-              <li><a href="{% url 'website:home' %}" class="active">Scip India 2016</a></li>
-              
-              {%   if user and not user.is_anonymous %}
+<div id="navbar-main"> 
+  <!-- Fixed navbar -->
+  <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+         <li><a href="{% url 'website:home' %}" class="active">Home</a></li>        
+               {% if user and not user.is_anonymous %}
                <li class="dropdown">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.get_full_name|default:user.username }}<b class="caret"></b></a>
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.get_full_name|default:user.username }}</a>
                <ul class="dropdown-menu">
                    <li><a href="{% url 'auth:logout' %}?next=/2016/cfp">Logout</a></li>
-          
-               </ul>           
+                   <li><a href="{% url 'website:cfp' %}">Main Menu</a></li>
+               </ul>   
+               {% else %}       
+                <li><a href="{% url 'website:cfp' %}" >Login</a></li>
            {% endif %}
-            </ul>
-          </nav>
+        </ul>
+      </div>
+      <!--/.nav-collapse --> 
+  </div>
+</div>
 {% endblock %}
 
 
-{% block content %}
-			<div id="wrapper">
-<div id="main">
+{% block content %} 
+      <div id="wrapper">
+<div id="main" class="col-md-5">
+
 <section id="content" class="main">
  {% if user and not user.is_anonymous and not login_required %}
                   <h2><u>Main Menu</u></h2>
@@ -74,14 +82,18 @@
                     </form>
                     </div>
                     <br>
-      {% endif %}
-  		
-					
+      {% endif %}    
+          
+  
+              </section>
 
-				<!-- Main -->
-					
-								
-								<h2><u>Proposal Guidelines</u></h2>
+          </div>
+ <div id="wrapper" >
+<div id="main" class="col-md-7" >
+
+<section id="content" class="main">
+
+                <h2><u>Proposal Guidelines</u></h2>
             <ul>
                 <li>The project you are willing to present should be an actual implementation rather than just an idea.
                 <li>Abstract should be of 300 to 700 words describing the topic, including its relevance to scientific computing.
@@ -90,26 +102,25 @@
                 <li>Notification for selection/rejection of your proposal will be given through email.
                 <li>All selected proposals must be presented at the conference by at least one author.
             </ul>
-          			  <h2><u>Important Dates</u></h2>
-			<ul>
+                  <h2><u>Important Dates</u></h2>
+      <ul>
                 <li>CFP Open: July 5, 2015
                 <li>CFP Close: November 24, 2015
                 <li>Announcement of selected proposals: December 1, 2015
             </ul>
-							</section>
+              </section>
 
-					</div>
-
+          </div>
 {% endblock %}
-					
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/skel.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="assets/js/main.js"></script>
+          
+    <!-- Scripts -->
+      <script src="assets/js/jquery.min.js"></script>
+      <script src="assets/js/jquery.scrollex.min.js"></script>
+      <script src="assets/js/jquery.scrolly.min.js"></script>
+      <script src="assets/js/skel.min.js"></script>
+      <script src="assets/js/util.js"></script>
+      <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+      <script src="assets/js/main.js"></script>
 
-	</body>
+  </body>
 </html>
