@@ -1628,7 +1628,7 @@
 		background-image: url("images/overlay.png"), -webkit-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
 		background-image: url("images/overlay.png"), -ms-linear-gradient(45deg, #e37682 15%, #5f4d93 85%);
 		/*background-image: url("images/overlay.png"), linear-gradient(45deg, #e37682 15%, #5f4d93 85%);*/
-		background-image: url("images/overlay.png"), linear-gradient(45deg, #3a3a3b 15%, #F9896D 85%);
+		background-image: url("images/overlay.png"), linear-gradient(0deg, #3a3a3b 25%, #D44727 75%);
 	}
 
 		body.is-loading *, body.is-loading *:before, body.is-loading *:after {
@@ -1690,11 +1690,13 @@
 		transition: color 0.2s ease, border-bottom 0.2s ease;
 		text-decoration: none;
 /*		border-bottom: dotted 1px;
-*/		color: blue;
+*/		color: #D44727;
 	}
 
 		a:hover {
 			border-bottom-color: transparent;
+			border-bottom: dotted 1px;
+
 		}
 
 	strong, b {
@@ -1706,7 +1708,7 @@
 	}
 
 	p {
-		margin: 0 0 2em 0;
+		margin: 0 0 .5em 0;
 	}
 
 		p.content {
@@ -2069,7 +2071,7 @@
 	input[type="text"],
 	input[type="password"],
 	input[type="email"],
-	select,
+	/*select,*/
 	textarea {
 		-moz-appearance: none;
 		-webkit-appearance: none;
@@ -2129,7 +2131,7 @@
 	input[type="password"],
 	input[type="email"],
 	select {
-		height: 2.75em;
+		/*height: 2.75em;*/
 	}
 
 	textarea {
@@ -2835,7 +2837,7 @@
 	}
 
 		.features li {
-			width: 20%;
+			/*width: 20%;*/
 			margin-left: 2em;
 		
 			padding: 0;
@@ -3378,7 +3380,8 @@
 		}
 
 		#main a:hover {
-			color: #636363;
+			color:#D44727;
+;
 		}
 
 		#main strong, #main b {
@@ -3478,13 +3481,24 @@
 			color: #636363;
 		}
 
-		#main input[type="text"],
+		#main input[type="text"]{
+			background: rgba(222, 222, 222, 0.25);
+			border-color: #dddddd;
+			width : 98%;
+		}
+		
+		#main select{
+			background: rgba(222, 222, 222, 0.25);
+			border-color: #dddddd;
+			width: 30%;
+
+		}
 		#main input[type="password"],
 		#main input[type="email"],
-		#main select,
 		#main textarea {
 			background: rgba(222, 222, 222, 0.25);
 			border-color: #dddddd;
+			width: 98%;
 		}
 
 			#main input[type="text"]:focus,
@@ -3579,6 +3593,7 @@
 			background-image: -webkit-linear-gradient(90deg, #efa8b0, #a89cc8, #8cc9f0);
 			background-image: -ms-linear-gradient(90deg, #efa8b0, #a89cc8, #8cc9f0);
 			background-image: linear-gradient(90deg, #efa8b0, #a89cc8, #8cc9f0);
+
 		}
 
 		#main table tbody tr {

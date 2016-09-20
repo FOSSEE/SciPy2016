@@ -19,7 +19,7 @@
     
       {% block header %}
        <header id="header1">
-            <h1>Scipy India 2016</h1>
+            <h1>SciPy India 2016</h1>
             <h2>Register</h2>
 </header> 
 {% endblock %}
@@ -45,9 +45,6 @@
       <div id="wrapper">
 <div id="main">
 <section id="content" class="main">
-                
-                
-
 
 {% if email_registered %}
           <center>
@@ -63,20 +60,77 @@
          {% if registration_complete %}
           <p> Your Account is Created Successfully !</p>
            {% endif %}
-          <div>
-            <form action="" method="POST">
-                {{ form.as_p}}
-                <div class="col-md-8">
-                    <button class="button" type="submit" >SignUp</button>
-                    <a class="btn btn-primary" href="{% url 'website:cfp' %}">I have an account</a>
-                </div>
-                {% csrf_token %}
+          <!-- <div class = "col-md-7">                   -->
+            <!-- <div id = "my_form"> -->
+            <form action="" method="POST">  {% csrf_token %}
+                  {% for field in form %} 
+                  {{ field.errors }}
+                  <p>{{ field.label}}
+                   {% if field.field.required %} <span style="color:red;">*</span> {% endif %}
+                    {{ field }}</p>
+                  {% endfor %}
+                <br>
+                    <button class="button special" style="background:#D44727" type="submit" >SignUp</button>
+                    <a class="btn btn-primary" href="{% url 'website:cfp' %}"><u>I have an account</u></a>
+                <!-- </div> -->
+               
             </form>
-          </div>
-
+          <!-- </div> -->
+        <!-- </div> -->
+        
               </section>
 
           </div>
+          <!--  <footer id="footer">
+            <section id="contact">
+              <h2>Write to Us</h2>
+              <p>Feel free to send us an email if you have any questions.</p>
+              <form id="contact" action="" class="form" role="form" method=POST enctype="multipart/form-data">{% csrf_token %}
+                    <div class="col-md-6 form-group">
+                      <input class="form-control" id="name" name="name" placeholder="Name" type="text" required />
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <input class="form-control" id="email" name="email" placeholder="Email" type="email" required />
+                    </div>
+                    <br><br>
+                    <textarea class="form-control" id="message" name="message" placeholder="Message" rows="5"></textarea>
+                  <br>
+                  <div class = "col-md-3">
+                  <input class="form-control" style="color:black;" readonly type="text" id="a" />
+                  </div>
+                  <div class = "col-md-3">
+              <input placeholder = "Answer" class="form-control" type="text" id="b"/>
+              </div>
+              <div class = "col-md-3">
+              <button class="button" id = "c" type="submit">Send Message</button>
+              </div>
+            </section>
+            <section>
+              <h2>Contact Us</h2>
+              <dl class="alt">
+                <dt>Address</dt>
+                <dd>1234 Somewhere Road &bull; Nashville, TN 00000 &bull; USA</dd>
+                <dt>Phone</dt>
+                <dd>(000) 000-0000 x 0000</dd>
+                <dt>Email</dt>
+                <dd><a style="color:white;" href="#">information@untitled.tld</a></dd>
+              </dl>
+              <ul class="icons">
+                <li><a style="color:white;" href="#" class="icon-twitter alt"><span class="label"></span></a></li>
+                <li><a style="color:white;" href="#" class="icon-facebook alt"><span class="label"></span></a></li>
+                <li><a style="color:white;" href="#" class="icon-instagram alt"><span class="label"></span></a></li>
+                <li><a style="color:white;" href="#" class="icon-github alt"><span class="label"></span></a></li>
+                <li><a style="color:white;" href="#" class="icon-dribbble alt"><span class="label"></span></a></li>
+              </ul>
+              Visit SciPy.in/ <a style="color:white;" href="">2009</a>/
+              <a style="color:white;" href="">2010</a>/
+              <a style="color:white;" href="">2011</a>/
+              <a style="color:white;" href="">2012</a>/
+              <a style="color:white;" href="">2013</a>/
+              <a style="color:white;" href="">2014</a>/
+              <a style="color:white;" href="">2015</a>
+            </section>
+          </footer> -->
 
 {% endblock   %}
           
@@ -88,6 +142,20 @@
       <script src="assets/js/util.js"></script>
       <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
       <script src="assets/js/main.js"></script>
+<script>
+$(document).ready(function() {
+    var n1 = Math.round(Math.random() * 10 + 1);
+    var n2 = Math.round(Math.random() * 10 + 1);
+    $("#a").val(n1 + " + " + n2 + " = ");
+    $("#c").click(function() {
+        if (eval($("#a").val()) == $("#b").val()) {
+        } else {
+            alert("Write the correct value ");
+        }
+    });
+});
+</script>
+
 
   </body>
 </html>

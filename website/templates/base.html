@@ -3,17 +3,17 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-    	<title>Scipy India 2016</title>
+		 <link rel="icon" href="http://fossee.in/data/emails/images/favicon.ico" type="icon"> 
+    	<title>SciPy India 2016</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<script src="{% static 'js/ie/html5shiv.js' %}"></script>
 		<link rel="stylesheet" href="{% static 'css/main.css'%}" />
 		<link rel="stylesheet" href="{% static 'css/fileuploader.css'%}" />
-		<!-- <link rel="stylesheet" href="{% static 'css/ie9.css' %}" /> -->
-		<!-- <link rel="stylesheet" href="{% static 'css/ie8.css' %}" /> -->
 		<link href="{% static 'css/base.css' %}" rel="stylesheet">
-		<link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
-	</head>
+		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		<link href="{% static 'css/bootstrap-social.css' %}" rel="stylesheet">
+	</head>	
 	<body>
 
 		<!-- Wrapper -->
@@ -22,17 +22,14 @@
 
 <header id="header" class="alt">
 						<span class="logo"><img src="{% static 'img/logo.png' %}" alt="" /></span>
-						<h1 >Scipy India 2016</h1>
-						<p style="color:#636363; font-weight:500" >DECEMBER 9, 10 & 11</p><br><br>
+						<h1 >SciPy India 2016</h1>
+						<p style="color:#484848; font-weight:700; font-size:28px;" >DECEMBER 9, 10 & 11</p><br><br>
             			
             	 <a href="{% url 'website:cfp' %}" class="button special" style="width : 220px;" >Attend</a></center>
-            	 <a href="#callforabstract" class="button special"  style="width : 220px;">Submit Abstract</a></center>
-            	  <a href="#callforabstract" class="button special" style="width : 220px;" >Propose Workshop</a></center>
+            	 <a href="{% url 'website:cfp' %}" class="button special"  style="width : 220px;">Call for Proposal</a></center>
+            	  <!-- <a href="#callforabstract" class="button special" style="width : 220px;" >Propose Workshop</a></center> -->
 					</header>
 {% endblock %}
-
-
-
 
 
 <body data-spy="scroll" data-offset="0" data-target="#navbar-main">
@@ -47,7 +44,7 @@
           <li> <a href="#about" class="smoothScroll">About</a></li>
           <li> <a href="#speakers" class="smoothScroll">Speakers</a></li>
           <li> <a href="#attend" class="smoothScroll">Attend</a></li>
-          <li> <a href="#callforabstract">Call for Proposal</a></li>
+          <li> <a href="{% url 'website:cfp' %}">Call for Proposal</a></li>
 	 	  <li> <a href="#schedule" class="smoothScroll">Schedule</a></li>
           <li> <a href="#venue" class="smoothScroll">Venue</a></li>
           <li> <a href="#sponsors" class="smoothScroll">Sponsors</a></li>
@@ -80,34 +77,11 @@
 										<header class="major">
 											<h2>ABOUT</h2>
 										</header>
-										<p style= "font-size: 20px;">We look forward to your proposals. Conference aims to promote Python for Scientific Computing and Education. Topics like pedagogy, exploration, modeling or from both applied and developmental perspectives are welcome. Contributions from academia as well as industry are welcome. If you wish to propose a talk at the conference, kindly follow the guidelines given below.</p>
+										<p align="justify" style= "font-size: 20px;">We look forward to your proposals. Conference aims to promote Python for Scientific Computing and Education. Topics like pedagogy, exploration, modeling or from both applied and developmental perspectives are welcome. Contributions from academia as well as industry are welcome. If you wish to propose a talk at the conference, kindly follow the guidelines given below.</p>
 										
 									</div>
 									</div>
-								<div><h3>SciPy India Conferences down the lane</h3>
-								<ul class="features">
-									<li>
-										<span><img src="{% static 'img/s15.jpg' %}" width="200" alt="" /></span>
-										<h4><a href="http://scipy.in/2015" target="_blank">SciPy India 2015</a></h4>
-										
-									</li>
-									<li>
-										<span><img src="{% static 'img/s14.jpg' %}" width="200" alt="" /></span>
-										<h4><a href="http://scipy.in/2014" target="_blank">SciPy India 2014</a></h4>
-										
-									</li>
-									<li>
-										<span><img src="{% static 'img/s13.jpg' %}" width="200" alt="" /></span>
-										<h4><a href="http://scipy.in/2013" target="_blank">SciPy India 2013</a></h4>
-										
-									</li>
-									<li>
-										<span><img src="{% static 'img/s12.jpg' %}" width="200" alt="" /></span>
-										<h4><a href="http://scipy.in/2012" target="_blank">SciPy India 2012</a></h4>
-										
-									</li>
-								</ul>
-								</div>
+								
 							</section>
 
 
@@ -121,28 +95,28 @@
 	<center>
 				
 				<div class = "col-md-4">
-					<img class="img-responsive" src="{% static 'img/pic01.png' %}" alt="">
-					<p>Dr. Abc Xyz</p>
-									<a href="https://github.com/expeyes" targer"_blank"><i class="icon-github" style="font-size:30px;"></i></a>
+					<img class="img-responsive" src="{% static 'img/ajith.jpg' %}" height="300" width="300" alt="">
+					<p>Dr. Ajit Kumar</p>
+									<a style = "color:#636363;" href="https://github.com/expeyes" target="_blank"><i class="icon-github" style="font-size:30px;"></i></a>
 									&nbsp;&nbsp;&nbsp;&nbsp;
-        							<a href="http://expeyes.in/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a>
+        							<a style = "color:#636363;" href="http://expeyes.in/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a>
 				</div>
 				<div class = "col-md-4">
-					<img class="img-responsive" src="{% static 'img/pic01.png' %}" alt="">
+					<img class="img-responsive" src="{% static 'img/pic01.png' %}" height="300" width="300" alt="">
 					<p>Dr. Abc Xyz</p>
-									<a href="https://github.com/expeyes" targer"_blank"><i class="icon-github" style="font-size:30px;"></i></a>
+									<a style = "color:#636363;" href="https://github.com/expeyes" target="_blank"><i class="icon-github" style="font-size:30px;"></i></a>
 									&nbsp;&nbsp;&nbsp;&nbsp;
-        							<a href="http://expeyes.in/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a>
+        							<a style = "color:#636363;" href="http://expeyes.in/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a>
 				</div>
 				<div class = "col-md-4">
-					<img class="img-responsive" src="{% static 'img/pic01.png' %}" alt="">
+					<img class="img-responsive" src="{% static 'img/pic01.png' %}" height="300" width="300" alt="">
 					<p>Dr. Abc Xyz</p>
-									<a href="https://github.com/expeyes" targer"_blank"><i class="icon-github" style="font-size:30px;"></i></a>
+									<a style = "color:#636363;" href="https://github.com/expeyes" target="_blank"><i class="icon-github" style="font-size:30px;"></i></a>
 									&nbsp;&nbsp;&nbsp;&nbsp;
-        							<a href="http://expeyes.in/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a>
+        							<a style = "color:#636363;" href="http://expeyes.in/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a>
 				</div>
 				</center>
-
+					
 				</div>
 			
 			</div>
@@ -155,6 +129,7 @@
 									<h2>ATTEND</h2>
  								</header>
 
+							<!-- <div style="overflow-x:auto;"> -->
 								<table >
 									 <colgroup>
         							 <col width="20%" />
@@ -163,13 +138,9 @@
 									    </colgroup>
 									<tr>
 										<center>
-								<!-- <ul class="statistics"> -->
 								<td bgcolor="#efa8b0">
-									<!-- <ul class="statistics"> -->
-										<!-- <li class="style1"> -->
 										<h9 style="color:white;">Early Bird</h9>
 										<h2 style="color:white;" style ="font-size: 25px;">&#8377;1000</h2>
-								<!-- </ul> -->
 								</td>
 								<td>
 									This ticket includes conference (tutorials + talks), lunch and snacks for 3 days. It does not include Accommodation & T-Shirt. This is a non-refundable ticket.
@@ -177,56 +148,40 @@
 								</tr>
 								<tr>
 								<td bgcolor = "#c79cc8">
-									<!-- <ul class="statistics"> -->
-										<!-- <li class="style2"> -->
 										
 										<h9 style="color:white;">Light</h9>
 										<h2  style="color:white;"style ="font-size: 25px;">&#8377;300</h2>
-									<!-- </li> -->
-									<!-- </ul> -->
 								</td>
 								<td>
 									This Ticket allows you to ONLY attend the conference for 3 Days. Does not include any conference amenities (Accommodation, Kit, Food & T-shirt). This is a non-refundable ticket.									</td>
 								</tr>
 								<tr>
 								<td bgcolor="#a89cc8">
-									<!-- <ul class="statistics"> -->
-										<!-- <li class="style3"> -->
 										<h9 style="color:white;">Regular</h9>
 										<h2 style="color:white;" style ="font-size: 25px;">&#8377;1200</h2>
-									<!-- </li> -->
-								<!-- </ul> -->
 								</td>
 								<td>
 									This ticket includes conference (tutorials + talks), lunch and snacks for 3 days. It does not include Accommodation & T-Shirt. This is a non-refundable ticket.</td>
 								</tr> 
 								<tr>
 								<td bgcolor ="#9bb2e1">
-									<!-- <ul class="statistics"> -->
-										<!-- <li class="style5"> -->
 										<h9 style="color:white;">Accomodation</h9>
 										<h2 style="color:white;" style ="font-size: 25px;">&#8377;750</h2>
-									<!-- </li> -->
-								<!-- </ul> -->
 								</td>
 								<td>
 									Accommodation is provided on a shared basis (twin sharing) inside IIT-B campus (Boys/Girls hostel). Accommodation will be provided for 3 days, i.e, 13-14, 14-15 and 15-16 December. Accommodation does not include other amenities like dinner, etc. Extension of period of stay is not available. This is a non-refundable ticket.
 									</td>
 								<tr>
 								<td bgcolor= "#8cc9f0">
-									<!-- <ul class="statistics"> -->
-										<!-- <li class="style4"> -->
 										<h9 style="color:white;">T-Shirt</h9>
 										<h2 style="color:white;" style ="font-size: 25px;">&#8377;250</h2>
-									<!-- </li> -->
-								<!-- </ul> -->
 								</td>
 								<td>
 									Change of size, exchange at the venue is not available. This is a non-refundable ticket.
 									</td>
 								</tr>
 							</tr>
-						
+								
 							</table>
 								
 								<p id="demo"></p>
@@ -238,32 +193,6 @@
 							</section>
 
 		
-<section id="callforabstract" class="main special">
-								<div class="spotlight">
-									<div class="content">
-										<header class="major">
-											<h2>CALL FOR PROPOSAL</h2></header>
-											<div class="col-md-6">
-											 <p align="justify">We look forward to your proposals. Conference aims to promote <strong>Python for Scientific Computing and Education</strong>. Topics like pedagogy, exploration, modeling or from both applied and developmental perspectives are welcome. Contributions from academia as well as industry are welcome. If you wish to propose a talk at the conference, kindly follow the guidelines given below.</p><br><br>
-											  {% if user and not user.is_anonymous and not login_required %}
-											<a class="button" href="{% url 'website:submitcfp' %}">Submit Abstract</a>
-											{% else %}
-											<a class="button" href="{% url 'website:cfp' %}">Submit Abstract</a>
-											{% endif %}
-										</div>
-										<div class="col-md-6">
-											 <p align="justify">We look forward to your proposals. Conference aims to promote <strong>Python for Scientific Computing and Education</strong>. Topics like pedagogy, exploration, modeling or from both applied and developmental perspectives are welcome. Contributions from academia as well as industry are welcome. If you wish to propose a talk at the conference, kindly follow the guidelines given below.</p><br><br>
-											 {% if user and not user.is_anonymous and not login_required %}
-											<a class="button" href="{% url 'website:submitcfw' %}">Propose Workshop</a>
-											{% else %}
-											<a class="button" href="{% url 'website:cfp' %}">Propose Workshop</a>
-											{% endif %}
-											
-										</div>
-										</section>
-
-
-
 		<section id="schedule" class="main special">
 								<div class="spotlight">
 									<div class="content">
@@ -280,11 +209,9 @@
         <li><a style="background: #a89cc8;" data-toggle="tab" href="http://scipy.in/2015#day3">Day 3</a></li>
 		<li><a style="background: #9bb2e1;"data-toggle="tab" href="http://scipy.in/2015#paper">Workshop Resources</a></li>
 		<li><a style="background: #8cc9f0;" data-toggle="tab" href="http://scipy.in/2015#workshop">Workshop Instructions</a></li>
-
     
 </ul>
     <div class="tab-content">
-      
         <div id="day1" class="tab-pane fade in active">
             <p>
         </p><center><h4>14 Dec 2015: Day 1</h4></center>
@@ -425,8 +352,10 @@
 									<div class="content">
 										<header class="major">
 											<h2>VENUE</h2>	
-											<center><h4>Lecture Hall Complex, IIT Bombay</h4>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.472585331343!2d72.916895!3d19.130779999999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c7f4215f57bf%3A0xcf0c03ea45a113e1!2sLecture+Hall+Complex+(LHC)!5e0!3m2!1sen!2sin!4v1434726932900" width="550" height="300" frameborder="0" style="border:0"></iframe></center>
+											<center><h4>Lecture Hall Complex, IIT Bombay</h4></center>
+												<!-- <div class='myIframe' >  -->
+                    <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.472585331343!2d72.916895!3d19.130779999999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c7f4215f57bf%3A0xcf0c03ea45a113e1!2sLecture+Hall+Complex+(LHC)!5e0!3m2!1sen!2sin!4v1434726932900" width="550" height="300" frameborder="0" style="border:0"></iframe>
+                <!-- </div> -->
                 </section>
 
 
@@ -451,17 +380,15 @@
         <p align="justify">The Annual SciPy India conference is organised by the team members of FOSSEE project which is part of the National Mission on Education through ICT with the thrust area being Adaptation and deployment of open source simulation packages equivalent to proprietary software, funded by MHRD, based at the Indian Institute of Technology Bombay (IITB).</p>
       </div>
 										</section>
-<!-- 
-
-									
---><br><br><br>
 					</div>
+					{% endblock %}
+					{% block footer %}
 
 	<footer id="footer">
 						<section id="contact">
-							<h2>Write Us</h2>
+							<h2>Write to Us</h2>
 							<p>Feel free to send us an email if you have any questions.</p>
-							<form id="contact" action="" class="form" role="form" method=POST enctype="multipart/form-data">{% csrf_token %}
+							<form id="contact_us" action='{{ contact_form_url}}' class="form" role="form" method=POST enctype="multipart/form-data">{% csrf_token %}
             				<div class="col-md-6 form-group">
               				<input class="form-control" id="name" name="name" placeholder="Name" type="text" required />
             				</div>
@@ -470,9 +397,20 @@
             				</div>
 				            <br><br>
           					<textarea class="form-control" id="message" name="message" placeholder="Message" rows="5"></textarea>
-					           <br>	
-              				<button class="button" type="submit">Send Message</button>
+					        <br>
+					        <div class = "col-md-3">
+					        <input class="form-control" style="color:black;" readonly type="text" id="a" />
+					        </div>
+					        <div class = "col-md-3">
+							<input placeholder = "Answer" class="form-control" type="text" id="b"/>
+							</div>
+							<div class = "col-md-3">
+							<button class="button" href="" id = "c" type="submit">Send Message</button>
+							</div>
+						</form>
 						</section>
+
+
 						<section>
 							<h2>Contact Us</h2>
 							<dl class="alt">
@@ -481,20 +419,26 @@
 								<dt>Phone</dt>
 								<dd>(000) 000-0000 x 0000</dd>
 								<dt>Email</dt>
-								<dd><a href="#">information@untitled.tld</a></dd>
+								<dd><a style="color:white;" href="#">information@untitled.tld</a></dd>
 							</dl>
 							<ul class="icons">
-								<li><a href="#" class="icon fa-twitter alt"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon fa-facebook alt"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon fa-instagram alt"><span class="label">Instagram</span></a></li>
-								<li><a href="#" class="icon fa-github alt"><span class="label">GitHub</span></a></li>
-								<li><a href="#" class="icon fa-dribbble alt"><span class="label">Dribbble</span></a></li>
+								<li><a style="color:white;" href="#" class="icon-twitter alt"><span class="label"></span></a></li>
+								<li><a style="color:white;" href="#" class="icon-facebook alt"><span class="label"></span></a></li>
+								<li><a style="color:white;" href="#" class="icon-instagram alt"><span class="label"></span></a></li>
+								<li><a style="color:white;" href="#" class="icon-github alt"><span class="label"></span></a></li>
+								<li><a style="color:white;" href="#" class="icon-dribbble alt"><span class="label"></span></a></li>
 							</ul>
+							Visit SciPy.in/ <a style="color:white;" href="">2009</a>/
+							<a style="color:white;" target="_blank" href="">2010</a>/
+							<a style="color:white;" target="_blank" href="">2011</a>/
+							<a style="color:white;" target="_blank" href="http://scipy.in/2012">2012</a>/
+							<a style="color:white;" target="_blank" href="http://scipy.in/2013"	>2013</a>/
+							<a style="color:white;" target="_blank" href="http://scipy.in/2014">2014</a>/
+							<a style="color:white;" target="_blank" href="http://scipy.in/2015">2015</a>
 						</section>
 					</footer>
 
     </div>
-				
 			</div>
 			<!-- end wrapper -->
 								{% endblock %}
@@ -511,5 +455,18 @@
 			<script src="{% static 'js/bootstrap.min.js' %}"></script>
 			<script src="{% static 'js/smoothscroll.js' %}"></script>
 
+<script>
+$(document).ready(function() {
+    var n1 = Math.round(Math.random() * 10 + 1);
+    var n2 = Math.round(Math.random() * 10 + 1);
+    $("#a").val(n1 + " + " + n2 + " = ");
+    $("#c").click(function() {
+        if (eval($("#a").val()) == $("#b").val()) {
+        } else {
+            alert("Write the correct value ");
+        }
+    });
+});
+</script>
 	</body>
 </html>
