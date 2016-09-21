@@ -61,6 +61,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
    'django.contrib.messages.context_processors.messages',
    'social.apps.django_app.context_processors.backends',
    'social.apps.django_app.context_processors.login_redirect',
+   # 'website.context_processors.contact_us_context_processor'
+
 )
 
 AUTHENTICATION_BACKENDS = (
@@ -102,14 +104,16 @@ DATABASES = {
     }
 }
 
-# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = LOCAL_SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
-# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = LOCAL_SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
+LOCAL_SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '628178553368-dvc6sjtgp90cm0591b8p4da62rhttn35.apps.googleusercontent.com'
+LOCAL_SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'eoiek3jLz9Ax3dv7k3mXFrbU'
+# API key AIzaSyDxRqGfJNJJIFw6traKTG5nC1mY8TNODu4 
 
-# SOCIAL_AUTH_FACEBOOK_KEY = LOCAL_SOCIAL_AUTH_FB_KEY
-# SOCIAL_AUTH_FACEBOOK_SECRET = LOCAL_SOCIAL_AUTH_FB_SECRET
 
-# SOCIAL_AUTH_GITHUB_KEY = LOCAL_SOCIAL_AUTH_GITHUB_KEY
-# SOCIAL_AUTH_GITHUB_SECRET = LOCAL_SOCIAL_AUTH_GITHUB_SECRET
+LOCAL_SOCIAL_AUTH_FB_KEY = '160224867760606'
+LOCAL_SOCIAL_AUTH_FB_SECRET = '45eb71682352723c44d79471ecab5894'
+
+LOCAL_SOCIAL_AUTH_GITHUB_KEY = '0bcac418003a6d06fb50'
+LOCAL_SOCIAL_AUTH_GITHUB_SECRET = 'cd1b070917d0a5c8cd27ef997fd353a4'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -136,4 +140,7 @@ MEDIA_URL = "/downloads/"
 LOGIN_REDIRECT_URL = '/cfp'
 
 # smtp
+<<<<<<< HEAD
 
+=======
+>>>>>>> 170d96914f0226118a9d1a46ec55973b91c7bdf2

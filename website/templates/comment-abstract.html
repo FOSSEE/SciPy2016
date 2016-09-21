@@ -30,6 +30,7 @@
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
          <li><a href="{% url 'website:home' %}" class="active">Home</a></li>        
+         <li><a href="{% url 'website:view_abstracts' %}" class="active">View Proposals</a></li>        
                {% if user and not user.is_anonymous %}
                <li class="dropdown">
                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.get_full_name|default:user.username }}</a>
@@ -47,7 +48,6 @@
 </div>
 {% endblock %}
 
-
 {% block content %}
 			<div id="wrapper">
 			<div id="main">
@@ -60,37 +60,66 @@
         		<p><b>Prerequisite: </b>&nbsp;{{ proposal.prerequisite }}</p>
         	{% endif%}
           {% if proposal.attachment.url %}
-           <a href="{{ proposal.attachment.url }}" class="btn btn-info" target="_blank">Attachment</a>
+           <b>Attachment: </b>&nbsp;<a href="{{ proposal.attachment.url }}" class="btn btn-info" target="_blank">{{ proposal.attachment}}</a>
            {% endif %}
-   		    <p><b>Date Created: </b>&nbsp;{{ proposal.date_created }}</p>  
-   		    <hr> 
-          <form action="{% url 'website:status' proposal.id %}" method='POST'>{% csrf_token %}
+   		    <p><b>Date Created: </b>&nbsp;{{ proposal.date_created }}</p>
 
-    <input type="submit" value="Accept" name="accept"/>
-    <input type="submit" value="Reject" name="reject"/>
 
-     </form>
-        <hr>
+          <form action="{% url 'website:rate_proposal' proposal.id %}" method='POST' enctype="multipart/form-data">  {% csrf_token %}
+   		   <b>Rate :</b>
+                 <select name="rating" style="width:70px;" onchange="run()">  <!--Call run() function-->
+     <option value="0">0</option>
+     <option value="1">1</option>
+     <option value="2">2</option>
+     <option value="3">3</option>
+     <option value="4">4</option>
+     <option value="5">5</option>
+     <option value="6">6</option>
+     <option value="7">7</option>
+     <option value="8">8</option>
+     <option value="9">9</option>
+     <option value="10">10</option>
+
+    </select> /10
+ <input class="btn btn btn_primary"  type="submit"  value="Rate">
+</form>
+          {% if proposal.rate %}
+          {{proposal.rate}} /10 
+
+          {% endif %}
+
+          <hr> 
         <h4>Comments</h4>
         {% for comment in comments %}
             <div>
                 <strong>Comment By:</strong>
                 {{ comment.user.first_name }} {{ comment.user.last_name }}
-                <p>{{ comment.comment|safe }}</p>   
-               <!--   <a href="#">Edit</a>
-                <a href="#">Delete</a> -->
+                <p>{{ comment.comment|safe }}</p>  
+                {% if user == comment.user %}
+                 <form action="" method='POST' enctype="multipart/form-data">
+            {% csrf_token %} 
+                {% endif %}
             </div>
             <hr>
+          </form>
         {% endfor %}
         <form action="{% url 'website:comment_abstract' proposal.id %}" method='POST' enctype="multipart/form-data">
             {% csrf_token %}
             <textarea rows="5" cols="100" id="comment" class= "comment" name="comment" placeholder = "Add commnet here..."></textarea><br>
-            <button type="submit" class="button">Comment</button>
+            <input class="button special" style="background:#d44727" type="submit" class="button" value="Comment">
 
         </form>
+         <form action="{% url 'website:status' proposal.id %}" method='POST'>{% csrf_token %}
+
+    <input type="submit" class="button special" style="background:green" value="Accept" name="accept"/>
+    <input type="submit" class="button special" style="background:red "value="Reject" name="reject"/>
+      <input type="submit" class="button special" style="background:grey "value="Resubmit" name="resubmit"/>
+
+     </form>
 
 		</section> 
-		</div>
+	</div>
+  </div>
 
 {% endblock %}
 					
@@ -122,10 +151,17 @@ mySubmitButton.onclick = function() {
 
 
 <script>
-$(function(){
-
-}
-)
+$(document).ready(function() {
+    var n1 = Math.round(Math.random() * 10 + 1);
+    var n2 = Math.round(Math.random() * 10 + 1);
+    $("#a").val(n1 + " + " + n2 + " = ");
+    $("#c").click(function() {
+        if (eval($("#a").val()) == $("#b").val()) {
+        } else {
+            alert("Write the correct value ");
+        }
+    });
+});
 </script>
 
 </body>
