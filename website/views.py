@@ -11,9 +11,10 @@ from django.contrib.auth.models import User
 from django.contrib.admin.models import CHANGE
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
+from django.db.models import F
+import csv
 
-
-from website.forms import ProposalForm, UserRegisterForm, UserLoginForm, WorkshopForm, CommentForm
+from website.forms import ProposalForm, UserRegisterForm, UserLoginForm, WorkshopForm, ContactForm
 from website.models import Proposal, Comments
 from social.apps.django_app.default.models import UserSocialAuth
 import random
@@ -53,9 +54,30 @@ def userregister(request):
         context['user'] = request.user
         return render_to_response('cfp.html', context)
 
+def contact_us(request,next_url):
+    pass
+    context = {}
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        sender_name = request.POST['name']
+        sender_email = request.POST['email']
+        to = ('scipy@fossee.in',)
+        subject = "Query from - "+sender_name
+        message = request.POST['message']
+        try:
+            send_mail(subject, message, sender_email, to)
+            context['mailsent'] = True
+            context['user'] = user
+        except:
+            context['mailfailed'] = True
+            context['user'] = user
+    return redirect(next_url,context)
+
 
 def home(request):
+    #pass
     context = {}
+    user = request.user
     context.update(csrf(request))
     if request.method == "POST":
         sender_name = request.POST['name']
@@ -66,8 +88,12 @@ def home(request):
         try:
             send_mail(subject, message, sender_email, to)
             context['mailsent'] = True
+            if user.is_authenticated():
+                context['user'] = user
         except:
             context['mailfailed'] = True
+            if user.is_authenticated():
+                context['user'] = user
     return render_to_response('base.html', context)
 
 
@@ -78,29 +104,19 @@ def cfp(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
-        if user.is_superuser :
-            login(request, user)
-            print"in cfp view"
-            proposals = Proposal.objects.all()
-            context['proposals'] = proposals
-            context['user'] = user
-            return render_to_response('cfp.html', context)
-        elif user is not None:
+        if user is not None:
             login(request, user)
             if 'next' in request.GET:
                 next = request.GET['next']
                 return HttpResponseRedirect(next)
-            if Proposal.objects.filter(user = user).exists :
-                print "---------------------->>>>>>>>>>", user 
-                proposals = Proposal.objects.filter(user = user)
-                for p in proposals:
-                    print "-------->", p
-                context['proposals'] = proposals
-                context['user'] = user
+            proposals = Proposal.objects.filter(user = request.user).count()
+            context['user'] = user
+            context['proposals'] = proposals
             return render_to_response('cfp.html', context)
         else:
             context['invalid'] = True
             context['form'] = UserLoginForm
+            context['user'] = user
             return render_to_response('cfp.html', context)
     else:
         form = UserLoginForm()
@@ -112,8 +128,6 @@ def cfp(request):
                              context_instance=context)
 
 
-
-
 def submitcfp(request):
     context = {}
     if request.user.is_authenticated():
@@ -121,6 +135,7 @@ def submitcfp(request):
         context.update(csrf(request))
         django_user = User.objects.get(username=social_user)
         context['user'] = django_user
+        proposals_a = Proposal.objects.filter(user = request.user, proposal_type = 'ABSTRACT').count()
         if request.method == 'POST':
             form = ProposalForm(request.POST, request.FILES)
             if form.is_valid():
@@ -137,9 +152,11 @@ def submitcfp(request):
                 return render_to_response('cfp.html', context)
             else:
                 context['proposal_form'] =  form
+                context['proposals_a'] = proposals_a
                 return render_to_response('submit-cfp.html', context)
         else:
             form = ProposalForm()
+            context['proposals_a'] = proposals_a 
             context['proposal_form'] = form
         return render_to_response('submit-cfp.html', context) #when link clicked
     else:
@@ -153,6 +170,7 @@ def submitcfw(request):
         context.update(csrf(request))
         django_user = User.objects.get(username=social_user)
         context['user'] = django_user
+        proposals_w = Proposal.objects.filter(user = request.user, proposal_type = 'WORKSHOP').count()
         if request.method == 'POST':
             form = WorkshopForm(request.POST, request.FILES)
             if form.is_valid():
@@ -169,10 +187,12 @@ def submitcfw(request):
                 return render_to_response('cfp.html', context)
             else:
                 context['proposal_form'] =  form
+                context['proposals_w'] = proposals_w
                 return render_to_response('submit-cfw.html', context)
         else:
             form = WorkshopForm()
             context['proposal_form'] = form
+            context['proposals_w'] = proposals_w
         return render_to_response('submit-cfw.html', context)
     else:
         context['login_required'] = True
@@ -182,28 +202,24 @@ def submitcfw(request):
 def view_abstracts(request):
     user = request.user
     context = {}
+    count_list =[]
     if user.is_authenticated():
         if user.is_superuser :
             proposals = Proposal.objects.all()
             context['proposals'] = proposals
+            for proposal in proposals:
+                count = Comments.objects.filter(proposal = proposal).count()
+                # print "-----------count ", count
+                count_list.append(count)
+            print "-----------count ", count_list
+            context['counts'] = count_list
             context['user'] = user
             return render(request, 'view-abstracts.html', context)
         elif user is not None:
-            # if request.method == "POST":
-            #     if request.POST.get('delete'):
-            #         Proposal.objects.filter(id__in=request.POST.getlist('delete_proposal')).delete()
-            #     # print "---------------------",request.POST
-            #     # delete_proposal = request.POST.getlist('delete_proposal')
-            #     # for propsal_id in delete_proposal:
-            #     #     proposal = Proposal.objects.get(id = proposal_id)
-            #     #     proposal.remove()
-            #     context = RequestContext(request, {'request': request,
-            #                            'user': request.user})
-            #     context.update(csrf(request))
-            #     return render(request, 'view-abstracts.html',context_instance=context)
             if Proposal.objects.filter(user = user).exists :
-                print "in view-abstracts ---------------------->>>>>>>>>>", user 
                 proposals = Proposal.objects.filter(user = user)
+                print "-----------count ", count_list
+                context['counts'] = count_list
                 context['proposals'] = proposals
                 context['user'] = user
             return render(request, 'view-abstracts.html', context)
@@ -235,6 +251,33 @@ def abstract_details(request, proposal_id=None):
     else:
         return render(request, 'cfp.html')
 
+def rate_proposal(request, proposal_id = None):
+    user = request.user
+    context = {}
+    if user.is_authenticated():
+        proposal = Proposal.objects.get(id=proposal_id)
+        if request.method == 'POST':
+            print"in rating"
+            rate = request.POST.get('rating')
+            print"rate-------" , rate
+            proposal.rate = rate
+            proposal.save()
+            comments = Comments.objects.filter(proposal=proposal)
+            context['proposal'] = proposal
+            context['comments'] = comments
+            context.update(csrf(request))
+            return render(request, 'comment-abstract.html', context)
+        else:
+            comments = Comments.objects.filter(proposal=proposal)
+            context['proposal'] = proposal
+            context['comments'] = comments
+            context.update(csrf(request))
+            return render(request, 'comment-abstract.html', context)
+    else:
+        return render(request, 'comment-abstract.html', context)
+
+
+
 
 def comment_abstract(request, proposal_id = None):
     user = request.user
@@ -254,20 +297,16 @@ def comment_abstract(request, proposal_id = None):
             print "proposal poster", proposal.user.email
             sender_name = "SciPy India 2016"
             sender_email = "scipy@fossee.in"
-            subject = "SciPy India - Comment of Your Proposal"
+            subject = "SciPy India - Comment on Your Proposal"
             to = (proposal.user.email, )
             message = """Dear """+proposal.user.first_name+""",\n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
             send_mail(subject, message, sender_email, to)
+            proposal.status="Commented"
+            proposal.save()
             context['proposal'] = proposal
             context['comments'] = comments
-            # if request.GET.get("accept"):
-            #     print "-----------user clicked list"
             context.update(csrf(request))
             return render(request, 'comment-abstract.html', context)
-        # elif request.GET.get("accept"):
-        #     print"----------------- accept"
-        #     context.update(csrf(request))
-        #     return render(request, 'comment-abstract.html', context)
         else:
             comments = Comments.objects.filter(proposal=proposal)
             context['proposal'] = proposal
@@ -304,6 +343,16 @@ def status(request, proposal_id= None):
             message = """Dear """+proposal.user.first_name+""",\n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
             send_mail(subject, message, sender_email, to)
             context.update(csrf(request))  
+        elif 'resubmit' in request.POST:
+            proposal.status="Resubmit"
+            proposal.save()
+            sender_name = "SciPy India 2016"
+            sender_email = "scipy@fossee.in"
+            subject = "SciPy India - Resubmit"
+            to = (proposal.user.email, )
+            message = """Dear """+proposal.user.first_name+""",\n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
+            send_mail(subject, message, sender_email, to)
+            context.update(csrf(request)) 
     proposals = Proposal.objects.all()
     context['proposals'] = proposals
     context['user'] = user
@@ -322,10 +371,65 @@ def delete(request):
                 print proposal_id
                 proposal = Proposal.objects.get(id = proposal_id)
                 proposal.delete()
-            context.update(csrf(request))  
-    proposals = Proposal.objects.all()
-    context['proposals'] = proposals
-    context['user'] = user
-    return render(request, 'view-abstracts.html', context)  
+            context.update(csrf(request)) 
+        elif 'dump' in request.POST:
+            print" in dump"
+            delete_proposal = request.POST.getlist('delete_proposal')
+            try:
+                response = HttpResponse(content_type='text/csv')
+                response['Content-Disposition'] = 'attachment; filename="Proposals.csv"'
+                writer = csv.writer(response)
+                header = [
+                            'name',
+                            'username',
+                            'email',
+                            'about_me',
+                            'phone',
+                            'title',
+                            'abstract',
+                            'prerequisite',
+                            'duration',
+                            'attachment',
+                            'date_created',
+                            'status',
+                            'proposal_type',
+                            'tags',
+                            'rate',
+                      ]
+                writer.writerow(header)
+                for proposal_id in delete_proposal:
+                    proposal = Proposal.objects.get(id = proposal_id)
+                    print"proposal", proposal
+                    row = [
+                            '{0} {1}'.format(proposal.user.first_name, proposal.user.last_name),
+                            proposal.user.username,
+                            proposal.user.email,
+                            proposal.about_me,
+                            proposal.phone,
+                            proposal.title,
+                            proposal.abstract,
+                            proposal.prerequisite,
+                            proposal.duration,
+                            proposal.attachment,
+                            proposal.date_created,
+                            proposal.status,
+                            proposal.proposal_type,
+                            proposal.tags,
+                            proposal.rate
+                            ]
+                    writer.writerow(row)
+                return response
+            except:
+                proposals = Proposal.objects.all()
+                context['proposals'] = proposals
+                context['user'] = user
+                return render(request, 'view-abstracts.html', context) 
+        else:
+            proposals = Proposal.objects.all()
+            context['proposals'] = proposals
+            context['user'] = user
+            return render(request, 'view-abstracts.html', context) 
+    else:
+        return render(request, 'view-abstracts.html', context) 
 
 
