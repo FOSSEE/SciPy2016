@@ -96,7 +96,7 @@ DATABASES = {
         'NAME': 'scipy2016',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'aero123',
         'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',
     }
@@ -137,10 +137,3 @@ LOGIN_REDIRECT_URL = '/cfp'
 
 # smtp
 
-ACCOUNT_ACTIVATION_DAYS = 7
-EMAIL_HOST =  'localhost'
-EMAIL_PORT = 1025
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = False
-DEFAULT_FROM_EMAIL = 'komal@gmail.com'
