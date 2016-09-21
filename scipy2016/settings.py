@@ -140,3 +140,7 @@ MEDIA_URL = "/downloads/"
 LOGIN_REDIRECT_URL = '/cfp'
 
 # smtp
+<<<<<<< HEAD
+
+=======
+>>>>>>> 170d96914f0226118a9d1a46ec55973b91c7bdf2
