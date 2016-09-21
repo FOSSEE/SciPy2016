@@ -6,6 +6,7 @@ from django.conf import settings
 
 urlpatterns = patterns('',
     url(r'^$', 'website.views.home', name='home'),
+    # url(r'^contact/$', 'website.views.contact_us', name='contact'),
     url(r'^cfp/$', 'website.views.cfp', name='cfp'),
     url(r'^submit-cfp/$', 'website.views.submitcfp', name='submitcfp'),
     url(r'^submit-cfw/$', 'website.views.submitcfw', name='submitcfw'),
@@ -16,5 +17,7 @@ urlpatterns = patterns('',
     url(r'^view-abstracts/delete/$', 'website.views.delete', name='delete'),
     url(r'^comment-abstract/(?P<proposal_id>\d+)$', 'website.views.comment_abstract', name='comment_abstract'),
     url(r'^comment-abstract/status/(?P<proposal_id>\d+)$', 'website.views.status', name='status'),
-
-  )+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^comment-abstract/rate/(?P<proposal_id>\d+)$', 'website.views.rate_proposal', name='rate_proposal'),
+    url(r'^process-contact-form/(?P<next_url>\d+)', 'website.views.contact_us', name='contact_us'),
+    # url(r'^view-abstracts/download_csv/$','website.views.download_csv', name='download_csv')
+    )+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -9,34 +9,68 @@ from django.core.validators import MinLengthValidator, MinValueValidator, \
 RegexValidator, URLValidator
 
 
-class CommentForm(forms.Form):
-    pass
+MY_CHOICES = (
+    ('Beginner', 'Beginner'),
+    ('intermediate', 'Intermediate'),
+    ('Advanced', 'Advanced'),
+)
+rating=(
+    ('1','1'),
+    ('2','2'),
+    ('3','3'),
+    ('4','4'),
+    ('5','5'),
+    ('6','6'),
+    ('7','7'),
+    ('8','8'),
+    ('9','9'),
+    ('10','10'),
+)
+    
+
+class ContactForm(forms.Form):
+    name = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'About Me'}),
+                        required = True,
+                        error_messages = {'required':'Name field required.'},  
+                        )
+    email = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'About Me'}),
+                        required = True,
+                        error_messages = {'required':'Email field required.'},  
+                        )
+    # subject = forms.CharField(required=True)
+    message = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Title'}),
+                        required = True,
+                        error_messages = {'required':'Message field required.'},  
+                            )
+    # rate = forms.ChoiceField(choices=rating)
 
 class ProposalForm(forms.ModelForm):
-    error_css_class = 'error'
-    required_css_class = 'required'
 
-    # content_link = forms.CharField(required=False, help_text='Link to the content of your Talk')
-    # speaker_link = forms.CharField(required=False, help_text='Link to information about the Speaker')
     about_me = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'About Me'}),
                         required = True,
                         error_messages = {'required':'Title field required.'},  
-                        label = '')
-    attachment = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))   
-    phone = forms.CharField(max_length = 12, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),required=False, label = '', validators = [RegexValidator(regex = '^[0-9-_+.]*$')])
+                        )
+    attachment = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}),
+                        required = True,
+                        error_messages = {'required':'Attachment field required.'},)   
+    phone = forms.CharField(max_length = 12, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),required=False, validators = [RegexValidator(regex = '^[0-9-_+.]*$', message='Enter a Valid Phone Number',)],
+                             # error_messages = {'required':'Title field required.'},  
+                                )
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Title'}),
                         required = True,
                         error_messages = {'required':'Title field required.'},  
-                        label = ''
-                        )
+                            )
     abstract = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Abstract'}),
                         required = True,
-                        error_messages = {'required':'Title field required.'},  
-                        label = ''
+                        error_messages = {'required':'Abstract field required.'},  
                         )
+    proposal_type = forms.CharField(widget = forms.HiddenInput(), label = '', initial = 'ABSTRACT', required=False)
+    
+    tags = forms.ChoiceField(choices=MY_CHOICES)
+
     class Meta:
         model = Proposal
-        exclude = ('user', 'email','prerequisite','status')
+        exclude = ('user', 'email','prerequisite','status','rate')
 
     def clean_title(self):
         title = self.cleaned_data['title']
@@ -50,7 +84,7 @@ class ProposalForm(forms.ModelForm):
         attachment = cleaned_data.get('attachment', None)
         if attachment:
             ext = os.path.splitext(attachment.name)[1]
-            valid_extensions = ['.pdf','.zip','.rar']
+            valid_extensions = ['.pdf']
             if not ext in valid_extensions:
                 raise forms.ValidationError(u'File not supported!')
             if attachment.size > (5*1024*1024):
@@ -59,32 +93,38 @@ class ProposalForm(forms.ModelForm):
 
 
 class WorkshopForm(forms.ModelForm):
-    # content_link = forms.CharField(required=False, help_text='Link to the content of your Talk')
-    # speaker_link = forms.CharField(required=False, help_text='Link to information about the Speaker')
     about_me = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'About Me'}),
                         required = True,
                         error_messages = {'required':'Title field required.'},  
-                        label = '')
-    attachment = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))   
-    phone = forms.CharField(max_length = 12, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),required=False, label = '', validators = [RegexValidator(regex = '^[0-9-_+.]*$')])
+                        )
+    attachment = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}),
+                        required = True,
+                        error_messages = {'required':'Attachment field required.'},)   
+    phone = forms.CharField(max_length = 12, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),required=False, validators = [RegexValidator(regex = '^[0-9-_+.]*$', message='Enter a Valid Phone Number',)],
+                             error_messages = {'required':'Title field required.'},  
+                                )
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Title'}),
                         required = True,
                         error_messages = {'required':'Title field required.'},  
-                        label = ''
-                        )
-    abstract = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Abstract'}),
+                            )
+    abstract = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Desciption'}),
                         required = True,
-                        error_messages = {'required':'Title field required.'},  
-                        label = ''
+                        label = 'Description',
+                        error_messages = {'required':'Abstract field required.'},  
                         )
-    prerequisite = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Prerequisite'}),
-                        required = True,
-                        error_messages = {'required':'Title field required.'},  
-                        label = ''
+    prerequisite = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Prerequisite'}),
+                        label = 'Prerequisites',
+                        required = False,
                         )
+    proposal_type = forms.CharField(widget = forms.HiddenInput(), label = '', required=False, initial = 'WORKSHOP')
+
+    tags = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tags'}),
+                        required = False,
+                        )
+    
     class Meta:
         model = Proposal
-        exclude = ('user', 'email','status')
+        exclude = ('user', 'email','status','rate')
 
     def clean_title(self):
         title = self.cleaned_data['title']
@@ -92,6 +132,18 @@ class WorkshopForm(forms.ModelForm):
             raise forms.ValidationError("This title already exist.")
         return title
 
+    def clean_attachment(self):
+        import os
+        cleaned_data = self.cleaned_data
+        attachment = cleaned_data.get('attachment', None)
+        if attachment:
+            ext = os.path.splitext(attachment.name)[1]
+            valid_extensions = ['.pdf',]
+            if not ext in valid_extensions:
+                raise forms.ValidationError(u'File not supported!')
+            if attachment.size > (5*1024*1024):
+                raise forms.ValidationError('File size exceeds 5MB')
+        return attachment
 
 class UserRegisterForm(UserCreationForm):
 	class Meta:
@@ -99,30 +151,30 @@ class UserRegisterForm(UserCreationForm):
 		fields = ('first_name', 'last_name', 'email', 'username', 'password1',
 		          'password2')
         first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'First Name'}),
-                        label = ''
+                        label = 'First Name'
                         )
         last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Last Name'}),
-                        label = ''
+                        label = 'Last Name'
                         )
         email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': 'Email'}),
                         required = True,
                         error_messages = {'required':'Email field required.'},  
-                        label = ''
+                        label = 'Email'
                         )
         username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}),
                         required = True,
                         error_messages = {'required':'Username field required.'},  
-                        label = ''
+                        label = 'Username'
                         )
         password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}),
                         required = True,
                         error_messages = {'required':'Password field required.'},  
-                        label = ''
+                        label = 'Password'
                         )
         password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}),
                         required = True,
                         error_messages = {'required':'Password Confirm field required.'},  
-                        label = ''
+                        label = 'RePassword'
                         )
 
 

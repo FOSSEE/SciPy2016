@@ -20,7 +20,7 @@
     
       {% block header %}
        <header id="header1">
-            <h1>Scipy India 2016</h1>
+            <h1>SciPy India 2016</h1>
             <h2>View Proposals</h2>
 </header> 
 {% endblock %}
@@ -56,57 +56,75 @@
       <div id="wrapper">
 <div id="main">
 <section id="content" class="main">
-                
-                
+                {% if not proposals %}
+                <center>
+You have not submitted any proposal. To submit proposal click <a href="{% url 'website:cfp' %}">here </a></center>
+{% else %}
 
-   <form action="{% url 'website:delete' %}" method="post"> {% csrf_token %}
+   <form action="{% url 'website:delete' %}" method="post" onsubmit="return confirm('Sure?');"> {% csrf_token %}
     <table class="table">
           <colgroup>
                 {% if user.is_superuser  %}
         <col width="10%" />
+        <col width="30%" />
         <col width="20%" />
         <col width="60%" />
+        <!-- <col width="10%" /> -->
         <col width="10%" />
         <col width="10%" />
         <col width="20%" />
         {% else %}
-         <col width="10%" />
-        <col width="60%" />
+        <col width="20%" />
+        <col width="70%" />
+        <col width="10%" />
         <col width="10%" />
         <col width="10%" />
         <col width="20%" />
 
         {% endif %}
     </colgroup>
+     {% if user.is_superuser  %}
     <th> <center>Select
-            {% if user.is_superuser  %}
+           
     <th>Speaker
       {% endif %}
-    <th> <center>Title
+    <th> Type
+    <th> Title
+      {% if not user.is_superuser %}
     <th> View
+      {% endif %}
     <th> Comments
-    <th> Status</center>
+    <th> Rate
+    <th> Status
     {% for proposal in proposals %}
     <tr>
+        {% if user.is_superuser  %}
       <td><center> <input type = "checkbox" name="delete_proposal" value = {{proposal.id}}></input></center></td>
-            {% if user.is_superuser  %}
+          
         <td>
             {{ proposal.user.get_full_name}}
         </td>
         {% endif %}
-        <td style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:.5px;"> <center>{{proposal.title}}</td>
+        <td> {{proposal.proposal_type }} </td>
+       
       {% if user.is_superuser  %}
-        <td ><a href="{% url 'website:comment_abstract' proposal.id %}">View</a> </td>
+        <td ><a href="{% url 'website:comment_abstract' proposal.id %}">{{proposal.title }}</a> </td>
       {% else %}
+       <td  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:.5px;"> {{proposal.title}}</td>
          <td ><a href="{% url 'website:abstract_details' proposal.id %}">View</a> </td>
       {% endif %}
-      <td><center> 0 </center></td>
+      <td><center> {{ proposal.comments_set.count }} </center></td>
+            <td><center> {{ proposal.rate }} </center></td>
 
       <td>
          {% if proposal.status = 'Accepted' %}
          <h5 style="color:green;">{{proposal.status}}</h5>
          {% elif proposal.status = 'Rejected' %}
           <h5 style="color:red;">{{proposal.status}}</h5>
+           {% elif proposal.status = 'Commented' %}
+          <h5 style="color:brown;">{{proposal.status}}</h5>
+          {% elif proposal.status = 'Resubmit' %}
+          <h5 style="color:grey;">{{proposal.status}}</h5>
           {% else %}
           <h5 style="color:blue;">{{proposal.status}}</h5>
          {% endif %}
@@ -115,11 +133,70 @@
     </tr>
     {% endfor %}
     </table>
-    <center><input type="submit" value="Delete" name="delete"/></center> 
+    {% if user.is_superuser  %}
+    <center><input type="submit" id="delete" class ="button special" style="background:#D44727;" value="Delete" name="delete"/>
+    <input type="submit" id="dump" class ="button special" style="background:#D44727;" value="Dump" name="dump"/></center>
+   
+    {% endif %}
                   </form>
+                  {% endif %}
+
+          
               </section>
 
           </div>
+
+           
+     <!-- <footer id="footer">
+            <section id="contact">
+              <h2>Write to Us</h2>
+              <p>Feel free to send us an email if you have any questions.</p>
+              <form id="contact" action="" class="form" role="form" method=POST enctype="multipart/form-data">{% csrf_token %}
+                    <div class="col-md-6 form-group">
+                      <input class="form-control" id="name" name="name" placeholder="Name" type="text" required />
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <input class="form-control" id="email" name="email" placeholder="Email" type="email" required />
+                    </div>
+                    <br><br>
+                    <textarea class="form-control" id="message" name="message" placeholder="Message" rows="5"></textarea>
+                  <br>
+                  <div class = "col-md-3">
+                  <input class="form-control" style="color:black;" readonly type="text" id="a" />
+                  </div>
+                  <div class = "col-md-3">
+              <input placeholder = "Answer" class="form-control" type="text" id="b"/>
+              </div>
+              <div class = "col-md-3">
+              <button class="button" id = "c" type="submit">Send Message</button>
+              </div>
+            </section>
+            <section>
+              <h2>Contact Us</h2>
+              <dl class="alt">
+                <dt>Address</dt>
+                <dd>1234 Somewhere Road &bull; Nashville, TN 00000 &bull; USA</dd>
+                <dt>Phone</dt>
+                <dd>(000) 000-0000 x 0000</dd>
+                <dt>Email</dt>
+                <dd><a style="color:white;" href="#">information@untitled.tld</a></dd>
+              </dl>
+              <ul class="icons">
+                <li><a style="color:white;" href="#" class="icon-twitter alt"><span class="label"></span></a></li>
+                <li><a style="color:white;" href="#" class="icon-facebook alt"><span class="label"></span></a></li>
+                <li><a style="color:white;" href="#" class="icon-instagram alt"><span class="label"></span></a></li>
+                <li><a style="color:white;" href="#" class="icon-github alt"><span class="label"></span></a></li>
+                <li><a style="color:white;" href="#" class="icon-dribbble alt"><span class="label"></span></a></li>
+              </ul>
+              Visit SciPy.in/ <a style="color:white;" href="">2009</a>/
+              <a style="color:white;" href="">2010</a>/
+              <a style="color:white;" href="">2011</a>/
+              <a style="color:white;" href="">2012</a>/
+              <a style="color:white;" href="">2013</a>/
+              <a style="color:white;" href="">2014</a>/
+              <a style="color:white;" href="">2015</a>
+            </section>
+          </footer> -->
 
 {% endblock   %}
           
@@ -132,13 +209,19 @@
       <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
       <script src="assets/js/main.js"></script>
 
-  
 
 <script>
-function hello(){
-  alert('hi');
-}
+$(document).ready(function() {
+    var n1 = Math.round(Math.random() * 10 + 1);
+    var n2 = Math.round(Math.random() * 10 + 1);
+    $("#a").val(n1 + " + " + n2 + " = ");
+    $("#c").click(function() {
+        if (eval($("#a").val()) == $("#b").val()) {
+        } else {
+            alert("Write the correct value ");
+        }
+    });
+});
 </script>
-
 </body>
 </html>
