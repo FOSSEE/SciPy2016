@@ -3,7 +3,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		 <link rel="icon" href="http://fossee.in/data/emails/images/favicon.ico" type="icon"> 
+		 <link rel="icon" href="{% static 'img/favicon.ico'%}" type="icon"> 
     	<title>SciPy India 2016</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -23,7 +23,7 @@
 <header id="header" class="alt">
 						<span class="logo"><img src="{% static 'img/logo.png' %}" alt="" /></span>
 						<h1 >SciPy India 2016</h1>
-						<p style="color:#484848; font-weight:700; font-size:28px;" >DECEMBER 9, 10 & 11</p><br><br>
+						<p style="color:#484848; font-weight:700; font-size:28px;" >DECEMBER 10 & 11</p><br><br>
             			
             	 <a href="{% url 'website:cfp' %}" class="button special" style="width : 220px;" >Attend</a></center>
             	 <a href="{% url 'website:cfp' %}" class="button special"  style="width : 220px;">Call for Proposal</a></center>
@@ -77,7 +77,7 @@
 										<header class="major">
 											<h2>ABOUT</h2>
 										</header>
-										<p align="justify" style= "font-size: 20px;">We look forward to your proposals. Conference aims to promote Python for Scientific Computing and Education. Topics like pedagogy, exploration, modeling or from both applied and developmental perspectives are welcome. Contributions from academia as well as industry are welcome. If you wish to propose a talk at the conference, kindly follow the guidelines given below.</p>
+										<p align="justify" style= "font-size: 20px;">SciPy India is a conference providing opportunities to spread the use of the Python programming language in the Scientific Computing community in India. It provides a unique opportunity to interact with the "Who's who" of the Python for Scientific Computing fraternity and learn, understand, participate, and contribute to Scientific Computing using Python. One of the goals of the conference is to combine education, engineering, and science with computing through the medium of Python.</p>
 										
 									</div>
 									</div>
@@ -92,31 +92,95 @@
 										<header class="major">
 											<h2>SPEAKERS</h2>
 						
-	<center>
-				
-				<div class = "col-md-4">
-					<img class="img-responsive" src="{% static 'img/ajith.jpg' %}" height="300" width="300" alt="">
+
+		<table class = "table">
+			<colgroup>
+        <col width="40%" />
+        <col width="20%" />
+        <col width="40%" />
+    </colgroup>
+<tr>
+<td> <img class="img-responsive" src="{% static 'img/ajith.jpg' %}" height="300" width="300" alt="">
 					<p>Dr. Ajit Kumar</p>
 									<a style = "color:#636363;" href="https://github.com/expeyes" target="_blank"><i class="icon-github" style="font-size:30px;"></i></a>
 									&nbsp;&nbsp;&nbsp;&nbsp;
-        							<a style = "color:#636363;" href="http://expeyes.in/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a>
-				</div>
-				<div class = "col-md-4">
-					<img class="img-responsive" src="{% static 'img/pic01.png' %}" height="300" width="300" alt="">
-					<p>Dr. Abc Xyz</p>
-									<a style = "color:#636363;" href="https://github.com/expeyes" target="_blank"><i class="icon-github" style="font-size:30px;"></i></a>
+        							<a style = "color:#636363;" href="http://expeyes.in/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a></td>
+
+        							<td></td>
+<td> <img class="img-responsive" src="{% static 'img/anand.jpg' %}" height="300" width="300" alt="">
+					<p>Mr. S. Anand</p>
+									<a style = "color:#636363;" href="https://github.com/sanand0" target="_blank"><i class="icon-github" style="font-size:30px;"></i></a>
 									&nbsp;&nbsp;&nbsp;&nbsp;
-        							<a style = "color:#636363;" href="http://expeyes.in/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a>
-				</div>
-				<div class = "col-md-4">
-					<img class="img-responsive" src="{% static 'img/pic01.png' %}" height="300" width="300" alt="">
-					<p>Dr. Abc Xyz</p>
-									<a style = "color:#636363;" href="https://github.com/expeyes" target="_blank"><i class="icon-github" style="font-size:30px;"></i></a>
+        							<a style = "color:#636363;" href="http://www.s-anand.net/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a> </td>
+
+</tr>
+<tr>
+<td> Dr. B. P. Ajith Kumar, a scientist working with the <a target="_blank" href = "http://www.iuac.res.in/">IUAC</a>. His main area of work is development of instrumentation for particle accelerators and associated experiments, including radio-frequency accelerating structures, control and data acquisition systems, digital and radio frequency electronics modules. He initiated the Phoenix / expEYES project. ExpEYES is currently the cheapest educational system to teach science. </td>
+<td></td>
+<td> Anand is the Chief Executive Officer at Gramener. He leads a team of data enthusiasts with skills in analysis, design, programming and statistics. He studied at IIT Madras, IIM Bangalore and LBS, and worked at IBM, Infosys, Lehman Brothers and BCG. He and his team explore insights from data and communicate these as visual stories. These visual analyses and dashboards are built on the Gramener Visualisation Server -- Gramener's flagship product. </td>
+</tr>
+		</table>
+				
+				
+					<!-- <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+						<!-- Wrapper for slides 
+						<div class="carousel-inner">
+							<div class="item active centered">
+							<table class="tile_table">
+              				  <tr>
+                			    <td>
+								<img class="img-responsive" src="{% static 'img/c1.png' %}" alt="">
+								</td>
+								<td>
+									<p>Dr. Ajith Kumar</p>
+									Information about the person. His topic or anythhin related to. Filed of work etc.
+									<p></p>
+									<a href="https://github.com/expeyes" targer"_blank"><i class="icon-github" style="font-size:30px;"></i></a>
 									&nbsp;&nbsp;&nbsp;&nbsp;
-        							<a style = "color:#636363;" href="http://expeyes.in/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a>
-				</div>
-				</center>
-					
+        							<a href="http://expeyes.in/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a>
+
+								</td>
+							</tr>
+						</table>
+
+							</div>
+							<div class="item centered">
+								<table class="tile_table">
+              				  <tr>
+                			    <td>
+								<img class="img-responsive" src="{% static 'img/c2.png' %}" alt="">
+								</td>
+								<td>
+									<p>PQR UVW</p>
+									<hr>
+									Information about the person. His topic or anythhin related to talk. Filed of work etc.
+
+								</td>
+							</tr>
+						</table>
+							</div>
+							<div class="item centered">
+								<table class="tile_table">
+              				  <tr>
+                			    <td>
+								<img class="img-responsive" src="{% static 'img/c3.png' %}" alt="">
+								</td>
+								<td>
+									<p>ABC XYZ</p>
+									<hr>
+									Information about the person. His topic or anythhin related to talk. Filed of work etc.
+
+								</td>
+							</tr>
+						</table>
+							</div>
+						</div>
+						<ol class="carousel-indicators">
+						    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+						    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+						    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+						</ol>
+					</div> -->
 				</div>
 			
 			</div>
@@ -141,27 +205,37 @@
 								<td bgcolor="#efa8b0">
 										<h9 style="color:white;">Early Bird</h9>
 										<h2 style="color:white;" style ="font-size: 25px;">&#8377;1000</h2>
+										<h9 style="color:white;">(Till 10 Nov 2016)</h9>
+
 								</td>
 								<td>
-									This ticket includes conference (tutorials + talks), lunch and snacks for 3 days. It does not include Accommodation & T-Shirt. This is a non-refundable ticket.
+									This ticket includes conference (tutorials + talks), lunch and snacks for 2 days. It does not include Accommodation & T-Shirt. This is a non-refundable ticket.
+
 									</td>
 								</tr>
 								<tr>
 								<td bgcolor = "#c79cc8">
 										
 										<h9 style="color:white;">Light</h9>
-										<h2  style="color:white;"style ="font-size: 25px;">&#8377;300</h2>
+										<h2  style="color:white;"style ="font-size: 25px;">&#8377;600</h2>
+										<h9 style="color:white;">(Till 30 Nov 2016)</h9>
+
+
 								</td>
 								<td>
-									This Ticket allows you to ONLY attend the conference for 3 Days. Does not include any conference amenities (Accommodation, Kit, Food & T-shirt). This is a non-refundable ticket.									</td>
+									This Ticket allows you to ONLY attend the conference for 2 Days (snacks shall be served). Does not include any conference amenities (Accommodation, Kit, Lunch & T-shirt). This is a non-refundable ticket.
+									</td>
 								</tr>
 								<tr>
 								<td bgcolor="#a89cc8">
 										<h9 style="color:white;">Regular</h9>
 										<h2 style="color:white;" style ="font-size: 25px;">&#8377;1200</h2>
+										<h9 style="color:white;">(10 Nov - 30 Nov 2016)</h9>
+									<!-- </li> -->
+								<!-- </ul> -->
 								</td>
 								<td>
-									This ticket includes conference (tutorials + talks), lunch and snacks for 3 days. It does not include Accommodation & T-Shirt. This is a non-refundable ticket.</td>
+									This ticket includes conference (tutorials + talks), lunch and snacks for 2 days. It does not include Accommodation & T-Shirt. This is a non-refundable ticket.</td>
 								</tr> 
 								<tr>
 								<td bgcolor ="#9bb2e1">
@@ -169,7 +243,7 @@
 										<h2 style="color:white;" style ="font-size: 25px;">&#8377;750</h2>
 								</td>
 								<td>
-									Accommodation is provided on a shared basis (twin sharing) inside IIT-B campus (Boys/Girls hostel). Accommodation will be provided for 3 days, i.e, 13-14, 14-15 and 15-16 December. Accommodation does not include other amenities like dinner, etc. Extension of period of stay is not available. This is a non-refundable ticket.
+									 Accommodation is provided on a shared basis (twin sharing) inside IIT-B campus (Boys/Girls hostel). Accommodation will be provided for 2 days, i.e, 10-11 and 11-12 December. Accommodation does not include other amenities like dinner, etc. Extension of period of stay is not available. This is a non-refundable ticket.
 									</td>
 								<tr>
 								<td bgcolor= "#8cc9f0">
@@ -181,7 +255,24 @@
 									</td>
 								</tr>
 							</tr>
-								
+							<!-- <tr>
+								<!-- </ul>
+							</center>
+									
+									<td>
+									This Ticket allows you to ONLY attend the conference for 3 Days. Does not include any conference amenities (Accommodation, Kit, Food & T-shirt). This is a non-refundable ticket.
+									</td>
+									<td>
+									This ticket includes conference (tutorials + talks), lunch and snacks for 3 days. It does not include Accommodation & T-Shirt. This is a non-refundable ticket.
+									</td>
+									<td>
+									Change of size, exchange at the venue is not available. This is a non-refundable ticket.
+									</td>
+									<td>
+									Accommodation is provided on a shared basis (twin sharing) inside IIT-B campus (Boys/Girls hostel). Accommodation will be provided for 3 days, i.e, 13-14, 14-15 and 15-16 December. Accommodation does not include other amenities like dinner, etc. Extension of period of stay is not available. This is a non-refundable ticket.
+									</td>
+								</tr>
+ -->
 							</table>
 								
 								<p id="demo"></p>
@@ -199,8 +290,10 @@
 										<header class="major">
 											<h2>SCHEDULE</h2>	
 											<div id="schedule" name="schedule">
+												 <h3>To be announced<h3>
+
   
-      <div >
+    <!--   <div >
        <center>
            <ul class="nav nav-tabs">
         <li class="active">
@@ -209,9 +302,11 @@
         <li><a style="background: #a89cc8;" data-toggle="tab" href="http://scipy.in/2015#day3">Day 3</a></li>
 		<li><a style="background: #9bb2e1;"data-toggle="tab" href="http://scipy.in/2015#paper">Workshop Resources</a></li>
 		<li><a style="background: #8cc9f0;" data-toggle="tab" href="http://scipy.in/2015#workshop">Workshop Instructions</a></li>
+
     
 </ul>
     <div class="tab-content">
+        <br>	<br>
         <div id="day1" class="tab-pane fade in active">
             <p>
         </p><center><h4>14 Dec 2015: Day 1</h4></center>
@@ -341,8 +436,8 @@
  &amp; Mr. Atul Kumar</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work7">Modeling and solving mathematical optimization problems with Pyomo</a></td></tr>
                 <tr><td>Prof. Madhu Belur, Saurabh Kumar &amp; Shana Moothedath</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work8">Application of Pandas for some allocation problems</a></td>
                </tr></tbody></table>
-            <p></p>
-        </div>
+            <p></p>-->
+        </div> 
       </div>
 			</section>
 											
@@ -415,11 +510,12 @@
 							<h2>Contact Us</h2>
 							<dl class="alt">
 								<dt>Address</dt>
-								<dd>1234 Somewhere Road &bull; Nashville, TN 00000 &bull; USA</dd>
+								<dd> &bull; CFD - Lab, Aero. Annex Building,<br>&bull; Below HSS Dept.,<br> &bull; Opp.Metallurgical Dept.IIT Bombay,<br> &bull; Powai, Mumbai - 400076 India</dd>
 								<dt>Phone</dt>
-								<dd>(000) 000-0000 x 0000</dd>
+								<dd> (+91) 22 25764133</dd>
 								<dt>Email</dt>
-								<dd><a style="color:white;" href="#">information@untitled.tld</a></dd>
+								<dd><a style="color:white;" href="#">info [at] fossee [dot] in
+</a></dd>
 							</dl>
 							<ul class="icons">
 								<li><a style="color:white;" href="#" class="icon-twitter alt"><span class="label"></span></a></li>

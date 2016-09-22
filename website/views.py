@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import render
 from django.utils.encoding import force_text
 from django.contrib.contenttypes.models import ContentType
@@ -13,6 +15,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.db.models import F
 import csv
+from django.core.mail import EmailMultiAlternatives
+
 
 from website.forms import ProposalForm, UserRegisterForm, UserLoginForm, WorkshopForm, ContactForm
 from website.models import Proposal, Comments
@@ -40,6 +44,8 @@ def userregister(request):
                 else:
                     form.save()
                     context['registration_complete'] = True
+                    form = UserLoginForm()
+                    context['form'] = form
                     return render_to_response('cfp.html', context)
             else:
                 context.update(csrf(request))
@@ -145,9 +151,9 @@ def submitcfp(request):
                 context['proposal_submit'] = True
                 sender_name = "SciPy India 2016"
                 sender_email = "scipy@fossee.in"
-                subject = "SciPy India - Proposal Acknowledgment"
+                subject = "SciPy India - Proposal Submission Acknowledgment"
                 to = (social_user.email, )
-                message = """Dear """+django_user.first_name+""",\n\nThank you for showing interest & submitting a talk at SciPy India 2016 conference. We have received your proposal for the talk titled '"""+request.POST['title']+"""'.\nReviewal of the proposals will start once the CFP closes.\nYou will be notified regarding selection/rejection of your talk via email.\n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
+                message = """Dear """+django_user.first_name+""",\n\nThank you for showing interest & submitting a talk/workshop at SciPy India 2016 conference.We have received your proposal (abstract/workshop description)for the talk/workshop titled  '"""+request.POST['title']+"""'.\nReviewal of the proposals will start once the CFP closes.\nYou will be notified regarding selection/rejection of your talk via email.\n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
                 send_mail(subject, message, sender_email, to)
                 return render_to_response('cfp.html', context)
             else:
@@ -299,8 +305,25 @@ def comment_abstract(request, proposal_id = None):
             sender_email = "scipy@fossee.in"
             subject = "SciPy India - Comment on Your Proposal"
             to = (proposal.user.email, )
-            message = """Dear """+proposal.user.first_name+""",\n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
-            send_mail(subject, message, sender_email, to)
+            message = """
+                Dear {0}, <br><br>
+                There is a comment posted on your proposal for the talk/workshop titled {1}. 
+                Please <a href = “”>login </a>to link and check the comment and do the needful.<br><br>
+                Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
+                """.format(
+                proposal.user.first_name,
+                proposal.title, 
+                )
+            email = EmailMultiAlternatives(
+                subject,'',
+                sender_email, to,
+                headers={"Content-type":"text/html;charset=iso-8859-1"}
+            )
+            email.attach_alternative(message, "text/html")
+            email.send(fail_silently=True)
+
+            # message = """Dear """+proposal.user.first_name+"""There is a comment posted on your proposal for the talk/workshop titled '"""+ proposal.title +"""'.Please login to link and check the comment and do the needful.\n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
+            # send_mail(subject, message, sender_email, to)
             proposal.status="Commented"
             proposal.save()
             context['proposal'] = proposal
@@ -330,7 +353,7 @@ def status(request, proposal_id= None):
             sender_email = "scipy@fossee.in"
             subject = "SciPy India - Proposal Accepted"
             to = (proposal.user.email, )
-            message = """Dear """+proposal.user.first_name+""",\n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
+            message = """Dear """+proposal.user.first_name+"""Congratulations your proposal for the talk/workshop titled '"""+ proposal.title+ """'is accepted you shall present the talk/ conduct the workshop at the conference.\n\nYou will be notified regarding instructions of your talk/workshop via email.\n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
             send_mail(subject, message, sender_email, to)
             context.update(csrf(request))
         elif 'reject' in request.POST:
@@ -340,7 +363,7 @@ def status(request, proposal_id= None):
             sender_email = "scipy@fossee.in"
             subject = "SciPy India - Proposal Rejected"
             to = (proposal.user.email, )
-            message = """Dear """+proposal.user.first_name+""",\n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
+            message = """Dear """+proposal.user.first_name+"""We regret to inform you that your proposal for the talk/workshop titled '"""+ proposal.title +"""'.\n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
             send_mail(subject, message, sender_email, to)
             context.update(csrf(request))  
         elif 'resubmit' in request.POST:
