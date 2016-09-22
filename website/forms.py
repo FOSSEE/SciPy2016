@@ -7,11 +7,14 @@ from django.contrib.auth.forms import UserCreationForm
 from website.models import Proposal
 from django.core.validators import MinLengthValidator, MinValueValidator, \
 RegexValidator, URLValidator
+from captcha.fields import ReCaptchaField  # Only import different from yesterday
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit
+import floppyforms as forms
 
 
 MY_CHOICES = (
     ('Beginner', 'Beginner'),
-    ('intermediate', 'Intermediate'),
     ('Advanced', 'Advanced'),
 )
 rating=(
@@ -48,7 +51,7 @@ class ProposalForm(forms.ModelForm):
 
     about_me = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'About Me'}),
                         required = True,
-                        error_messages = {'required':'Title field required.'},  
+                        error_messages = {'required':'About me field required.'},  
                         )
     attachment = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}),
                         required = True,
@@ -95,13 +98,12 @@ class ProposalForm(forms.ModelForm):
 class WorkshopForm(forms.ModelForm):
     about_me = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'About Me'}),
                         required = True,
-                        error_messages = {'required':'Title field required.'},  
+                        error_messages = {'required':'About Me field required.'},  
                         )
     attachment = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}),
                         required = True,
                         error_messages = {'required':'Attachment field required.'},)   
     phone = forms.CharField(max_length = 12, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),required=False, validators = [RegexValidator(regex = '^[0-9-_+.]*$', message='Enter a Valid Phone Number',)],
-                             error_messages = {'required':'Title field required.'},  
                                 )
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Title'}),
                         required = True,
@@ -176,6 +178,15 @@ class UserRegisterForm(UserCreationForm):
                         error_messages = {'required':'Password Confirm field required.'},  
                         label = 'RePassword'
                         )
+    
+        def clean_first_name(self):
+            return self.cleaned_data["first_name"].title()
+
+        def clean_email(self):
+            return self.cleaned_data["email"].lower()
+
+        def clean_last_name(self):
+            return self.cleaned_data["last_name"].title()
 
 
 class UserLoginForm(forms.Form):
