@@ -40,6 +40,9 @@ INSTALLED_APPS = (
     'website',
     'social.apps.django_app.default',
     'widget_tweaks',
+    'crispy_forms',
+    'floppyforms',
+    'captcha',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -117,6 +120,9 @@ LOCAL_SOCIAL_AUTH_GITHUB_SECRET = 'cd1b070917d0a5c8cd27ef997fd353a4'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
+
+RECAPTCHA_PUBLIC_KEY = '76wtgdfsjhsydt7r5FFGFhgsdfytd656sad75fgh'
+RECAPTCHA_PRIVATE_KEY = '6LcVu9ESAAAAAGxz7aEIACWRa3CVnXN3mFd-cajP'
 
 LANGUAGE_CODE = 'en-us'
 

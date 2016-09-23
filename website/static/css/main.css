@@ -2748,6 +2748,7 @@
 
 		table td {
 			padding: 0.75em 0.75em;
+			text-align: justify;
 		}
 
 		table th {
