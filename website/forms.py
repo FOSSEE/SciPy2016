@@ -11,6 +11,7 @@ from captcha.fields import ReCaptchaField  # Only import different from yesterda
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 import floppyforms as forms
+from captcha.fields import ReCaptchaField
 
 
 MY_CHOICES = (
@@ -40,12 +41,11 @@ class ContactForm(forms.Form):
                         required = True,
                         error_messages = {'required':'Email field required.'},  
                         )
-    # subject = forms.CharField(required=True)
     message = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Title'}),
                         required = True,
                         error_messages = {'required':'Message field required.'},  
                             )
-    # rate = forms.ChoiceField(choices=rating)
+    captcha = ReCaptchaField()
 
 class ProposalForm(forms.ModelForm):
 
