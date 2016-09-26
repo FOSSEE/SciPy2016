@@ -63,50 +63,7 @@
   </div>
 </div>
 </section>
-    <!--  <footer id="footer">
-            <section id="contact">
-              <h2>Write to Us</h2>
-              <p>Feel free to send us an email if you have any questions.</p>
-              <form id="contact" action="" class="form" role="form" method=POST enctype="multipart/form-data">{% csrf_token %}
-                    <div class="col-md-6 form-group">
-                      <input class="form-control" id="name" name="name" placeholder="Name" type="text" required />
-                    </div>
-                    <div class="col-md-6 form-group">
-                      <input class="form-control" id="email" name="email" placeholder="Email" type="email" required />
-                    </div>
-                    <br><br>
-                    <textarea class="form-control" id="message" name="message" placeholder="Message" rows="5"></textarea>
-                     <br> 
-                      <button class="button" type="submit">Send Message</button>
-            </section>
-            <section>
-              <h2>Contact Us</h2>
-              <dl class="alt">
-                <dt>Address</dt>
-                <dd>1234 Somewhere Road &bull; Nashville, TN 00000 &bull; USA</dd>
-                <dt>Phone</dt>
-                <dd>(000) 000-0000 x 0000</dd>
-                <dt>Email</dt>
-                <dd><a style="color:white;" href="#">information@untitled.tld</a></dd>
-              </dl>
-              <ul class="icons">
-                <li><a style="color:white;" href="#" class="icon-twitter alt"><span class="label"></span></a></li>
-                <li><a style="color:white;" href="#" class="icon-facebook alt"><span class="label"></span></a></li>
-                <li><a style="color:white;" href="#" class="icon-instagram alt"><span class="label"></span></a></li>
-                <li><a style="color:white;" href="#" class="icon-github alt"><span class="label"></span></a></li>
-                <li><a style="color:white;" href="#" class="icon-dribbble alt"><span class="label"></span></a></li>
-              </ul>
-              Visit SciPy.in/ <a style="color:white;" href="">2009</a>/
-              <a style="color:white;" href="">2010</a>/
-              <a style="color:white;" href="">2011</a>/
-              <a style="color:white;" href="">2012</a>/
-              <a style="color:white;" href="">2013</a>/
-              <a style="color:white;" href="">2014</a>/
-              <a style="color:white;" href="">2015</a>
-            </section>
-          </footer>
- -->
-                                  {% else %} 
+                                     {% else %} 
 <div id="wrapper">
 <!-- <div id="main"> -->
 <section id="content" class="main">
@@ -114,15 +71,15 @@
 
         <!-- <h2>{{ user.get_full_name|default:user.username }} </h2> -->
         <h2><u>Proposal Guidelines</u></h2>
-        <li>To be announced</li><br>
-            <!-- <ul>
+        <!-- <li>To be announced</li><br> -->
+            <ul>
                 <li>The project you are willing to present should be an actual implementation rather than just an idea.
                 <li>Abstract should be of 300 to 700 words describing the topic, including its relevance to scientific computing.
                 <li>Proposals with an aim to promote a commercial product or service will be rejected.
                 <li>In your abstract mention about various tools/libraries used for development.
                 <li>Notification for selection/rejection of your proposal will be given through email.
                 <li>All selected proposals must be presented at the conference by at least one author.
-            </ul> -->
+            </ul>
         <form  action="" method=POST enctype="multipart/form-data">
 
           <div class="row1">
