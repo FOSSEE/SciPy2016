@@ -44,8 +44,8 @@ def userregister(request):
                 else:
                     form.save()
                     context['registration_complete'] = True
-                    form = UserLoginForm()
-                    context['form'] = form
+                    # form = UserLoginForm()
+                    # context['form'] = form
                     return render_to_response('cfp.html', context)
             else:
                 context.update(csrf(request))
