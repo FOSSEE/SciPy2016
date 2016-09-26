@@ -8,6 +8,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="{% static 'css/main.css'%}" />
+		<link rel="stylesheet" href="{% static 'css/font-awesome.min.css'%}" />
 		<link href="{% static 'css/base.css' %}" rel="stylesheet">
 	</head>	
 	<body>
@@ -22,7 +23,7 @@
 						<p style="color:#484848; font-weight:700; font-size:28px;" >DECEMBER 10 & 11</p><br><br>
             			
             	 <a href="#attend" class="button special" style="width : 220px;" >Attend</a></center>
-            	 <a href="#" class="button special" id="cfp" style="width : 220px;">Call for Proposal</a></center>
+            	 <a href="{% url 'website:cfp' %}" class="button special"  style="width : 220px;">Call for Proposal</a></center>
 					</header>
 {% endblock %}
 
@@ -40,7 +41,7 @@
           <li> <a href="#about" class="smoothScroll">About</a></li>
           <li> <a href="#speakers" class="smoothScroll">Speakers</a></li>
           <li> <a href="#attend" class="smoothScroll">Attend</a></li>
-          <li> <a href="#" id = "cfp1" >Call for Proposal</a></li>
+          <li> <a href="{% url 'website:cfp' %}">Call for Proposal</a></li>
 	 	  <li> <a href="#schedule" class="smoothScroll">Schedule</a></li>
           <li> <a href="#venue" class="smoothScroll">Venue</a></li>
           <li> <a href="#sponsors" class="smoothScroll">Sponsors</a></li>
@@ -204,151 +205,7 @@
 											<div id="schedule" name="schedule">
 												 <h3>To be announced<h3>
 
-  
-    <!--   <div >
-       <center>
-           <ul class="nav nav-tabs">
-        <li class="active">
-        <a style="background: #efa8b0;" data-toggle="tab" href="http://scipy.in/2015#day1">Day 1</a></li>
-        <li><a style="background: #c79cc8;" data-toggle="tab" href="http://scipy.in/2015#day2">Day 2</a></li>
-        <li><a style="background: #a89cc8;" data-toggle="tab" href="http://scipy.in/2015#day3">Day 3</a></li>
-		<li><a style="background: #9bb2e1;"data-toggle="tab" href="http://scipy.in/2015#paper">Workshop Resources</a></li>
-		<li><a style="background: #8cc9f0;" data-toggle="tab" href="http://scipy.in/2015#workshop">Workshop Instructions</a></li>
-
-    
-</ul>
-    <div class="tab-content">
-        <br>	<br>
-        <div id="day1" class="tab-pane fade in active">
-            <p>
-        </p><center><h4>14 Dec 2015: Day 1</h4></center>
-              <table class="table table-bordered">
-                                <tbody><tr style="background-color:#f0f0f0"><td>08:30 AM - 09:00 AM</td><td>Registration and Breakfast</td><td></td>
-                                </tr>
-                                <tr><td>09:00 AM - 10:00 AM</td><td>Inauguration and Setup</td>
-                                </tr>
-                                <tr><td width="25%"> 10:00 AM - 12:00 PM</td><td width="45%"><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work1"> Workshop: IPython, NumPy, SciPy, MPL Introduction</a></td>
-<td width="30%"> by Jarrod Millman &amp; Prof. Prabhu Ramachandran</td>
-                                </tr>
-                                <tr><td>12:00 PM - 01:00 PM</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work2">Workshop: Introduction to BioPython</a></td>
-				<td> by Sourav Singh</td>
-                                </tr>
-                                <tr style="background-color:#f0f0f0"><td>01:00 PM - 02:00 PM</td><td>Lunch</td>  <td></td>
-
-                                </tr>
-                                <tr><td>02:00 PM - 04:00 PM</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work3">Workshop: Symbolic computation with Python, SymPy</a> </td>
-				<td> by Sumith</td>
-                                </tr>
-                                <tr><td> 04:00 PM - 06:00 PM</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work4">Workshop: Introduction to Data Analysis using Pandas</a></td>
-				<td>by Bargava Subramanian</td>
-                                </tr>
-              </tbody></table>
-         
-            <p></p>
-        </div>
-        <div id="day2" class="tab-pane fade">
-            <p>
-              </p><center><h4>15 Dec 2015: Day 2</h4></center>
-               <table class="table table-bordered">
-                                <tbody><tr style="background-color:#f0f0f0"><td>08:30 AM - 09:00 AM</td><td>Breakfast</td>  <td></td>
-
-                                </tr>
-                                <tr><td width="25%">09:00 AM - 11:00 AM</td><td width="45%"><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work5">Workshop: Complex Network analysis using NetworkX</a></td>
-<td width="40%">by Mridul Seth &amp; Himanshu Mishra</td>
-                                </tr>
-                                <tr><td>11:00 AM - 01:00 PM</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work6">Workshop: Domain-specific languages and high performance:<br>
-                                                Generating high-performance code in Python</a></td>
-				<td>by Dr. Andreas Kloeckner</td>
-                                </tr>
-                                <tr style="background-color:#f0f0f0">
-                                <td>01:00 PM - 02:00 PM</td><td>Lunch</td><td></td>
-
-                                </tr><tr><td>02:00 PM - 03:00 PM</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work8">Workshop: Application of Pandas for some allocation problems</a> </td>
-				<td>by Prof. Madhu Belur, Saurabh Kumar &amp; Shana Moothedath</td>
-                                </tr>
-                                <tr><td>03:00 PM - 04:00 PM</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work7">Workshop: Modeling and solving mathematical optimization problems with Pyomo</a> </td>
-<td>by Prof. Ashutosh Mahajan, Prof. Jayendran Venkateswaran &amp; Mr. Atul Kumar</td>
-                                </tr>
-                                <tr><td>04:00 PM - 06:00 PM</td><td>Python in Schools Track: Details TBA</td>
-                                </tr>
-               </tbody></table>
-            <p></p>
-        </div>
-        <div id="day3" class="tab-pane fade">
-            <p>
-              </p><center><h4>16 Dec 2015: Day 3</h4></center>
- <table class="table table-bordered">
-                                <tbody><tr style="background-color:#f0f0f0"><td>08:30 AM - 09:00 AM</td><td>Breakfast</td>
-                                </tr>
-                                <tr><td width="25%">09:00 AM - 09:15 AM</td><td width="45%">Conference inauguration</td>
-
-                                </tr>
-                                <tr><td>09:15 AM - 10:15 AM</td><td>Keynote Address - Prof. Andreas Klöckner</td>
-                                
-                                </tr>
-<tr><td>10:15 AM - 11:00 AM</td><td>Python for Statisticians - Jarrod Millman</td>
-                                
-                                </tr>
-                                <tr style="background-color:#f0f0f0">
-                                <td>11:00 AM - 11:15 AM</td><td>Tea</td>
-
-
-                                </tr><tr><td>11:15 AM - 11:45 PM</td><td>Concept of a Python based Laboratory - Dr. Ajith Kumar</td>
-                                
-                                </tr>
-                                <tr><td>11:45 AM - 12:10 PM</td><td>SymPy, SymEngine and the interface! - Sumith</td>
-
-                                </tr>
-                                <tr><td>12:10 PM - 12:35 PM</td><td>Sandhi - Visual Programming Editor - Ambikeshwar Srivastava</td>
-                                </tr>
-  <tr><td>12:35 PM - 12:50PM</td><td>Time Series Satellite Data Visualizer - Umang Gupta</td>
-                                </tr>
-  <tr style="background-color:#f0f0f0"><td>12:50 PM - 02:00 PM</td><td>	Lunch</td>
-                                </tr>
-  <tr><td>2:00PM - 2:20 PM</td><td>Python based implementation of Aqua Monitoring System using Raspberry Pi - Mohan Allam</td>
-                                </tr>
-  <tr><td>2:20PM - 2:40 PM</td><td>3D Scanner System Using Python - Neha Shinde</td>
-                                </tr>
-  <tr><td>02:40 PM - 03:10 PM</td><td>Talk - Prof. Ted Ralphs</td>
-                                </tr>
-<tr><td>03:10 PM - 03:40 PM</td><td>CFD simulations using OpenFOAM and PyFOAM - Prof. Shivasubramanian Gopalakrishnan</td>
-                                </tr>
-<tr style="background-color:#f0f0f0"><td>3:40 PM - 4:00 PM</td><td>	Tea</td>
-                                </tr>
-<tr><td>4:00 PM - 4:25 PM</td><td>Osdag: A python-based open source steel design and graphics software - Deepa</td>
-                                </tr>
-<tr><td>4:25 PM - 5:00 PM</td><td>Python for Microcontrollers - Srikant Patnaik</td>
-                                </tr>
-<tr><td>5:00 PM - 5:30 PM</td><td>	Lightning Talks</td>
-                                </tr>
-<tr><td>5:30 PM - 5:45 PM</td><td>	Vote of thanks and closing</td>
-                              
-               </tr></tbody></table>	
-           <p></p>
-        </div>
- <div id="workshop" class="tab-pane fade">
-            <p>
-              </p><center><h4>Click on each title for more details</h4></center><br>
-			<h5 align="right"><a href="http://fossee.in/data/emails/SciPy-India-2015-Installation-Instruction-for-Workshop.pdf">SciPy 2015: Installation Instructions for Workshop</a></h5>
-               <table class="table table-bordered">
-		 <colgroup>
-                                <col width="220">
-                                <col width="720">
-                                </colgroup>
-
-		 <tbody><tr><th>Speaker</th>
-                <th>Title</th>
-                </tr><tr><td>Jarrod Millman &amp; Prof. Prabhu Ramachandran</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work1">IPython, NumPy, SciPy, MPL Introduction</a></td></tr>
-                <tr><td>Sourav Singh</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work2">Introduction to BioPython</a></td></tr> 
-                <tr><td>Sumith</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work3">Symbolic computation with Python, SymPy</a></td></tr>
-                <tr><td>Mr. Bargava Subramanian</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work4">Introduction to Data Analysis using Pandas</a></td></tr>
-                <tr><td>Mridul Seth &amp; Himanshu Mishra</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work5">Complex Network analysis using NetworkX</a></td></tr>
-                <tr><td>Dr. Andreas Kloeckner</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work6">Domain-specific languages to high performance: Code generation and transformation in Python</a></td></tr>
-                <tr><td>Prof. Ashutosh Mahajan, Prof. Jayendran Venkateswaran
- &amp; Mr. Atul Kumar</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work7">Modeling and solving mathematical optimization problems with Pyomo</a></td></tr>
-                <tr><td>Prof. Madhu Belur, Saurabh Kumar &amp; Shana Moothedath</td><td><a href="http://scipy.in/2015#" data-toggle="modal" data-target="#work8">Application of Pandas for some allocation problems</a></td>
-               </tr></tbody></table>
-            <p></p>-->
+ 
         </div> 
       </div>
 			</section>
@@ -396,7 +253,7 @@
 						<section id="contact">
 							<h2>Write to Us</h2>
 							<p>Feel free to send us an email if you have any questions.</p>
-							<form id="contact_us" action='{{ contact_form_url}}' class="form" role="form" method=POST enctype="multipart/form-data">{% csrf_token %}
+							<form id="contact_us" action='#' class="form" role="form" method=POST enctype="multipart/form-data">{% csrf_token %}
             				<div class="col-md-6 form-group">
               				<input class="form-control" id="name" name="name" placeholder="Name" type="text" required />
             				</div>
@@ -414,7 +271,8 @@
 							</div>
 							<div class = "col-md-3">
 							<!-- <button class="button" href="" id = "c" type="submit">Send Message</button> -->
-							<button id="myButton">Send Message</button>
+							<button id="myButton" disabled >Send Message</button><br>
+							<p style="color: red;" id= "error">
 							</div>
 						</form>
 						</section>
@@ -465,49 +323,25 @@
 			<script src="{% static 'js/smoothscroll.js' %}"></script>
 
 
-<!-- 
-<script>
-$(document).ready(function() {
-    var n1 = Math.round(Math.random() * 10 + 1);
-    var n2 = Math.round(Math.random() * 10 + 1);
-    $("#a").val(n1 + " + " + n2 + " = ");
-    $("#c").click(function() {
-        if (eval($("#a").val()) == $("#b").val()) {
-        } else {
-            alert("Write the correct value ");
-        }
-    });
-});
-</script>
- -->
 
 <script type="text/javascript">
 window.onload = function () {
 	var n1 = Math.round(Math.random() * 10 + 1);
     var n2 = Math.round(Math.random() * 10 + 1);
     $("#a").val(n1 + " + " + n2 + " = ");
-    document.getElementById("myButton").onclick = function () {
-         if (eval($("#a").val()) == $("#b").val()) {
-         	return true;
-         	alert("!")
-        } else {
-            alert("Write the correct value ");
-            return false;
-        }
-    }
+    var add = n1 + n2;
+    $("#b").on('change', function (){
+    	if (this.value == add){
+    		 $('#myButton').removeAttr('disabled');
+    		 document.getElementById("error").innerHTML = "";    	
+
+    	}
+    	else{
+    		$('#myButton').attr('disabled', true);
+			document.getElementById("error").innerHTML = "Incorrect!";    	
+		}
+    });
 }</script>
-
-<script type="text/javascript">
-
-window.onload = function () {
-    document.getElementById("cfp").onclick = function () {
-         alert("To Be Announced !");
-    }
-     document.getElementById("cfp1").onclick = function () {
-         alert("To Be Announced !");
-     }
-}</script>
-
 
 	</body>
 </html>
