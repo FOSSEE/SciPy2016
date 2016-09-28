@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="{% static 'css/font-awesome.min.css'%}" />
 		<link href="{% static 'css/base.css' %}" rel="stylesheet">
 		<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
 	</head>	
 	<body>
 
@@ -48,11 +49,7 @@
           <li> <a href="#sponsors" class="smoothScroll">Sponsors</a></li>
           <li> <a href="#contact" class="smoothScroll">Contact</a></li>
             {% if user and not user.is_anonymous %}
-               <li class="dropdown">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.get_full_name|default:user.username }}</a>
-               <ul class="dropdown-menu">
-                   <li><a href="{% url 'auth:logout' %}">Logout</a></li>
-                   <li><a href="{% url 'website:cfp' %}">Main Menu</a></li>
+                   <li><a href="{% url 'auth:logout' %}?next=/2016/cfp">Logout</a></li>
                </ul>   
                {% else %}       
                 <li><a href="{% url 'website:cfp' %}" >Login</a></li>
@@ -91,21 +88,19 @@
 											<h2>SPEAKERS</h2>
 						
 
-		<table class = "table">
+		<table>
 			<colgroup>
         <col width="40%" />
-        <col width="20%" />
         <col width="40%" />
     </colgroup>
 <tr>
-<td> <img class="img-responsive" src="{% static 'img/ajith.jpg' %}" height="300" width="300" alt="">
+<td> <img class="img-responsive" src="{% static 'img/ajith.jpg' %}" height=75% width= 75% alt="">
 					<p>Dr. Ajith Kumar</p>
 									<a style = "color:#636363;" href="https://github.com/expeyes" target="_blank"><i class="icon-github" style="font-size:30px;"></i></a>
 									&nbsp;&nbsp;&nbsp;&nbsp;
         							<a style = "color:#636363;" href="http://expeyes.in/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a></td>
 
-        							<td></td>
-<td> <img class="img-responsive" src="{% static 'img/anand.jpg' %}" height="300" width="300" alt="">
+<td> <img class="img-responsive" src="{% static 'img/anand.jpg' %}" height=30% width=75% alt="">
 					<p>Mr. S. Anand</p>
 									<a style = "color:#636363;" href="https://github.com/sanand0" target="_blank"><i class="icon-github" style="font-size:30px;"></i></a>
 									&nbsp;&nbsp;&nbsp;&nbsp;
@@ -114,7 +109,6 @@
 </tr>
 <tr>
 <td> Dr. B. P. Ajith Kumar, a scientist working with the <a target="_blank" href = "http://www.iuac.res.in/">IUAC</a>. His main area of work is development of instrumentation for particle accelerators and associated experiments, including radio-frequency accelerating structures, control and data acquisition systems, digital and radio frequency electronics modules. He initiated the Phoenix / expEYES project. ExpEYES is currently the cheapest educational system to teach science. </td>
-<td></td>
 <td> Anand is the Chief Executive Officer at Gramener. He leads a team of data enthusiasts with skills in analysis, design, programming and statistics. He studied at IIT Madras, IIM Bangalore and LBS, and worked at IBM, Infosys, Lehman Brothers and BCG. He and his team explore insights from data and communicate these as visual stories. These visual analyses and dashboards are built on the Gramener Visualisation Server -- Gramener's flagship product. </td>
 </tr>
 		</table>
@@ -172,6 +166,7 @@
 								<td bgcolor ="#9bb2e1">
 										<h9 style="color:white;">Accomodation</h9>
 										<h2 style="color:white;" style ="font-size: 25px;">&#8377;500</h2>
+										<h9 style="color:white;"><a href="#"> Add Ons </a></h9>
 								</td>
 								<td>
 									 Accommodation is provided on a shared basis (twin sharing) inside IIT-B campus (Boys/Girls hostel). Accommodation will be provided for 2 days, i.e, 10-11 and 11-12 December. Accommodation does not include other amenities like dinner, etc. Extension of period of stay is not available. This is a non-refundable ticket.
@@ -180,6 +175,7 @@
 								<td bgcolor= "#8cc9f0">
 										<h9 style="color:white;">T-Shirt</h9>
 										<h2 style="color:white;" style ="font-size: 25px;">&#8377;350</h2>
+										<h9 style="color:white;"><a href="#"> Add Ons </a></h9>
 								</td>
 								<td>
 									Change of size, exchange at the venue is not available. This is a non-refundable ticket.
@@ -205,8 +201,6 @@
 											<h2>SCHEDULE</h2>	
 											<div id="schedule" name="schedule">
 												 <h3>To be announced<h3>
-
- 
         </div> 
       </div>
 			</section>
@@ -218,9 +212,9 @@
 										<header class="major">
 											<h2>VENUE</h2>	
 											<center><h4>Lecture Hall Complex, IIT Bombay</h4></center>
-												<!-- <div class='myIframe' >  -->
+												<div class='myIframe' > 
                     <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.472585331343!2d72.916895!3d19.130779999999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c7f4215f57bf%3A0xcf0c03ea45a113e1!2sLecture+Hall+Complex+(LHC)!5e0!3m2!1sen!2sin!4v1434726932900" width="650" height="450" frameborder="0" style="border:0"></iframe>
-                <!-- </div> -->
+                </div/>
                 </section>
 
 
@@ -254,7 +248,7 @@
 						<section id="contact">
 							<h2>Write to Us</h2>
 							<p>Feel free to send us an email if you have any questions.</p>
-							<form id="contact_us" action='#' class="form" role="form" method=POST enctype="multipart/form-data">{% csrf_token %}
+							<form id="contact_us" action='#' class="form" role="form" method=POST onSubmit="alert('Thank you for your feedback.');" enctype="multipart/form-data">{% csrf_token %}
             				<div class="col-md-6 form-group">
               				<input class="form-control" id="name" name="name" placeholder="Name" type="text" required />
             				</div>
@@ -287,7 +281,7 @@
 								<dt>Phone</dt>
 								<dd> (+91) 22 25764133</dd>
 								<dt>Email</dt>
-								<dd><a style="color:white;" href="#">info [at] fossee [dot] in
+								<dd><a style="color:white;" href="#">scipy [at] fossee [dot] in
 </a></dd>
 							</dl>
 							<ul class="icons">
@@ -322,7 +316,7 @@
 			<script src="{% static 'js/ie/respond.min.js' %}"></script>
 			<script src="{% static 'js/bootstrap.min.js' %}"></script>
 			<script src="{% static 'js/smoothscroll.js' %}"></script>
-
+			<script src="{% static 'js/rating.js' %}"></script>
 
 
 <script type="text/javascript">

@@ -14,32 +14,29 @@
       {% block header %}
        <header id="header1">
 						<h1>Scipy India 2016</h1>
+            {% if proposal.proposal_type == "ABSTRACT"%}
 						<h2>Abstract Details</h2>
+            {% else %}
+            <h2>Workshop Details</h2>
+            {% endif %}
 </header> 
 {% endblock %}
 
 {% block nav %}
-<div id="wrapper">
+
 <div id="navbar-main"> 
-  <!-- Fixed navbar -->
   <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
          <li><a href="{% url 'website:home' %}" class="active">Home</a></li>        
-         <li><a href="{% url 'website:view_abstracts' %}" class="active">View Proposals</a></li>        
                {% if user and not user.is_anonymous %}
-               <li class="dropdown">
-               <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.get_full_name|default:user.username }}</a>
-               <ul class="dropdown-menu">
-                   <li><a href="{% url 'auth:logout'%}?next=/2016/cfp">Logout</a></li>
-                   <li><a href="{% url 'website:cfp' %}">Main Menu</a></li>
-               </ul>   
+               <li><a href="{% url 'website:cfp' %}">{{ user.get_full_name|default:user.username }}</a>
+                <li><a href="{% url 'auth:logout' %}?next=/2016/cfp">Logout</a></li>
                {% else %}       
                 <li><a href="{% url 'website:cfp' %}" >Login</a></li>
            {% endif %}
         </ul>
       </div>
-      <!--/.nav-collapse --> 
   </div>
 </div>
 {% endblock %}
@@ -52,19 +49,26 @@
 				<h3>{{ proposal.user.first_name }} {{ proposal.user.last_name }}</h3>
 			<p><b>Title: </b>&nbsp;{{ proposal.title }}</p>
      		<p><b>About Me: </b>&nbsp;{{ proposal.about_me }}</p>
-        	<p><b>Abstract: </b>&nbsp;{{ proposal.abstract }}</p>
+
+         {% if proposal.proposal_type == "ABSTRACT"%}
+
+        	<p><b>Abstract:</b>&nbsp;
+            {% else %}
+          <p><b>Description:</b>&nbsp;
+          {% endif %}
+            {{ proposal.abstract }}</p>
         	{% if proposal.prerequisite %}
         		<p><b>Prerequisite: </b>&nbsp;{{ proposal.prerequisite }}</p>
         	{% endif%}
           {% if proposal.attachment.url %}
-           <b>Attachment: </b>&nbsp;<a href="{{ proposal.attachment.url }}" class="btn btn-info" target="_blank">{{ proposal.attachment}}</a>
+           <b>Attachment: </b>&nbsp;<a href="{{ proposal.attachment.url }}" class="btn btn-info" target="_blank">{{ filename }}</a>
            {% endif %}
    		    <p><b>Date Created: </b>&nbsp;{{ proposal.date_created }}</p>
 
 
           <form action="{% url 'website:rate_proposal' proposal.id %}" method='POST' enctype="multipart/form-data">  {% csrf_token %}
-   		   <b>Rate :</b>
-                 <select name="rating" style="width:70px;" onchange="run()">  <!--Call run() function-->
+   		   <b>Ratings :</b>
+                 <select name="rating" style="width:70px;" >  <!--Call run() function-->
      <option value="0">0</option>
      <option value="1">1</option>
      <option value="2">2</option>
@@ -77,13 +81,18 @@
      <option value="9">9</option>
      <option value="10">10</option>
 
-    </select> /10
- <input class="btn btn btn_primary"  type="submit"  value="Rate">
-</form>
-          {% if proposal.rate %}
-          {{proposal.rate}} /10 
+      </select> /10 &nbsp;
+      <input class="btn btn btn_primary"  type="submit"  value="Rate">
+    </form>
+                   <h4>Ratings</h4>
 
-          {% endif %}
+           {% for rate in rates %}
+           <div>
+           {{rate.rating}}/10 
+          by  {{ rate.user.first_name }} {{ rate.user.last_name }}
+        </div>
+          {% endfor %}
+         
 
           <hr> 
         <h4>Comments</h4>
@@ -92,10 +101,10 @@
                 <strong>Comment By:</strong>
                 {{ comment.user.first_name }} {{ comment.user.last_name }}
                 <p>{{ comment.comment|safe }}</p>  
-                {% if user == comment.user %}
+               <!--  {% if user == comment.user %}
                  <form action="" method='POST' enctype="multipart/form-data">
             {% csrf_token %} 
-                {% endif %}
+                {% endif %} -->
             </div>
             <hr>
           </form>
@@ -145,6 +154,13 @@ mySubmitButton.onclick = function() {
   this.form.submit();
 }</script>
 
+<script>
+    function run() {
+      value = document.getElementById("Ultra").value;
+      document.getElementById("demo").innerHTML = "Hello JavaScript!";
+
+    }
+</script>
 
 <script>
 $(document).ready(function() {

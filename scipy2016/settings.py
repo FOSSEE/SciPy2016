@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 # from local import *
 import os
+from scipy2016.local import *
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -100,29 +101,35 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': 'scipy2016',                      # Or path to database file if using sqlite3.
         # The following settings are not used with sqlite3:
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'USER': DBUSER,
+        'PASSWORD': DBPWD,
         'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
         'PORT': '',
     }
 }
 
-LOCAL_SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '628178553368-dvc6sjtgp90cm0591b8p4da62rhttn35.apps.googleusercontent.com'
-LOCAL_SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'eoiek3jLz9Ax3dv7k3mXFrbU'
+LOCAL_SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = GOOGLE_KEY
+LOCAL_SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = GOOGLE_SECRET
 # API key AIzaSyDxRqGfJNJJIFw6traKTG5nC1mY8TNODu4 
 
 
-LOCAL_SOCIAL_AUTH_FB_KEY = '160224867760606'
-LOCAL_SOCIAL_AUTH_FB_SECRET = '45eb71682352723c44d79471ecab5894'
+LOCAL_SOCIAL_AUTH_FB_KEY = FACEBOOK_KEY
+LOCAL_SOCIAL_AUTH_FB_SECRET = FACEBOOK_SECRET
 
-LOCAL_SOCIAL_AUTH_GITHUB_KEY = '0bcac418003a6d06fb50'
-LOCAL_SOCIAL_AUTH_GITHUB_SECRET = 'cd1b070917d0a5c8cd27ef997fd353a4'
+
+LOCAL_SOCIAL_AUTH_GITHUB_KEY = GITHUB_KEY
+LOCAL_SOCIAL_AUTH_GITHUB_SECRET = GITHUB_SECRET
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-RECAPTCHA_PUBLIC_KEY = '76wtgdfsjhsydt7r5FFGFhgsdfytd656sad75fgh'
-RECAPTCHA_PRIVATE_KEY = '6LcVu9ESAAAAAGxz7aEIACWRa3CVnXN3mFd-cajP'
+RECAPTCHA_PUBLIC_KEY = RECAPTCHA_PUBLIC
+RECAPTCHA_PRIVATE_KEY = RECAPTCHA_PRIVATE
+
+
+# Internationalization
+# https://docs.djangoproject.com/en/1.6/topics/i18n/
+
 
 LANGUAGE_CODE = 'en-us'
 

@@ -7,7 +7,7 @@ from scipy2016 import settings
 def get_document_dir(instance, filename):
     # ename, eext = instance.user.email.split("@")
     fname, fext = filename.split(".")
-    return '%s/attachment/%s/%s.%s' % (instance.user, instance.proposal_type, str(instance.user)+str(fext), fext)
+    return '%s/attachment/%s/%s.%s' % (instance.user, instance.proposal_type, str(instance.user), fext)
 
 class Proposal(models.Model):
     user = models.ForeignKey(User)
@@ -24,7 +24,11 @@ class Proposal(models.Model):
     status = models.CharField(max_length = 100, default='Pending', editable=True)
     proposal_type = models.CharField(max_length = 100)
     tags = models.CharField(max_length = 250)
-    rate = models.CharField(max_length=100)
+
+class Ratings(models.Model):
+    proposal = models.ForeignKey(Proposal)
+    user = models.ForeignKey(User)
+    rating = models.CharField(max_length=700)
     
 class Comments(models.Model):
     proposal = models.ForeignKey(Proposal)
