@@ -25,7 +25,7 @@
 						<p style="color:#484848; font-weight:700; font-size:28px;" >DECEMBER 10 & 11</p><br><br>
             			
             	 <a href="#attend" class="button special" style="width : 220px;" >Register</a></center>
-            	 <a href="{% url 'website:cfp' %}" class="button special"  style="width : 220px;">Submit Proposal</a></center>
+            	 <a href="{% url 'website:cfp' %}" class="button special"  style="width : 220px;">Submit Proposals</a></center>
 					</header>
 {% endblock %}
 
@@ -43,17 +43,12 @@
           <li> <a href="#about" class="smoothScroll">About</a></li>
           <li> <a href="#speakers" class="smoothScroll">Speakers</a></li>
           <li> <a href="#attend" class="smoothScroll">Register</a></li>
+          <li> <a href="#coc" class="smoothScroll">COC</a></li>
           <li> <a href="{% url 'website:cfp' %}">Submit Proposal</a></li>
 	 	  <li> <a href="#schedule" class="smoothScroll">Schedule</a></li>
           <li> <a href="#venue" class="smoothScroll">Venue</a></li>
           <li> <a href="#sponsors" class="smoothScroll">Sponsors</a></li>
           <li> <a href="#contact" class="smoothScroll">Contact</a></li>
-            {% if user and not user.is_anonymous %}
-                   <li><a href="{% url 'auth:logout' %}?next=/2016/cfp">Logout</a></li>
-               </ul>   
-               {% else %}       
-                <li><a href="{% url 'website:cfp' %}" >COC</a></li>
-           {% endif %}
         </ul>
       </div>
       <!--/.nav-collapse --> 
@@ -94,13 +89,13 @@
         <col width="40%" />
     </colgroup>
 <tr>
-<td> <img class="img-responsive" src="{% static 'img/ajith.jpg' %}" height=75% width= 75% alt="">
+<td> <img class="img-responsive" src="{% static 'img/ajith.jpg' %}" height=70% width=60% alt="">
 					<p>Dr. Ajith Kumar</p>
 									<a style = "color:#636363;" href="https://github.com/expeyes" target="_blank"><i class="icon-github" style="font-size:30px;"></i></a>
 									&nbsp;&nbsp;&nbsp;&nbsp;
         							<a style = "color:#636363;" href="http://expeyes.in/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a></td>
 
-<td> <img class="img-responsive" src="{% static 'img/anand.jpg' %}" height=30% width=75% alt="">
+<td> <img class="img-responsive" src="{% static 'img/anand1.png' %}" height=70% width=60% alt="">
 					<p>Mr. S. Anand</p>
 									<a style = "color:#636363;" href="https://github.com/sanand0" target="_blank"><i class="icon-github" style="font-size:30px;"></i></a>
 									&nbsp;&nbsp;&nbsp;&nbsp;
@@ -194,14 +189,65 @@
 							</section>
 
 		
+<section id="coc" class="main special">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>CODE FOR CONDUCT</h2>	
+											<div id="schedule" name="schedule">
+												 <h3>To be announced<h3>
+        </div> 
+      </div>
+			</section>
+
+
+
 		<section id="schedule" class="main special">
 								<div class="spotlight">
 									<div class="content">
 										<header class="major">
 											<h2>SCHEDULE</h2>	
 											<div id="schedule" name="schedule">
-												 <h3>To be announced<h3>
-        </div> 
+ <div >
+       <center>
+           <ul class="nav nav-tabs">
+        <li class="active">
+        <a style="background: #efa8b0;" data-toggle="tab" href="http://scipy.in/2015#day1">Day 1</a></li>
+        <li><a style="background: #c79cc8;" data-toggle="tab" href="http://scipy.in/2015#day2">Day 2</a></li>
+		<!--<li><a style="background: #a89cc8;" data-toggle="tab" href="http://scipy.in/2015#day3">Day 3</a></li>-->		
+		<!-- <li><a style="background: #9bb2e1;"data-toggle="tab" href="http://scipy.in/2015#paper">Workshop Resources</a></li>
+		<li><a style="background: #8cc9f0;" data-toggle="tab" href="http://scipy.in/2015#workshop">Workshop Instructions</a></li>
+     --><br><br>
+</ul>
+    <div class="tab-content">
+        <div id="day1" class="tab-pane fade in active">
+            <p>
+        </p><center><h4>10 Dec 2015: Day 1</h4></center>
+              <table class="table table-bordered">
+                                <tbody><tr style="background-color:#f0f0f0">
+                                	<td>Tutorials (Parallel tracks) :</td>
+                                </tr>
+                               <tr><td><li>Basic</li></td></tr>
+                                <tr> <td><li>Advanced</li></td></tr>
+
+              </tbody></table>
+         
+            <p></p>
+        </div>
+        <div id="day2" class="tab-pane fade">
+            <p>
+              </p><center><h4>12 Dec 2015: Day 2</h4></center>
+               <table class="table table-bordered">
+                                <tbody><tr style="background-color:#f0f0f0">
+                                	<td>Conference and talks :</td>
+                                </tr>
+
+              </tbody></table>
+            <p></p>
+        </div>
+       
+
+      </div>        </div> 
       </div>
 			</section>
 											

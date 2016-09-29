@@ -32,7 +32,7 @@
                <li><a href="{% url 'website:cfp' %}">{{ user.get_full_name|default:user.username }}</a>
                 <li><a href="{% url 'auth:logout' %}?next=/2016/cfp">Logout</a></li>
                {% else %}       
-                <li><a href="{% url 'website:cfp' %}" >COC</a></li>
+                <li><a href="{% url 'website:cfp' %}" >Login</a></li>
            {% endif %}
         </ul>
       </div>
@@ -79,7 +79,7 @@
       {% else %}
       <ul class="features">
 <li>
-                 <span><h2><u>Code of Conduct</u></h2></span>
+                 <span><h2><u>Login</u></h2></span>
 
                 <p>Login/Register to Submit a Proposal</p>
                 {% if invalid %}
@@ -96,7 +96,7 @@
                     </form>
                     <!-- </div> -->
                     <p>Or Sign in with:&nbsp;
-                    <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}" class="btn btn-social-icon "  style="color:#dd4b39;"><i class="icon-google-plus"></i></a>&nbsp;
+                    <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-social-icon "  style="color:#dd4b39;"><i class="icon-google-plus"></i></a>&nbsp;
                     <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}" class=" btn btn-social-icon" style="color:#3b5998"><i class="icon-facebook"></i></a></p>
                   </li>
                 <!-- </div> -->
