@@ -260,6 +260,32 @@ def view_abstracts(request):
         return render(request, 'cfp.html')
 
 
+def edit_proposal(request, proposal_id = None):
+    user = request.user
+    context = {}
+    if user.is_authenticated():
+        proposal = Proposal.objects.get(id=proposal_id)
+        if proposal.proposal_type == 'ABSTRACT':
+            form = ProposalForm(request.POST, request.FILES, instance=proposal)
+        else:
+            form = WorkshopForm(request.POST, request.FILES, instance=proposal)
+        if request.method == 'POST':
+            if form.is_valid():
+                data = form.save(commit = False)
+                data.user = user
+                proposal.status = 'Resubmitted'
+                data.save()
+                context.update(csrf(request))
+                return render(request, 'cfp.html')
+            else:
+                context['user'] = user
+                return render(request, 'cfp.html', context)
+        context['user'] = user
+        context['form'] = form
+        context['proposal'] = proposal
+    return render(request, 'edit-proposal.html', context)
+
+
 def abstract_details(request, proposal_id=None):
     user = request.user
     context = {}
@@ -455,7 +481,7 @@ def status(request, proposal_id= None):
     
 
 
-def delete(request):
+def status_change(request):
     user = request.user
     context = {}
     if user.is_authenticated():
@@ -513,6 +539,69 @@ def delete(request):
                 context['proposals'] = proposals
                 context['user'] = user
                 return render(request, 'view-abstracts.html', context) 
+        elif 'accept' in request.POST:
+            delete_proposal = request.POST.getlist('delete_proposal') 
+            for proposal_id in delete_proposal:
+                proposal = Proposal.objects.get(id = proposal_id)
+                proposal.status = "Accepted"
+                proposal.save()
+                sender_name = "SciPy India 2016"
+                sender_email = "scipy@fossee.in"
+                to = (proposal.user.email, )
+                if proposal.proposal_type == 'ABSTRACT':
+                    subject = "SciPy India 2016 - Talk Proposal Accepted"
+                    message = """Dear """+proposal.user.first_name+""",
+                    Congratulations. Your proposal for the talk titled '"""+ proposal.title+ """'is accepted. 
+                    You shall present the talk at the conference.\n\nYou will be notified regarding instructions of your talk via email.\n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
+                elif proposal.proposal_type == 'WORKSHOP':
+                    subject = "SciPy India 2016 - Workshop Proposal Accepted"
+                    message = """Dear """+proposal.user.first_name+""",
+                    Congratulations. Your proposal for the workshop titled '"""+ proposal.title+ """'is accepted. 
+                    You shall conduct the workshop at the conference.\n\nYou will be notified regarding instructions of your workshop via email.\n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
+                send_mail(subject, message, sender_email, to)
+                context.update(csrf(request))
+            proposals = Proposal.objects.all()
+            context['proposals'] = proposals
+            context['user'] = user
+            return render(request, 'view-abstracts.html', context)  
+        elif 'reject' in request.POST:
+            delete_proposal = request.POST.getlist('delete_proposal') 
+            for proposal_id in delete_proposal:
+                proposal = Proposal.objects.get(id = proposal_id)
+                proposal.status="Rejected"
+                proposal.save()
+                sender_name = "SciPy India 2016"
+                sender_email = "scipy@fossee.in"
+                to = (proposal.user.email, )
+                if proposal.proposal_type == 'ABSTRACT':
+                    subject = "SciPy India 2016 - Talk Proposal Rejected"
+                    message = """Dear """+proposal.user.first_name+""",
+                    We regret to inform you that your proposal for the talk titled '"""+ proposal.title+ """'as not been shortlisted.<br> 
+                    You may register and attend the conference by clicking <a herf=""http://scipyindia2016.doattend.com/> here</a>
+                    \n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
+                elif proposal.proposal_type == 'WORKSHOP':
+                    subject = "SciPy India 2016 - Workshop Proposal Rejected"
+                    message = """Dear """+proposal.user.first_name+""",
+                    We regret to inform you that your proposal for the workshop titled '"""+ proposal.title+ """'as not been shortlisted.<br> 
+                    You may register and attend the conference by clicking <a herf=""http://scipyindia2016.doattend.com/> here</a>
+                    \n\n Thank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
+                send_mail(subject, message, sender_email, to)
+                context.update(csrf(request))  
+            proposals = Proposal.objects.all()
+            context['proposals'] = proposals
+            context['user'] = user
+            return render(request, 'view-abstracts.html', context)  
+        elif 'resubmit' in request.POST:
+            delete_proposal = request.POST.getlist('delete_proposal') 
+            for proposal_id in delete_proposal:
+                proposal = Proposal.objects.get(id = proposal_id)
+                proposal.status="Resubmit"
+                proposal.save()
+                context.update(csrf(request))  
+            proposals = Proposal.objects.all()
+            context['proposals'] = proposals
+            context['user'] = user
+            return render(request, 'view-abstracts.html', context)  
         else:
             proposals = Proposal.objects.all()
             context['proposals'] = proposals

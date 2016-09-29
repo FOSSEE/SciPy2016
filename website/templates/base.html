@@ -24,8 +24,8 @@
 						<h1 >SciPy India 2016</h1>
 						<p style="color:#484848; font-weight:700; font-size:28px;" >DECEMBER 10 & 11</p><br><br>
             			
-            	 <a href="#attend" class="button special" style="width : 220px;" >Attend</a></center>
-            	 <a href="{% url 'website:cfp' %}" class="button special"  style="width : 220px;">Call for Proposal</a></center>
+            	 <a href="#attend" class="button special" style="width : 220px;" >Register</a></center>
+            	 <a href="{% url 'website:cfp' %}" class="button special"  style="width : 220px;">Submit Proposal</a></center>
 					</header>
 {% endblock %}
 
@@ -42,8 +42,8 @@
           <li> <a href="#header" class="smoothScroll">Home</a></li>
           <li> <a href="#about" class="smoothScroll">About</a></li>
           <li> <a href="#speakers" class="smoothScroll">Speakers</a></li>
-          <li> <a href="#attend" class="smoothScroll">Attend</a></li>
-          <li> <a href="{% url 'website:cfp' %}">Call for Proposal</a></li>
+          <li> <a href="#attend" class="smoothScroll">Register</a></li>
+          <li> <a href="{% url 'website:cfp' %}">Submit Proposal</a></li>
 	 	  <li> <a href="#schedule" class="smoothScroll">Schedule</a></li>
           <li> <a href="#venue" class="smoothScroll">Venue</a></li>
           <li> <a href="#sponsors" class="smoothScroll">Sponsors</a></li>
@@ -52,7 +52,7 @@
                    <li><a href="{% url 'auth:logout' %}?next=/2016/cfp">Logout</a></li>
                </ul>   
                {% else %}       
-                <li><a href="{% url 'website:cfp' %}" >Login</a></li>
+                <li><a href="{% url 'website:cfp' %}" >COC</a></li>
            {% endif %}
         </ul>
       </div>
@@ -122,7 +122,7 @@
 
 	<section id="attend" class="main special">
 								<header class="major">
-									<h2>ATTEND</h2>
+									<h2>REGISTER</h2>
  								</header>
 
 								<table >
@@ -276,8 +276,6 @@
 						<section>
 							<h2>Contact Us</h2>
 							<dl class="alt">
-								<dt>Address</dt>
-								<dd> CFD - Lab, Aero. Annex Building,<br> Below HSS Dept.,<br>  Opp.Metallurgical Dept.IIT Bombay,<br> Powai, Mumbai - 400076<br>India</dd>
 								<dt>Phone</dt>
 								<dd> (+91) 22 25764133</dd>
 								<dt>Email</dt>
@@ -316,7 +314,6 @@
 			<script src="{% static 'js/ie/respond.min.js' %}"></script>
 			<script src="{% static 'js/bootstrap.min.js' %}"></script>
 			<script src="{% static 'js/smoothscroll.js' %}"></script>
-			<script src="{% static 'js/rating.js' %}"></script>
 
 
 <script type="text/javascript">
