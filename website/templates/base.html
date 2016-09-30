@@ -25,7 +25,7 @@
 						<p style="color:#484848; font-weight:700; font-size:28px;" >DECEMBER 10 & 11</p><br><br>
             			
             	 <a href="#attend" class="button special" style="width : 220px;" >Register</a></center>
-            	 <a href="{% url 'website:cfp' %}" class="button special"  style="width : 220px;">Submit Proposals</a></center>
+            	 <a href="{% url 'website:cfp' %}" class="button special"  style="width : 220px;">Submit</a></center>
 					</header>
 {% endblock %}
 
@@ -44,10 +44,10 @@
           <li> <a href="#speakers" class="smoothScroll">Speakers</a></li>
           <li> <a href="#attend" class="smoothScroll">Register</a></li>
           <li> <a href="#coc" class="smoothScroll">COC</a></li>
-          <li> <a href="{% url 'website:cfp' %}">Submit proposals</a></li>
+          <li> <a href="{% url 'website:cfp' %}">Submit</a></li>
 	 	  <li> <a href="#schedule" class="smoothScroll">Schedule</a></li>
           <li> <a href="#venue" class="smoothScroll">Venue</a></li>
-          <li> <a href="#sponsors" class="smoothScroll">Sponsors</a></li>
+          <li> <a href="#poster" class="smoothScroll">Poster</a></li>
           <li> <a href="#contact" class="smoothScroll">Contact</a></li>
         </ul>
       </div>
@@ -75,7 +75,6 @@
 							</section>
 
 
-
 					<section id="speakers" class="main special">
 								<div class="spotlight">
 									<div class="content">
@@ -86,24 +85,29 @@
 		<table>
 			<colgroup>
         <col width="40%" />
+        <col width= "20%"/>
         <col width="40%" />
     </colgroup>
 <tr>
-<td> <img class="img-responsive" src="{% static 'img/ajith.jpg' %}" height=80% width=60% alt="">
-					<p>Dr. Ajith Kumar</p>
-									<a style = "color:#636363;" href="https://github.com/expeyes" target="_blank"><i class="icon-github" style="font-size:30px;"></i></a>
-									&nbsp;&nbsp;&nbsp;&nbsp;
-        							<a style = "color:#636363;" href="http://expeyes.in/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a></td>
-
-<td> <img class="img-responsive" src="{% static 'img/anand1.png' %}" height=80% width=60% alt="">
-					<p>Mr. S. Anand</p>
-									<a style = "color:#636363;" href="https://github.com/sanand0" target="_blank"><i class="icon-github" style="font-size:30px;"></i></a>
-									&nbsp;&nbsp;&nbsp;&nbsp;
-        							<a style = "color:#636363;" href="http://www.s-anand.net/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a> </td>
+<td> <img class="img-responsive" src="{% static 'img/ajith.jpg' %}" height=90% width=60% alt="">
+					</td>
+<td></td>
+<td> <img class="img-responsive" src="{% static 'img/anand1.png' %}" height=90% width=60% alt="">
+					</td>
 
 </tr>
 <tr>
-<td> Dr. B. P. Ajith Kumar, a scientist working with the <a target="_blank" href = "http://www.iuac.res.in/">IUAC</a>. His main area of work is development of instrumentation for particle accelerators and associated experiments, including radio-frequency accelerating structures, control and data acquisition systems, digital and radio frequency electronics modules. He initiated the Phoenix / expEYES project. ExpEYES is currently the cheapest educational system to teach science. </td>
+<td><p>Dr. Ajith Kumar</p>
+									<a style = "color:#636363;" href="https://github.com/expeyes" target="_blank"><i class="icon-github" style="font-size:30px;"></i></a>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+        							<a style = "color:#636363;" href="http://expeyes.in/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a></td><td></td>
+        							<td><p>Mr. S. Anand</p>
+									<a style = "color:#636363;" href="https://github.com/sanand0" target="_blank"><i class="icon-github" style="font-size:30px;"></i></a>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+        							<a style = "color:#636363;" href="http://www.s-anand.net/" target="_blank"><i class="icon-info" style="font-size:30px;"></i></a> </td>
+</tr>
+<tr>
+<td> Dr. B. P. Ajith Kumar, a scientist working with the <a target="_blank" href = "http://www.iuac.res.in/">IUAC</a>. His main area of work is development of instrumentation for particle accelerators and associated experiments, including radio-frequency accelerating structures, control and data acquisition systems, digital and radio frequency electronics modules. He initiated the Phoenix / expEYES project. ExpEYES is currently the cheapest educational system to teach science. </td><td></td>
 <td> Anand is the Chief Executive Officer at Gramener. He leads a team of data enthusiasts with skills in analysis, design, programming and statistics. He studied at IIT Madras, IIM Bangalore and LBS, and worked at IBM, Infosys, Lehman Brothers and BCG. He and his team explore insights from data and communicate these as visual stories. These visual analyses and dashboards are built on the Gramener Visualisation Server -- Gramener's flagship product. </td>
 </tr>
 		</table>
@@ -146,7 +150,8 @@
 										<h9 style="color:white;">(Till 30 Nov 2016)</h9>
 								</td>
 								<td>
-									This Ticket allows you to ONLY attend the conference for 2 Days (snacks shall be served). Does not include any conference amenities (Accommodation, Kit, Lunch, Dinner & T-shirt). This is a non-refundable ticket.
+									This Ticket allows you to ONLY attend the conference for 2 Days (snacks and dinner for the first day will be served). Does not include any conference amenities (Accommodation, Kit, Lunch, Dinner & T-shirt). This is a non-refundable ticket.
+
 
 									</td>
 								</tr>
@@ -164,7 +169,7 @@
 								<td bgcolor ="#9bb2e1">
 										<h9 style="color:white;">Accomodation</h9>
 										<h2 style="color:white;" style ="font-size: 25px;">&#8377;500</h2>
-										<h9 style="color:white;"><a href="#"> Add Ons </a></h9>
+										<h9 style="color:white;"><a href="#"> Add On </a></h9>
 								</td>
 								<td>
 									 Accommodation is provided on a shared basis (twin sharing) inside IIT-B campus (Boys/Girls hostel). Accommodation will be provided for 2 days, i.e, 10-11 and 11-12 December. Accommodation does not include other amenities like dinner, etc. Extension of period of stay is not available. This is a non-refundable ticket.
@@ -174,7 +179,7 @@
 								<td bgcolor= "#8cc9f0">
 										<h9 style="color:white;">T-Shirt</h9>
 										<h2 style="color:white;" style ="font-size: 25px;">&#8377;350</h2>
-										<h9 style="color:white;"><a href="#"> Add Ons </a></h9>
+										<h9 style="color:white;"><a href="#"> Add On </a></h9>
 								</td>
 								<td>
 									Change of size, exchange at the venue is not available. This is a non-refundable ticket.
@@ -187,7 +192,7 @@
 								<p id="demo"></p>
 								<footer class="major">
 									<ul class="actions">
-										<a target="_blank" href="http://scipyindia2016.doattend.com/"><input type= "image"  src="{% static 'img/register.png'%}"></a>
+										<a target="_blank" href="http://scipyindia2016.doattend.com/"><input type= "image" style ="width: 200px" src="{% static 'img/register.png'%}"></a>
 									</ul>
 								</footer>
 							</section>
@@ -198,11 +203,83 @@
 								<div class="spotlight">
 									<div class="content">
 										<header class="major">
-											<h2>CODE FOR CONDUCT</h2>	</header>
+											<h2>CODE OF CONDUCT</h2>	</header>
 											<div id="schedule" name="schedule">
 												 <p align="justify" >We appreciate your participation in SciPy 2016. We want you to have an enjoyable and enriching experience in the conference. For this all the attendees are required to conform to the following Code of Conduct. Organisers will ensure that it is enforced throughout the event.<p>
         </div> 
+
+<div >
+    <div class="tab-content">
+        <div id="short" class="tab-pane fade">
+            <p>
+              <table class="table table-bordered">
+                                <tbody><tr style="background-color:#f0f0f0">
+                                	<td>
+<p>SciPy India is dedicated to providing a harassment-free conference experience for everyone, regardless of age, gender, sexual orientation, physical appearance, disability, race, religion or employment. We don't tolerate harassment of attendees in any form.</p>
+
+<p>All communication should be appropriate for a professional audience, including people from many different backgrounds.</p>
+
+<p><b>Code for Speakers:</b></p>
+
+<p>Sexual language or imagery is inappropriate for your talks or slides. Refrain from using sexist, racist or exclusionary language anywhere in your content.</p>
+
+<p><b>Code for Participants:</b></p>
+
+<p>Be kind and sensitive to the people around you and avoid any kind of offensive behavior. Sexist, racist or any other form of exclusionary or offensive jokes or excessive public swearing are not appropriate at any venue of SciPy India. Attendees violating these rules may be asked to leave the conference without a refund at the sole discretion of the conference organizers. Thank you for your consideration and help in making SciPy India a welcoming, friendly event for all of us.</p>
+</td>
+                                </tr>
+              </tbody></table>
+         
+            <p></p>
+        </div>
+        <div id="long" class="tab-pane fade">
+            <p>
+               <table class="table table-bordered">
+                                <tbody><tr style="background-color:#f0f0f0">
+                                	<td><p>SciPy India is dedicated to providing a harassment-free conference experience for everyone, regardless of age, gender, sexual orientation, physical appearance, disability, race, religion or employment.</p>
+
+<p>Harassment includes offensive verbal comments related to gender, sexual orientation, disability, physical appearance, body size, race, religion, sexual images in public spaces, deliberate intimidation, stalking, following, harassing photography or recording, sustained disruption of talks or other events, inappropriate physical contact, and unwelcome sexual attention. We have zero tolerance on harassment of conference participants in any form, including, but not limited to the activities mentioned here.</p>
+
+<p>Participants asked to stop any harassing behavior are expected to comply immediately.</p>
+
+<p>All communication should be appropriate for a professional audience, including people from many different backgrounds. Sexual language or imagery is inappropriate for all aspects of the conference, including talks. Remember that sexist, racist or any other form of exclusionary or offensive jokes or excessive public swearing are not appropriate at any venue of SciPy India.</p>
+
+<p>Do not insult or put down attendees or engage in any action that violates the open, welcoming and sharing spirit of the conference. Be kind and sensitive to the people around you when you are attending the conference, and avoid any kind of offensive or degrading behavior.</p>
+
+<p>If a participant engages in behavior that violates this code of conduct, the conference organizers may take any action they deem appropriate, including warning the offender or expulsion from the conference with no refund.</p>
+
+<p>Thank you for helping to make SciPy India a welcoming, friendly event for all.</p>
+
+<p><b>Contact Information:</b></p>
+
+<p>If you are being harassed, notice that someone else is being harassed, or have any other concerns, please contact a member of conference staff. Conference staff will be wearing "SciPy India: Organiser" badges.</p>
+
+<p>Conference staff will be happy to help participants contact venue security or local law enforcement, provide escorts, or otherwise assist those experiencing harassment to feel safe for the duration of the conference. We value your attendance.</p>
+
+<p><b>License:</b></p>
+
+<p>This Code of Conduct was forked from PSF Code of Conduct by Python Software Foundation which is under a Creative Commons Attribution 3.0 Unported License.</p>
+
+<p>SciPy India Conference Code of Conduct is licensed under a Creative Commons Attribution 3.0 Unported License.</p>
+</td>
+                                </tr>
+
+              </tbody></table>
+            <p></p>
+        </div>
+       
+
       </div>
+
+    <ul class="nav nav-tabs">
+        <li>
+        <a style="background: #efa8b0;" data-toggle="tab" href="http://scipy.in/2016#short">Short Version</a></li>
+        <li><a style="background: #c79cc8;" data-toggle="tab" href="http://scipy.in/2016#long">Long Version</a></li>
+    </ul>
+
+
+      </div>
+  </div>
 			</section>
 
 
@@ -217,8 +294,8 @@
        <center>
            <ul class="nav nav-tabs">
         <li class="active">
-        <a style="background: #efa8b0;" data-toggle="tab" href="http://scipy.in/2015#day1">Day 1</a></li>
-        <li><a style="background: #c79cc8;" data-toggle="tab" href="http://scipy.in/2015#day2">Day 2</a></li>
+        <a style="background: #efa8b0;" data-toggle="tab" href="http://scipy.in/2016#day1">Day 1</a></li>
+        <li><a style="background: #c79cc8;" data-toggle="tab" href="http://scipy.in/2016#day2">Day 2</a></li>
 		<!--<li><a style="background: #a89cc8;" data-toggle="tab" href="http://scipy.in/2015#day3">Day 3</a></li>-->		
 		<!-- <li><a style="background: #9bb2e1;"data-toggle="tab" href="http://scipy.in/2015#paper">Workshop Resources</a></li>
 		<li><a style="background: #8cc9f0;" data-toggle="tab" href="http://scipy.in/2015#workshop">Workshop Instructions</a></li>
@@ -241,7 +318,7 @@
         </div>
         <div id="day2" class="tab-pane fade">
             <p>
-              </p><center><h4>12 Dec 2016: Day 2</h4></center>
+              </p><center><h4>11 Dec 2016: Day 2</h4></center>
                <table class="table table-bordered">
                                 <tbody><tr style="background-color:#f0f0f0">
                                 	<td>Conference and talks </td>
@@ -269,13 +346,24 @@
                 </section>
 
 
+<section id="poster" class = "main special">
+<div class="spotlight">
+		<div class="content">
+						<header class="major">
+											<h2>POSTER</h2></header>
+											<a href="http://fossee.in/data/emails/images/Poster_thumbnail_2016.png" target="_blank">   <img height = 20%, width=20% src="{% static 'img/sd.png'%}" /></a>
 
+											<p align="justify">We request you to share the event details through this poster with faculty members, students and others who might be interested. You may print the poster (native size - A4) and display on the notice boards.</p>
+							</div>
+						</div>
+
+</section>
 	
 											<section id="sponsors" class="main special">
 								<div class="spotlight">
 									<div class="content">
 										<header class="major">
-											<h2>SPONSORS</h2></header>
+											<h2>SPONSOR</h2></header>
 											<div class="col-md-4">
         <a href="http://mhrd.gov.in/" target="_blank"><img width=200 height=70 src="{% static 'img/mhrd.png'%}" /></a>
       </div>
@@ -339,15 +427,22 @@
 								<li><a style="color:white;" target="_blank" href="https://plus.google.com/+ScipyIndia/posts" class="icon-google-plus alt"><span class="label"></span></a></li>
 
 							</ul>
-							Visit SciPy.in/ <a style="color:white;" href="">2009</a>/
-							<a style="color:white;" target="_blank" href="">2010</a>/
-							<a style="color:white;" target="_blank" href="">2011</a>/
+							Visit SciPy.in/
+							<!-- <a style="color:white;" href="">2009</a>/ -->
+							<!-- <a style="color:white;" target="_blank" href="">2010</a>/ -->
+							<!-- <a style="color:white;" target="_blank" href="">2011</a>/ -->
 							<a style="color:white;" target="_blank" href="http://scipy.in/2012">2012</a>/
 							<a style="color:white;" target="_blank" href="http://scipy.in/2013"	>2013</a>/
 							<a style="color:white;" target="_blank" href="http://scipy.in/2014">2014</a>/
 							<a style="color:white;" target="_blank" href="http://scipy.in/2015">2015</a>
 						</section>
 					</footer>
+					<div class="container">
+            <center><img src="{% static 'img/fossee.png' %}" width=100 height=40>
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"></a>
+                <img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></center>
+            <center>This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.<center>
+ <br>
 
     </div>
 			</div>

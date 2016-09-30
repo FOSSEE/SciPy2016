@@ -77,15 +77,19 @@
             </ul>
         <form  action="" method=POST enctype="multipart/form-data">
 
-          <div class="row1">
-          {% for field in proposal_form %} 
+<!--           <div class="row1">
+ -->          {% for field in proposal_form %} 
                   <p>{{ field.label}}
                    {% if field.field.required %} <span style="color:red;">*</span> {% endif %}
                     {{ field }}</p>
                      <a style="color:red; ">{{ field.errors }}</a>
                   {% endfor %}
-          </div>
+          <!-- </div> -->
           {% csrf_token %}
+          {% if form.error %}
+
+          Auch
+          {% endif %}
         <center><button class="button special" style="background:#D44727" type="submit">Submit</button></center>
         
               </section>

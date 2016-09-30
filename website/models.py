@@ -17,7 +17,7 @@ class Proposal(models.Model):
     title = models.CharField(max_length=250)
     abstract = models.TextField(max_length=700)
     prerequisite = models.CharField(max_length=750)
-    duration = models.DurationField()
+    duration = models.CharField(max_length = 100)
     attachment = models.FileField(upload_to=get_document_dir)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)

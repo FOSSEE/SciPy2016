@@ -18,6 +18,22 @@ MY_CHOICES = (
     ('Beginner', 'Beginner'),
     ('Advanced', 'Advanced'),
 )
+
+ws_duration = (
+    ('2', '2'),
+    ('3', '3'),
+    ('4', '4'),
+)
+abs_duration = (
+    ('15', '15'),
+    ('30', '30'),
+)
+
+
+MY_CHOICES = (
+    ('Beginner', 'Beginner'),
+    ('Advanced', 'Advanced'),
+)
 rating=(
     ('1','1'),
     ('2','2'),
@@ -56,20 +72,26 @@ class ProposalForm(forms.ModelForm):
     attachment = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}),
                         required = True,
                         error_messages = {'required':'Attachment field required.'},)   
-    phone = forms.CharField(max_length = 12, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),required=False, validators = [RegexValidator(regex = '^[0-9-_+.]*$', message='Enter a Valid Phone Number',)],
+    phone = forms.CharField(min_length = 10, max_length = 12, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),required=False, validators = [RegexValidator(regex = '^[0-9-_+.]*$', message='Enter a Valid Phone Number',)],
                              # error_messages = {'required':'Title field required.'},  
                                 )
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Title'}),
                         required = True,
                         error_messages = {'required':'Title field required.'},  
                             )
-    abstract = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Abstract'}),
+    abstract = forms.CharField(min_length = 300, max_length = 700,  widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Abstract'}),
                         required = True,
+                        label = 'Abstract (Min. 300 char.)',
                         error_messages = {'required':'Abstract field required.'},  
                         )
     proposal_type = forms.CharField(widget = forms.HiddenInput(), label = '', initial = 'ABSTRACT', required=False)
     
-    tags = forms.ChoiceField(choices=MY_CHOICES)
+    duration = forms.ChoiceField(choices=abs_duration, label = 'Duration (Mins.)')
+
+    tags = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tags'}),
+                        required = False,
+                        )
+    
 
     class Meta:
         model = Proposal
@@ -89,10 +111,15 @@ class ProposalForm(forms.ModelForm):
             ext = os.path.splitext(attachment.name)[1]
             valid_extensions = ['.pdf']
             if not ext in valid_extensions:
-                raise forms.ValidationError(u'File not supported!')
+                raise forms.ValidationError(u'File not supported!  Only .pdf file is accepted')
             if attachment.size > (5*1024*1024):
                 raise forms.ValidationError('File size exceeds 5MB')
         return attachment
+
+    # def clean_abstract(self):
+    #     about_me = self.cleaned_data['abstract']
+    #     if len(about_me) < 300:
+    #         raise forms.ValidationError("Abstract me should contain min. 300 characteres")
 
 
 class WorkshopForm(forms.ModelForm):
@@ -103,15 +130,15 @@ class WorkshopForm(forms.ModelForm):
     attachment = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}),
                         required = True,
                         error_messages = {'required':'Attachment field required.'},)   
-    phone = forms.CharField(max_length = 12, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),required=False, validators = [RegexValidator(regex = '^[0-9-_+.]*$', message='Enter a Valid Phone Number',)],
+    phone = forms.CharField(min_length = 10, max_length = 12, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),required=False, validators = [RegexValidator(regex = '^[0-9-_+.]*$', message='Enter a Valid Phone Number',)],
                                 )
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Title'}),
                         required = True,
                         error_messages = {'required':'Title field required.'},  
                             )
-    abstract = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Desciption'}),
+    abstract = forms.CharField(min_length = 300 ,max_length = 700,widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Desciption'}),
                         required = True,
-                        label = 'Description',
+                        label = 'Description (Min. 300 char.)',
                         error_messages = {'required':'Abstract field required.'},  
                         )
     prerequisite = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Prerequisite'}),
@@ -120,9 +147,9 @@ class WorkshopForm(forms.ModelForm):
                         )
     proposal_type = forms.CharField(widget = forms.HiddenInput(), label = '', required=False, initial = 'WORKSHOP')
 
-    tags = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Tags'}),
-                        required = False,
-                        )
+    duration = forms.ChoiceField(choices=ws_duration, label = 'Duration (Hrs.)')
+
+    tags = forms.ChoiceField(choices=MY_CHOICES)
     
     class Meta:
         model = Proposal
@@ -142,7 +169,7 @@ class WorkshopForm(forms.ModelForm):
             ext = os.path.splitext(attachment.name)[1]
             valid_extensions = ['.pdf',]
             if not ext in valid_extensions:
-                raise forms.ValidationError(u'File not supported!')
+                raise forms.ValidationError(u'File not supported! Only .pdf file is accepted')
             if attachment.size > (5*1024*1024):
                 raise forms.ValidationError('File size exceeds 5MB')
         return attachment
