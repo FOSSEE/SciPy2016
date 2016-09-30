@@ -74,8 +74,8 @@
                 <li>All selected proposals must be presented at the conference by at least one author.
             </ul>
         <form  action="" method=POST enctype="multipart/form-data">
-
-          <div class="row1">
+<!--           <a style="color:red; ">{{ proposal_form.errors }}</a>
+ -->          <div class="row1">
            {% for field in proposal_form %} 
                  
                   <p>{{ field.label}}
