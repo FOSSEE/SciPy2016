@@ -151,7 +151,7 @@ def submitcfp(request):
                 context['proposal_submit'] = True
                 sender_name = "SciPy India 2016"
                 sender_email = "scipy@fossee.in"
-                subject = "SciPy India 2016 – Talk Proposal Submission Acknowledgment "
+                subject = "SciPy India 2016 – Talk Proposal Submission Acknowledgment"
                 to = (social_user.email, )
                 message = """
                 Dear {0}, <br><br>
@@ -200,11 +200,11 @@ def submitcfw(request):
                 context['proposal_submit'] = True
                 sender_name = "SciPy India 2016"
                 sender_email = "scipy@fossee.in"
-                subject = "SciPy India 2016 – Workshop Proposal Submission Acknowledgment "
+                subject = "SciPy India 2016 – Workshop Proposal Submission Acknowledgment"
                 to = (social_user.email, )
                 message = """
                 Dear {0}, <br><br>
-                Thank you for showing interest & submitting a workshop proposal at SciPy India 2016 conference for the talk titled “{1}”. Reviewal of the proposals will start once the CFP closes.
+                Thank you for showing interest & submitting a workshop proposal at SciPy India 2016 conference for the workshop titled “{1}”. Reviewal of the proposals will start once the CFP closes.
                 <br><br>You will be notified regarding comments/selection/rejection of your workshop via email.
                 Visit this  <a href = “http://scipy.in/2016/view-abstracts/”>link </a> to view status of your submission.
                 Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
