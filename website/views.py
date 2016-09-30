@@ -465,7 +465,7 @@ def status(request, proposal_id= None):
             send_mail(subject, message, sender_email, to)
             context.update(csrf(request))  
         elif 'resubmit' in request.POST:
-            proposal.status="Resubmit"
+            proposal.status="Edit"
             proposal.save()
             sender_name = "SciPy India 2016"
             sender_email = "scipy@fossee.in"
@@ -595,7 +595,42 @@ def status_change(request):
             delete_proposal = request.POST.getlist('delete_proposal') 
             for proposal_id in delete_proposal:
                 proposal = Proposal.objects.get(id = proposal_id)
-                proposal.status="Resubmit"
+                sender_name = "SciPy India 2016"
+                sender_email = "scipy@fossee.in"
+                to = (proposal.user.email, )
+                if proposal.proposal_type == 'ABSTRACT':
+                    subject = "SciPy India 216 - Talk Proposal Resumbmission"
+                    message = """
+                    Dear {0}, <br><br>
+                    Thank you for showing interest & submitting a talk proposal at SciPy India 2016 conference for the talk titled "{1}". You are requested to submit this talk proposal once again.<br>
+                    You will be notified regarding comments/selection/rejection of your talk/workshop via email.
+                    Visit this <a herf = "{2}"> link </a>to view comments on your submission.<br><br>
+                    Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
+                    """.format(
+                    proposal.user.first_name,
+                    proposal.title, 
+                    'http://scipy.in/2016/view-abstracts/' 
+                    )
+                elif proposal.proposal_type =='WORKSHOP':
+                    subject = "SciPy India 216 - Workshop Proposal Resubmission"
+                    message = """
+                    Thank you for showing interest & submitting a workshop proposal at SciPy India 2016 conference for the workshop titled "{1}". You are requested to submit this talk proposal once        again.<br>
+                    You will be notified regarding comments/selection/rejection of your talk/workshop via email.
+                    Visit this <a herf = "{2}"> link </a>to view comments on your submission.<br><br>
+                    Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
+                    """.format(
+                    proposal.user.first_name,
+                    proposal.title, 
+                    'http://scipy.in/2016/view-abstracts/' 
+                    )
+                email = EmailMultiAlternatives(
+                subject,'',
+                sender_email, to,
+                headers={"Content-type":"text/html;charset=iso-8859-1"}
+                )
+                email.attach_alternative(message, "text/html")
+                email.send(fail_silently=True)
+                proposal.status="Edit"
                 proposal.save()
                 context.update(csrf(request))  
             proposals = Proposal.objects.all()

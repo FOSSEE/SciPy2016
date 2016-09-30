@@ -116,7 +116,7 @@ You have not submitted any proposal. To submit proposal click <a href="{% url 'w
           <h5 style="color:red;">{{proposal.status}}</h5>
            {% elif proposal.status = 'Commented' %}
           <h5 style="color:brown;">{{proposal.status}}</h5>
-          {% elif proposal.status = 'Resubmit' %}
+          {% elif proposal.status = 'Edit' %}
             {% if user.is_superuser %}
               <h5 style="color:grey;">{{proposal.status}}</h5>
             {% else %}
@@ -132,7 +132,7 @@ You have not submitted any proposal. To submit proposal click <a href="{% url 'w
     </table>
     {% if user.is_superuser  %}
     <center><input type="submit" id="delete" class ="button special" style="background:#D44727;" value="Delete" name="delete"/>
-    <input type="submit" id="dump" class ="button special" style="background:#D44727;" value="Dump" name="dump"/></center><br>
+    <input type="submit" id="dump" class ="button special" style="background:#D44727;" value="Export as csv" name="dump"/></center><br>
     <center>
     <input type="submit" id="accept" class ="button special" style="background:green;" value="Accept" name="accept"/>
     <input type="submit" id="rejected" class ="button special" style="background:red;" value="Reject" name="reject"/>
