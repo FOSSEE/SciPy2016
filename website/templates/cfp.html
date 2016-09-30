@@ -58,25 +58,29 @@
           </center>
           {% endif %}
  {% if user and not user.is_anonymous and not login_required %}
-  <span><h2><u>Important Dates</u></h2></span>
-                 
+  <p>We invite you to submit proposals for talks/ workshops to be presented at SciPy 2016. The time duration for talks is 30 minutes and for workshops is 2 to 4 (max) hours. The workshops are to be conducted in two parallel tracks for basic and advanced users.
+</p>
+                  <span><h2><u>Important Dates</u></h2></span>
              <ul>
-                <li>CFP Open: To be announced
-                <li>CFP Close: To be announced
+                <li>Call for proposals opens: 4 October 2016</li>
+                <li>Last date for submission of proposals: To be announced
                 <li>Announcement of selected proposals: To be announced
             </ul>
+
             <br>
       {% if user.is_superuser %}
         <center><a href="{% url 'website:view_abstracts' %}" style="background:#D44727" class="button special">View Proposals</a> </center>
         {% else %}
-                <center>
+               <!--  <center>
                 <a href="{% url 'website:submitcfp' %}" style="background:#D44727" class="button special">Submit an Abstract</a> 
                 <a href="{% url 'website:submitcfw' %}" style="background:#D44727" class="button special">Submit a Workshop</a>  
                 <a href="{% url 'website:view_abstracts' %}" style="background:#D44727" class="button special">View Proposals</a>
-                </center>
+                </center> -->
         {% endif %}
                
       {% else %}
+      <p align = "justify">We invite you to submit proposals for talks/ workshops to be presented at SciPy 2016. The time duration for talks is 15 or 30 minutes and for workshops is 2 to 4 (max) hours. The workshops are to be conducted in two parallel tracks for basic and advanced users.
+</p><hr>
       <ul class="features">
 <li>
                  <span><h2><u>Login</u></h2></span>
@@ -102,11 +106,12 @@
                 <!-- </div> -->
 
             <!-- <div class="col-md-6" > -->
+            
 <li>
                   <span><h2><u>Important Dates</u></h2></span>
              <ul>
-                <li>CFP Open: To be announced
-                <li>CFP Close: To be announced
+                <li>Call for proposal opens: 4 October 2016</li>
+                <li>Last date for submission of proposals: To be announced
                 <li>Announcement of selected proposals: To be announced
             </ul>
 </li>
