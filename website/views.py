@@ -153,14 +153,22 @@ def submitcfp(request):
                 sender_email = "scipy@fossee.in"
                 subject = "SciPy India 2016 – Talk Proposal Submission Acknowledgment"
                 to = (social_user.email, "scipy@fossee.in")
-                text_content =  'Dear'+ social_user.first_name+',Thank you for showing interest & submitting a talk proposal at SciPy India 2016 conference for the talk titled '+ request.POST['title']+'.\nReviewal of the proposals will start once the CFP closes.\n\nYou will be notified regarding comments/selection/rejection of your talk via email.\n'
-                html_content =  render_to_string('Visit this <a herf = "http://scipy.in/2016/view-abstracts/"> link </a> to view status of your submission.<br>  Thank You ! <br><br>Regards,<br><a herf = “http://scipy.in/2016>SciPy</a> India 2016,<br>FOSSEE - IIT Bombay.')
+                message = """
+                Dear {0}, <br><br>
+                Thank you for showing interest & submitting a talk proposal at SciPy India 2016 conference for the talk titled “{1}”. Reviewal of the proposals will start once the CFP closes.
+                <br><br>You will be notified regarding comments/selection/rejection of your talk via email.
+                Visit this {2} link to view status of your submission.
+                Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
+                """.format(
+                social_user.first_name,
+                request.POST['title'],
+                'http://scipy.in/2016/view-abstracts/',  )
                 email = EmailMultiAlternatives(
-                subject,text_content,
+                subject,'',
                 sender_email, to,
                 headers={"Content-type":"text/html;charset=iso-8859-1"}
                 )
-                email.attach_alternative(html_content, "text/html")
+                email.attach_alternative(message, "text/html")
                 email.send(fail_silently=True)
                 return render_to_response('cfp.html', context)
             else:
@@ -199,7 +207,7 @@ def submitcfw(request):
                 Dear {0}, <br><br>
                 Thank you for showing interest & submitting a workshop proposal at SciPy India 2016 conference for the workshop titled “{1}”. Reviewal of the proposals will start once the CFP closes.
                 <br><br>You will be notified regarding comments/selection/rejection of your workshop via email.
-                Visit this  <a href = {2}>link </a> to view status of your submission.
+                Visit this {2} link to view status of your submission.
                 Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
                 """.format(
                 social_user.first_name,
