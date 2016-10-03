@@ -47,7 +47,13 @@
           <section id="content" class="main">
  {% if proposal_submit %}
           <center>
+            <table>
+              <tr>
+                <td>
                 <p>Thank You for your submission. Your proposal has been saved successfully and is under review. You can check the status of submission <a href="{% url 'website:view_abstracts' %}">here </a>!</p>
+                </td>
+                </tr>
+                </table>
           </center>
   {% endif %}
   {% if registration_complete %}
