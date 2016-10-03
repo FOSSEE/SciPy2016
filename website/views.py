@@ -153,10 +153,7 @@ def submitcfp(request):
                 sender_email = "scipy@fossee.in"
                 subject = "SciPy India 2016 – Talk Proposal Submission Acknowledgment"
                 to = (social_user.email, "scipy@fossee.in")
-                text_content =  """Dear """+proposal.user.first_name+""",
-                Thank you for showing interest & submitting a talk proposal at SciPy India 2016 conference for the talk titled '"""+ request.POST['title']+ """'.
-                Reviewal of the proposals will start once the CFP closes.\n\n
-                You will be notified regarding comments/selection/rejection of your talk via email.\n"""
+                text_content =  'Dear'+ social_user.first_name+',Thank you for showing interest & submitting a talk proposal at SciPy India 2016 conference for the talk titled '+ request.POST['title']+'.\nReviewal of the proposals will start once the CFP closes.\n\nYou will be notified regarding comments/selection/rejection of your talk via email.\n'
                 html_content =  'Visit this <a herf = "http://scipy.in/2016/view-abstracts/"> link </a> to view status of your submission.<br>  Thank You ! <br><br>Regards,<br><a herf = “http://scipy.in/2016>SciPy</a> India 2016,<br>FOSSEE - IIT Bombay.'
                 email = EmailMultiAlternatives(
                 subject,text_content,
