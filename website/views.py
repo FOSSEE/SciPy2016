@@ -154,7 +154,7 @@ def submitcfp(request):
                 subject = "SciPy India 2016 – Talk Proposal Submission Acknowledgment"
                 to = (social_user.email, "scipy@fossee.in")
                 text_content =  'Dear'+ social_user.first_name+',Thank you for showing interest & submitting a talk proposal at SciPy India 2016 conference for the talk titled '+ request.POST['title']+'.\nReviewal of the proposals will start once the CFP closes.\n\nYou will be notified regarding comments/selection/rejection of your talk via email.\n'
-                html_content =  'Visit this <a herf = "http://scipy.in/2016/view-abstracts/"> link </a> to view status of your submission.<br>  Thank You ! <br><br>Regards,<br><a herf = “http://scipy.in/2016>SciPy</a> India 2016,<br>FOSSEE - IIT Bombay.'
+                html_content =  render_to_string('Visit this <a herf = "http://scipy.in/2016/view-abstracts/"> link </a> to view status of your submission.<br>  Thank You ! <br><br>Regards,<br><a herf = “http://scipy.in/2016>SciPy</a> India 2016,<br>FOSSEE - IIT Bombay.')
                 email = EmailMultiAlternatives(
                 subject,text_content,
                 sender_email, to,
@@ -376,7 +376,7 @@ def comment_abstract(request, proposal_id = None):
                     Dear {0}, <br><br>
                     There is a comment posted on your proposal for the workshop titled {1}.<br>
                     Once we receive your response, you will be notified regarding further comments/acceptance/ rejection of your talk/workshop via email. 
-                    Visit this <a herf = "{2}"> link </a>to view comments on your submission.<br><br>
+                    Visit this {2} link to view comments on your submission.<br><br>
                     Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
                     """.format(
                     proposal.user.first_name,
@@ -448,14 +448,14 @@ def status(request, proposal_id= None):
                 subject = "SciPy India 2016 - Talk Proposal Rejected"
                 message = """Dear """+proposal.user.first_name+""",
                 We regret to inform you that your proposal for the talk titled '"""+ proposal.title+ """' as not been shortlisted.<br> 
-                You may register and attend the conference by clicking <a herf= http://scipyindia2016.doattend.com/> here</a>
+                You may register and attend the conference by clicking http://scipyindia2016.doattend.com/.
                 \n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
             elif proposal.proposal_type == 'WORKSHOP':
                 subject = "SciPy India 2016 - Workshop Proposal Rejected"
                 message = """Dear """+proposal.user.first_name+""",
                 We regret to inform you that your proposal for the workshop titled '"""+ proposal.title+ """' as not been shortlisted.<br> 
-                You may register and attend the conference by clicking <a herf= http://scipyindia2016.doattend.com/> here</a>
-                \n\n Thank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
+                You may register and attend the conference by clicking http://scipyindia2016.doattend.com/.
+                \n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
             send_mail(subject, message, sender_email, to)
             context.update(csrf(request))  
         elif 'resubmit' in request.POST:
@@ -582,7 +582,7 @@ def status_change(request):
                     message = """Dear """+proposal.user.first_name+""",
                     We regret to inform you that your proposal for the workshop titled '"""+ proposal.title+ """'as not been shortlisted.<br> 
                     You may register and attend the conference by clicking http://scipyindia2016.doattend.com/
-                    \n\n Thank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
+                    \n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
                 send_mail(subject, message, sender_email, to)
                 context.update(csrf(request))  
             proposals = Proposal.objects.all()
@@ -601,8 +601,8 @@ def status_change(request):
                     message = """
                     Dear {0}, <br><br>
                     Thank you for showing interest & submitting a talk proposal at SciPy India 2016 conference for the talk titled "{1}". You are requested to submit this talk proposal once again.<br>
-                    You will be notified regarding comments/selection/rejection of your talk/workshop via email.
-                    Visit this <a herf = "{2}"> link </a>to view comments on your submission.<br><br>
+                    You will be notified regarding comments/selection/rejection of your talk via email.
+                    Visit this {2} link to view comments on your submission.<br><br>
                     Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
                     """.format(
                     proposal.user.first_name,
@@ -613,8 +613,8 @@ def status_change(request):
                     subject = "SciPy India 216 - Workshop Proposal Resubmission"
                     message = """
                     Thank you for showing interest & submitting a workshop proposal at SciPy India 2016 conference for the workshop titled "{1}". You are requested to submit this talk proposal once        again.<br>
-                    You will be notified regarding comments/selection/rejection of your talk/workshop via email.
-                    Visit this <a herf = "{2}"> link </a>to view comments on your submission.<br><br>
+                    You will be notified regarding comments/selection/rejection of your workshop via email.
+                    Visit this {2} link to view comments on your submission.<br><br>
                     Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
                     """.format(
                     proposal.user.first_name,
