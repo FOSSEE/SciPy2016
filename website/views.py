@@ -155,10 +155,10 @@ def submitcfp(request):
                 to = (social_user.email, "scipy@fossee.in")
                 message = """
                 Dear {0}, <br><br>
-                Thank you for showing interest & submitting a talk proposal at SciPy India 2016 conference for the talk titled “{1}”. Reviewal of the proposals will start once the CFP closes.
+                Thank you for showing interest & submitting a talk proposal at SciPy India 2016 conference for the talk titled <b>“{1}”</b>. Reviewal of the proposals will start once the CFP closes.
                 <br><br>You will be notified regarding comments/selection/rejection of your talk via email.
                 Visit this {2} link to view status of your submission.
-                Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
+                <br>Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
                 """.format(
                 social_user.first_name,
                 request.POST['title'],
@@ -205,10 +205,10 @@ def submitcfw(request):
                 to = (social_user.email, "scipy@fossee.in")
                 message = """
                 Dear {0}, <br><br>
-                Thank you for showing interest & submitting a workshop proposal at SciPy India 2016 conference for the workshop titled “{1}”. Reviewal of the proposals will start once the CFP closes.
+                Thank you for showing interest & submitting a workshop proposal at SciPy India 2016 conference for the workshop titled <b>“{1}”</b>. Reviewal of the proposals will start once the CFP closes.
                 <br><br>You will be notified regarding comments/selection/rejection of your workshop via email.
                 Visit this {2} link to view status of your submission.
-                Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
+                <br>Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
                 """.format(
                 social_user.first_name,
                 request.POST['title'],
@@ -369,7 +369,7 @@ def comment_abstract(request, proposal_id = None):
                 subject = "SciPy India 216 - Comment on Your talk Proposal"
                 message = """
                     Dear {0}, <br><br>
-                    There is a comment posted on your proposal for the talk titled {1}.<br>
+                    There is a comment posted on your proposal for the talk titled <b>{1}</b>.<br>
                     Once we receive your response, you will be notified regarding further comments/acceptance/ rejection of your talk/workshop via email. 
                     Visit this link {2} to view comments on your submission.<br><br>
                     Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
@@ -382,7 +382,7 @@ def comment_abstract(request, proposal_id = None):
                 subject = "SciPy India 216 - Comment on Your Workshop Proposal"
                 message = """
                     Dear {0}, <br><br>
-                    There is a comment posted on your proposal for the workshop titled {1}.<br>
+                    There is a comment posted on your proposal for the workshop titled <b>{1}</b>.<br>
                     Once we receive your response, you will be notified regarding further comments/acceptance/ rejection of your talk/workshop via email. 
                     Visit this {2} link to view comments on your submission.<br><br>
                     Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
@@ -455,13 +455,13 @@ def status(request, proposal_id= None):
             if proposal.proposal_type == 'ABSTRACT':
                 subject = "SciPy India 2016 - Talk Proposal Rejected"
                 message = """Dear """+proposal.user.first_name+""",
-                We regret to inform you that your proposal for the talk titled '"""+ proposal.title+ """' as not been shortlisted.<br> 
+                We regret to inform you that your proposal for the talk titled '"""+ proposal.title+ """' has not been shortlisted. 
                 You may register and attend the conference by clicking http://scipyindia2016.doattend.com/.
                 \n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
             elif proposal.proposal_type == 'WORKSHOP':
                 subject = "SciPy India 2016 - Workshop Proposal Rejected"
                 message = """Dear """+proposal.user.first_name+""",
-                We regret to inform you that your proposal for the workshop titled '"""+ proposal.title+ """' as not been shortlisted.<br> 
+                We regret to inform you that your proposal for the workshop titled '"""+ proposal.title+ """' has not been shortlisted.
                 You may register and attend the conference by clicking http://scipyindia2016.doattend.com/.
                 \n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
             send_mail(subject, message, sender_email, to)
@@ -582,13 +582,13 @@ def status_change(request):
                 if proposal.proposal_type == 'ABSTRACT':
                     subject = "SciPy India 2016 - Talk Proposal Rejected"
                     message = """Dear """+proposal.user.first_name+""",
-                    We regret to inform you that your proposal for the talk titled '"""+ proposal.title+ """'as not been shortlisted.<br> 
+                    We regret to inform you that your proposal for the talk titled '"""+ proposal.title+ """' as not been shortlisted.<br> 
                     You may register and attend the conference by clicking http://scipyindia2016.doattend.com/
                     \n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
                 elif proposal.proposal_type == 'WORKSHOP':
                     subject = "SciPy India 2016 - Workshop Proposal Rejected"
                     message = """Dear """+proposal.user.first_name+""",
-                    We regret to inform you that your proposal for the workshop titled '"""+ proposal.title+ """'as not been shortlisted.<br> 
+                    We regret to inform you that your proposal for the workshop titled '"""+ proposal.title+ """' as not been shortlisted.<br> 
                     You may register and attend the conference by clicking http://scipyindia2016.doattend.com/
                     \n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
                 send_mail(subject, message, sender_email, to)
@@ -608,7 +608,7 @@ def status_change(request):
                     subject = "SciPy India 216 - Talk Proposal Resumbmission"
                     message = """
                     Dear {0}, <br><br>
-                    Thank you for showing interest & submitting a talk proposal at SciPy India 2016 conference for the talk titled "{1}". You are requested to submit this talk proposal once again.<br>
+                    Thank you for showing interest & submitting a talk proposal at SciPy India 2016 conference for the talk titled <b>"{1}"</b>. You are requested to submit this talk proposal once again.<br>
                     You will be notified regarding comments/selection/rejection of your talk via email.
                     Visit this {2} link to view comments on your submission.<br><br>
                     Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
@@ -620,7 +620,7 @@ def status_change(request):
                 elif proposal.proposal_type =='WORKSHOP':
                     subject = "SciPy India 216 - Workshop Proposal Resubmission"
                     message = """
-                    Thank you for showing interest & submitting a workshop proposal at SciPy India 2016 conference for the workshop titled "{1}". You are requested to submit this talk proposal once        again.<br>
+                    Thank you for showing interest & submitting a workshop proposal at SciPy India 2016 conference for the workshop titled <b>"{1}"</b>. You are requested to submit this talk proposal once        again.<br>
                     You will be notified regarding comments/selection/rejection of your workshop via email.
                     Visit this {2} link to view comments on your submission.<br><br>
                     Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
