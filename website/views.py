@@ -241,17 +241,15 @@ def view_abstracts(request):
     count_list =[]
     if user.is_authenticated():
         if user.is_superuser :
-            proposals = Proposal.objects.all()
+            proposals = Proposal.objects.all().order_by('status')
+            ratings = Ratings.objects.all()
+            context['ratings'] = ratings
             context['proposals'] = proposals
-            for proposal in proposals:
-                count = Comments.objects.filter(proposal = proposal).count()
-                count_list.append(count)
-            context['counts'] = count_list
             context['user'] = user
             return render(request, 'view-abstracts.html', context)
         elif user is not None:
             if Proposal.objects.filter(user = user).exists :
-                proposals = Proposal.objects.filter(user = user)
+                proposals = Proposal.objects.filter(user = user).order_by('status')
                 context['counts'] = count_list
                 context['proposals'] = proposals
                 context['user'] = user

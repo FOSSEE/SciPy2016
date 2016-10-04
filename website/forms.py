@@ -149,7 +149,7 @@ class WorkshopForm(forms.ModelForm):
 
     duration = forms.ChoiceField(choices=ws_duration, label = 'Duration (Hrs.)')
 
-    tags = forms.ChoiceField(choices=MY_CHOICES)
+    tags = forms.ChoiceField(choices=MY_CHOICES, label = 'Level')
     
     class Meta:
         model = Proposal
@@ -203,7 +203,7 @@ class UserRegisterForm(UserCreationForm):
         password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}),
                         required = True,
                         error_messages = {'required':'Password Confirm field required.'},  
-                        label = 'RePassword'
+                        label = 'Re-enter Password'
                         )
     
         def clean_first_name(self):
