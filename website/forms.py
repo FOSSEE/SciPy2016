@@ -149,7 +149,7 @@ class WorkshopForm(forms.ModelForm):
 
     duration = forms.ChoiceField(choices=ws_duration, label = 'Duration (Hrs.)')
 
-    tags = forms.ChoiceField(choices=MY_CHOICES, label = 'Lavel')
+    tags = forms.ChoiceField(choices=MY_CHOICES, label = 'Level')
     
     class Meta:
         model = Proposal
