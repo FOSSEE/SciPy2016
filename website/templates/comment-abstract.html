@@ -89,7 +89,7 @@
            {% for rate in rates %}
            <div>
            {{rate.rating}}/10 
-          by  {{ rate.user.first_name }} {{ rate.user.last_name }}
+          by - {{ rate.user }}
         </div>
           {% endfor %}
          

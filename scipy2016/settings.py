@@ -133,7 +133,7 @@ RECAPTCHA_PRIVATE_KEY = RECAPTCHA_PRIVATE
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Calcutta'
 
 USE_I18N = True
 
@@ -148,16 +148,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
-MEDIA_URL = "/downloads/"
+MEDIA_URL = "/2016/downloads/"
 
 LOGIN_REDIRECT_URL = '/cfp'
 
 # smtp
 
-# ACCOUNT_ACTIVATION_DAYS = 7
-# EMAIL_HOST =  'localhost'
-# EMAIL_PORT = 1025
-# EMAIL_HOST_USER = ''
-# EMAIL_HOST_PASSWORD = ''
-# EMAIL_USE_TLS = False
-# DEFAULT_FROM_EMAIL = 'komal@gmail.com'
+ACCOUNT_ACTIVATION_DAYS = 7
+EMAIL_HOST =  'localhost'
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'komal@gmail.com'

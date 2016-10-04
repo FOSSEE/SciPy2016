@@ -107,7 +107,10 @@ You have not submitted any proposal. To submit proposal click <a href="{% url 'w
        <td  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:.5px;"> {{proposal.title}}</td>
          <td ><a href="{% url 'website:abstract_details' proposal.id %}">View</a> </td>
       {% endif %}
-      <td>{{proposal.rating}}
+
+      <td> {% for rating in ratings %}
+        {{rating.rating}}
+        {% endfor %}
 
         <!-- <center> {{ proposal.comments_set.count }} </center> --></td>
 
