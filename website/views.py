@@ -266,10 +266,14 @@ def edit_proposal(request, proposal_id = None):
     if user.is_authenticated():
         proposal = Proposal.objects.get(id=proposal_id)
         if proposal.proposal_type == 'ABSTRACT':
-            form = ProposalForm(request.POST, request.FILES, instance=proposal)
+            form = ProposalForm( instance=proposal)
         else:
-            form = WorkshopForm(request.POST, request.FILES, instance=proposal)
+            form = WorkshopForm( instance=proposal)
         if request.method == 'POST':
+            if proposal.proposal_type == 'ABSTRACT':
+                form = ProposalForm( request.POST, request.FILES, instance=proposal)
+            else:
+                form = WorkshopForm( request.POST, request.FILES, instance=proposal)
             if form.is_valid():
                 data = form.save(commit = False)
                 data.user = user
@@ -279,7 +283,9 @@ def edit_proposal(request, proposal_id = None):
                 return render(request, 'cfp.html')
             else:
                 context['user'] = user
-                return render(request, 'cfp.html', context)
+                context['form'] = form
+                context['proposal'] = proposal
+                return render(request, 'edit-proposal.html', context)
         context['user'] = user
         context['form'] = form
         context['proposal'] = proposal

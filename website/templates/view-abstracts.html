@@ -71,7 +71,6 @@ You have not submitted any proposal. To submit proposal click <a href="{% url 'w
         <col width="70%" />
         <col width="10%" />
         <col width="10%" />
-        <col width="10%" />
         <col width="20%" />
 
         {% endif %}
@@ -88,6 +87,8 @@ You have not submitted any proposal. To submit proposal click <a href="{% url 'w
       {% endif %}
       {% if user.is_superuser %}
     <th> Ratings
+      {% else %}
+    <th> Comments
       {% endif %}
     <th> Status
     {% for proposal in proposals %}
@@ -107,12 +108,15 @@ You have not submitted any proposal. To submit proposal click <a href="{% url 'w
        <td  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:.5px;"> {{proposal.title}}</td>
          <td ><a href="{% url 'website:abstract_details' proposal.id %}">View</a> </td>
       {% endif %}
-{% if user.is_superuser %}
-      <td> {% for rating in proposal.ratings_set.all %}
-        {{ rating.rating}} by {{rating.user}}<br>
+      <td>{% if user.is_superuser %}
+         {% for rating in proposal.ratings_set.all %}
+        {{ rating.rating}} - {{rating.user}}<br>
         {% endfor %}
+        {% else %}
+          {{proposal.comments_set.count}}
+        {% endif %}
+
         </td>
-{% endif %}
       <td>
          {% if proposal.status = 'Accepted' %}
          <h5 style="color:green;">{{proposal.status}}</h5>
