@@ -54,7 +54,7 @@ You have not submitted any proposal. To submit proposal click <a href="{% url 'w
 {% else %}
 
 
-   <form action="{% url 'website:status_change' %}" method="post" onsubmit="return confirm('Sure?');"> {% csrf_token %}
+   <form action="{% url 'website:status_change' %}" method="post" onsubmit="return confirm('Are You Sure?');"> {% csrf_token %}
 
 
     <table id = "myTable"  class="tablesorter">
@@ -93,9 +93,12 @@ You have not submitted any proposal. To submit proposal click <a href="{% url 'w
     <th> Status
     {% for proposal in proposals %}
     <tr>
-        {% if user.is_superuser  %}
-      <td><center> <input type = "checkbox" name="delete_proposal" value = {{proposal.id}}></input></center></td>
-          
+        {% if user.is_superuser %}
+         <td>
+          {% if proposal.status = 'Rejected' %}
+          {% else %}
+          <center> <input type = "checkbox" name="delete_proposal" value = {{proposal.id}}></input></center></td>
+          {% endif %}
         <td>
             {{ proposal.user.get_full_name}}
         </td>

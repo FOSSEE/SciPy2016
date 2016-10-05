@@ -44,8 +44,9 @@ def userregister(request):
                 else:
                     form.save()
                     context['registration_complete'] = True
-                    # form = UserLoginForm()
-                    # context['form'] = form
+                    form = UserLoginForm()
+                    context['form'] = form
+                    context['user'] = request.user
                     return render_to_response('cfp.html', context)
             else:
                 context.update(csrf(request))
@@ -257,7 +258,9 @@ def view_abstracts(request):
         else:
             return render(request, 'cfp.html')
     else:
-        return render(request, 'cfp.html')
+        form = UserLoginForm()
+        context['form'] = form
+        return render(request, 'cfp.html', context)
 
 
 def edit_proposal(request, proposal_id = None):
@@ -351,7 +354,6 @@ def rate_proposal(request, proposal_id = None):
             return render(request, 'comment-abstract.html', context)
     else:
         return render(request, 'comment-abstract.html', context)
-        return render(request, 'comment-abstract.html', context)
 
 
 
@@ -425,7 +427,9 @@ def comment_abstract(request, proposal_id = None):
             context.update(csrf(request))
             return render(request, 'comment-abstract.html', context)
     else:
-        return render(request, 'comment-abstract.html', context)
+        form = UserLoginForm()
+        context['form'] = form
+        return render(request, 'cfp.html', context)
 
 
 
@@ -443,12 +447,12 @@ def status(request, proposal_id= None):
             if proposal.proposal_type == 'ABSTRACT':
                 subject = "SciPy India 2016 - Talk Proposal Accepted"
                 message = """Dear """+proposal.user.first_name+""",
-                Congratulations. Your proposal for the talk titled '"""+ proposal.title+ """' is accepted. 
+                Congratulations. Your proposal for the talk titled '"""+ proposal.title+ """'is accepted. 
                 You shall present the talk at the conference.\n\nYou will be notified regarding instructions of your talk via email.\n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
             elif proposal.proposal_type == 'WORKSHOP':
                 subject = "SciPy India 2016 - Workshop Proposal Accepted"
                 message = """Dear """+proposal.user.first_name+""",
-                Congratulations. Your proposal for the workshop titled '"""+ proposal.title+ """' is accepted. 
+                Congratulations. Your proposal for the workshop titled '"""+ proposal.title+ """'is accepted. 
                 You shall conduct the workshop at the conference.\n\nYou will be notified regarding instructions of your workshop via email.\n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
             send_mail(subject, message, sender_email, to)
             context.update(csrf(request))
@@ -461,28 +465,57 @@ def status(request, proposal_id= None):
             if proposal.proposal_type == 'ABSTRACT':
                 subject = "SciPy India 2016 - Talk Proposal Rejected"
                 message = """Dear """+proposal.user.first_name+""",
-                We regret to inform you that your proposal for the talk titled '"""+ proposal.title+ """' has not been shortlisted. 
-                You may register and attend the conference by clicking http://scipyindia2016.doattend.com/.
+                We regret to inform you that your proposal for the talk titled '"""+ proposal.title+ """' as not been shortlisted.<br> 
+                You may register and attend the conference by clicking http://scipyindia2016.doattend.com/
                 \n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
             elif proposal.proposal_type == 'WORKSHOP':
                 subject = "SciPy India 2016 - Workshop Proposal Rejected"
                 message = """Dear """+proposal.user.first_name+""",
-                We regret to inform you that your proposal for the workshop titled '"""+ proposal.title+ """' has not been shortlisted.
-                You may register and attend the conference by clicking http://scipyindia2016.doattend.com/.
+                We regret to inform you that your proposal for the workshop titled '"""+ proposal.title+ """' as not been shortlisted.<br> 
+                You may register and attend the conference by clicking http://scipyindia2016.doattend.com/
                 \n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
             send_mail(subject, message, sender_email, to)
             context.update(csrf(request))  
         elif 'resubmit' in request.POST:
-            proposal.status="Edit"
-            proposal.save()
+            to = (proposal.user.email, "scipy@fossee.in" )
             sender_name = "SciPy India 2016"
             sender_email = "scipy@fossee.in"
-            subject = "SciPy India - Resubmit"
-            to = (proposal.user.email, "scipy@fossee.in")
-            message = """Dear """+proposal.user.first_name+""",\n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
-            send_mail(subject, message, sender_email, to)
+            if proposal.proposal_type == 'ABSTRACT':
+                subject = "SciPy India 216 - Talk Proposal Resumbmission"
+                message = """
+                Dear {0}, <br><br>
+                Thank you for showing interest & submitting a talk proposal at SciPy India 2016 conference for the talk titled <b>"{1}"</b>. You are requested to submit this talk proposal once again.<br>
+                You will be notified regarding comments/selection/rejection of your talk via email.
+                Visit this {2} link to view comments on your submission.<br><br>
+                Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
+                """.format(
+                proposal.user.first_name,
+                proposal.title, 
+                'http://scipy.in/2016/view-abstracts/' 
+                )
+            elif proposal.proposal_type =='WORKSHOP':
+                subject = "SciPy India 216 - Workshop Proposal Resubmission"
+                message = """
+                Thank you for showing interest & submitting a workshop proposal at SciPy India 2016 conference for the workshop titled <b>"{1}"</b>. You are requested to submit this talk proposal once        again.<br>
+                You will be notified regarding comments/selection/rejection of your workshop via email.
+                Visit this {2} link to view comments on your submission.<br><br>
+                Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
+                """.format(
+                proposal.user.first_name,
+                proposal.title, 
+                'http://scipy.in/2016/view-abstracts/' 
+                )
+            email = EmailMultiAlternatives(
+            subject,'',
+            sender_email, to,
+            headers={"Content-type":"text/html;charset=iso-8859-1"}
+            )
+            email.attach_alternative(message, "text/html")
+            email.send(fail_silently=True)
+            proposal.status="Edit"
+            proposal.save()
             context.update(csrf(request)) 
-    proposals = Proposal.objects.all()
+    proposals = Proposal.objects.all().order_by('status')
     context['proposals'] = proposals
     context['user'] = user
     return render(request, 'view-abstracts.html', context)  
