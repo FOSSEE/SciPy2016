@@ -103,7 +103,7 @@ You have not submitted any proposal. To submit proposal click <a href="{% url 'w
         <td> {{proposal.proposal_type }} </td>
        
       {% if user.is_superuser  %}
-        <td ><a href="{% url 'website:comment_abstract' proposal.id %}">{{proposal.title }}</a> </td>
+        <td style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:.5px;"><a href="{% url 'website:comment_abstract' proposal.id %}">{{proposal.title }}</a> </td>
       {% else %}
        <td  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:.5px;"> {{proposal.title}}</td>
          <td ><a href="{% url 'website:abstract_details' proposal.id %}">View</a> </td>

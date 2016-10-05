@@ -280,7 +280,9 @@ def edit_proposal(request, proposal_id = None):
                 proposal.status = 'Resubmitted'
                 data.save()
                 context.update(csrf(request))
-                return render(request, 'cfp.html')
+                proposals = Proposal.objects.filter(user = user).order_by('status')
+                context['proposals'] = proposals
+                return render(request, 'view-abstracts.html', context)
             else:
                 context['user'] = user
                 context['form'] = form
