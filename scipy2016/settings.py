@@ -152,7 +152,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
-MEDIA_URL = "/2016/downloads/"
+MEDIA_URL = "/downloads/"
 
 LOGIN_REDIRECT_URL = '/cfp'
 
