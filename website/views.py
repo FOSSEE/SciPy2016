@@ -134,7 +134,7 @@ def cfp(request):
         return render_to_response('cfp.html',
                              context_instance=context)
 
-
+@login_required
 def submitcfp(request):
     context = {}
     if request.user.is_authenticated():
@@ -185,6 +185,8 @@ def submitcfp(request):
         context['login_required'] = True
         return render_to_response('cfp.html', context)
 
+
+@login_required
 def submitcfw(request):
     context = {}
     if request.user.is_authenticated():
@@ -235,7 +237,7 @@ def submitcfw(request):
         context['login_required'] = True
         return render_to_response('cfp.html', context)
 
-
+@login_required
 def view_abstracts(request):
     user = request.user
     context = {}
@@ -258,11 +260,10 @@ def view_abstracts(request):
         else:
             return render(request, 'cfp.html')
     else:
-        form = UserLoginForm()
-        context['form'] = form
         return render(request, 'cfp.html', context)
 
 
+@login_required
 def edit_proposal(request, proposal_id = None):
     user = request.user
     context = {}
@@ -296,7 +297,7 @@ def edit_proposal(request, proposal_id = None):
         context['proposal'] = proposal
     return render(request, 'edit-proposal.html', context)
 
-
+@login_required
 def abstract_details(request, proposal_id=None):
     user = request.user
     context = {}
@@ -318,10 +319,10 @@ def abstract_details(request, proposal_id=None):
             context['filename'] = filename
             return render(request, 'abstract-details.html', context)
     else:
-        form = UserLoginForm()
-        context['form'] = form
         return render(request, 'cfp.html', context)
 
+
+@login_required
 def rate_proposal(request, proposal_id = None):
     user = request.user
     context = {}
@@ -359,7 +360,7 @@ def rate_proposal(request, proposal_id = None):
 
 
 
-
+@login_required
 def comment_abstract(request, proposal_id = None):
     user = request.user
     context = {}
@@ -432,12 +433,10 @@ def comment_abstract(request, proposal_id = None):
             context.update(csrf(request))
             return render(request, 'comment-abstract.html', context)
     else:
-        form = UserLoginForm()
-        context['form'] = form
         return render(request, 'cfp.html', context)
 
 
-
+@login_required
 def status(request, proposal_id= None):
     user = request.user
     context = {}
@@ -526,7 +525,7 @@ def status(request, proposal_id= None):
     return render(request, 'view-abstracts.html', context)  
     
 
-
+@login_required
 def status_change(request):
     user = request.user
     context = {}

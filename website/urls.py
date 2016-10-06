@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     url(r'^submit-cfp/$', 'website.views.submitcfp', name='submitcfp'),
     url(r'^submit-cfw/$', 'website.views.submitcfw', name='submitcfw'),
     url(r'^accounts/register/$', 'website.views.userregister', name='userregister'),
+    url(r'^accounts/login/$', 'website.views.cfp', name='cfp'),
+
     # url(r'^view-abstracts/$', 'website.views.view_abstracts', name='view_abstracts'),
     url(r'^view-abstracts/$', 'website.views.view_abstracts', name='view_abstracts'),
     url(r'^abstract-details/(?P<proposal_id>\d+)$', 'website.views.abstract_details', name='abstract_details'),
