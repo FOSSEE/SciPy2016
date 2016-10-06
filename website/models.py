@@ -7,6 +7,7 @@ from scipy2016 import settings
 def get_document_dir(instance, filename):
     # ename, eext = instance.user.email.split("@")
     fname, fext = filename.split(".")
+    print "----------------->",instance.user
     return '%s/attachment/%s/%s.%s' % (instance.user, instance.proposal_type, fname+'_'+str(instance.user), fext)
 
 class Proposal(models.Model):

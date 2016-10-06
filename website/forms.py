@@ -111,11 +111,6 @@ class ProposalForm(forms.ModelForm):
                 raise forms.ValidationError('File size exceeds 5MB')
         return attachment
 
-    # def clean_abstract(self):
-    #     about_me = self.cleaned_data['abstract']
-    #     if len(about_me) < 300:
-    #         raise forms.ValidationError("Abstract me should contain min. 300 characteres")
-
 
 class WorkshopForm(forms.ModelForm):
     about_me = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'About Me'}),
@@ -149,12 +144,6 @@ class WorkshopForm(forms.ModelForm):
     class Meta:
         model = Proposal
         exclude = ('user', 'email','status','rate')
-
-    def clean_title(self):
-        title = self.cleaned_data['title']
-        if Proposal.objects.filter(title=title).exists():
-            raise forms.ValidationError("This title already exist.")
-        return title
 
     def clean_attachment(self):
         import os
