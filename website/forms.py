@@ -97,11 +97,6 @@ class ProposalForm(forms.ModelForm):
         model = Proposal
         exclude = ('user', 'email','prerequisite','status','rate')
 
-    def clean_title(self):
-        title = self.cleaned_data['title']
-        if Proposal.objects.filter(title=title).exists():
-            raise forms.ValidationError("This title already exist.")
-        return title
 
     def clean_attachment(self):
         import os

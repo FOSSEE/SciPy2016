@@ -45,7 +45,7 @@
       <!-- <div id="wrapper"> -->
         <div id="main">
           <section id="content" class="main">
- {% if proposal_submit %}
+     {% if proposal_submit %}
           <center>
             <table>
               <tr>
@@ -55,17 +55,23 @@
                 </tr>
                 </table>
           </center>
-  {% endif %}
+      {% endif %}
+
+
+
   {% if registration_complete %}
 
   <center>
                 <p>Thank You for your registration. You can now log in by clicking  <a href="{% url 'website:cfp' %}">here </a>!</p>
                 <br><br>
           </center>
-          {% endif %}
+  {% endif %}
+
+
+
  {% if user and not user.is_anonymous and not login_required %}
-  <p>We invite you to submit proposals for talks/ workshops to be presented at SciPy 2016. The time duration for talks is 15 or 30 minutes and for workshops is 2 to 4 hours. The workshops are to be conducted in two parallel tracks for basic and advanced users.
-</p>
+      <p>We invite you to submit proposals for talks/ workshops to be presented at SciPy 2016. The time duration for talks is 15 or 30 minutes and for workshops is 2 to 4 hours. The workshops are to be conducted in two parallel tracks for basic and advanced users.
+      </p>
                   <span><h2><u>Important Dates</u></h2></span>
              <ul>
                 <li>Call for proposals opens: <b>October 4, 2016</b></li>
@@ -74,7 +80,7 @@
             </ul>
 
             <br>
-      {% if user.is_superuser %}
+        {% if user.is_superuser %}
         <center><a href="{% url 'website:view_abstracts' %}" style="background:#D44727" class="button special">View Proposals</a> </center>
         {% else %}
                 <center>
@@ -84,11 +90,11 @@
                 </center>
         {% endif %}
                
-      {% else %}
-      <p align = "justify">We invite you to submit proposals for talks/ workshops to be presented at SciPy 2016. The time duration for talks is 15 or 30 minutes and for workshops is 2 to 4 hours. The workshops are to be conducted in two parallel tracks for basic and advanced users.
-</p><hr>
-      <ul class="features">
-<li>
+  {% else %}
+          <p align = "justify">We invite you to submit proposals for talks/ workshops to be presented at SciPy 2016. The time duration for talks is 15 or 30 minutes and for workshops is 2 to 4 hours. The workshops are to be conducted in two parallel tracks for basic and advanced users.
+        </p><hr>
+          <ul class="features">
+          <li>
                  <span><h2><u>Login</u></h2></span>
 
                 <p>Login/Register to Submit a Proposal</p>
@@ -113,16 +119,16 @@
 
             <!-- <div class="col-md-6" > -->
             
-<li>
+        <li>
                   <span><h2><u>Important Dates</u></h2></span>
              <ul>
                 <li>Call for proposal opens: <b>October 4, 2016</b></li>
                 <li>Last date for submission of proposals: To be announced
                 <li>Announcement of selected proposals: To be announced
             </ul>
-</li>
+        </li>
           <!-- </div> -->
-      {% endif %}   
+  {% endif %}   
      
         </section>
         </div>
