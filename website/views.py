@@ -310,7 +310,7 @@ def abstract_details(request, proposal_id=None):
         elif user is not None:
             proposal = Proposal.objects.get(id=proposal_id)
             print "------------------> owner",proposal.user
-            if proposal.user = user:
+            if proposal.user == user:
                 url = '/2016'+str(proposal.attachment.url) 
                 comments = Comments.objects.filter(proposal=proposal)
                 context['proposal'] = proposal
@@ -320,8 +320,8 @@ def abstract_details(request, proposal_id=None):
                 path, filename = os.path.split(str(proposal.attachment))
                 context['filename'] = filename
                 return render(request, 'abstract-details.html', context)
-        else:
-            return render(request, 'cfp.html', context)
+            else:
+                return render(request, 'cfp.html', context)
     else:
         return render(request, 'cfp.html', context)
 
