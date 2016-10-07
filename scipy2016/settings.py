@@ -154,14 +154,8 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = "/downloads/"
 
-LOGIN_REDIRECT_URL = '/cfp'
+LOGIN_URL = '/2016/accounts/login/'
+LOGIN_REDIRECT_URL = '/2016/cfp'
+
 
 # smtp
-
-ACCOUNT_ACTIVATION_DAYS = 7
-EMAIL_HOST =  'localhost'
-EMAIL_PORT = 1025
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = False
-DEFAULT_FROM_EMAIL = 'komal@gmail.com'

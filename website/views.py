@@ -309,15 +309,19 @@ def abstract_details(request, proposal_id=None):
             return render(request, 'abstract_details.html', context)
         elif user is not None:
             proposal = Proposal.objects.get(id=proposal_id)
-            url = '/2016'+str(proposal.attachment.url) 
-            comments = Comments.objects.filter(proposal=proposal)
-            context['proposal'] = proposal
-            context['user'] = user
-            context['url'] = url
-            context['comments'] = comments
-            path, filename = os.path.split(str(proposal.attachment))
-            context['filename'] = filename
-            return render(request, 'abstract-details.html', context)
+            print "------------------> owner",proposal.user
+            if proposal.user = user:
+                url = '/2016'+str(proposal.attachment.url) 
+                comments = Comments.objects.filter(proposal=proposal)
+                context['proposal'] = proposal
+                context['user'] = user
+                context['url'] = url
+                context['comments'] = comments
+                path, filename = os.path.split(str(proposal.attachment))
+                context['filename'] = filename
+                return render(request, 'abstract-details.html', context)
+        else:
+            return render(request, 'cfp.html', context)
     else:
         return render(request, 'cfp.html', context)
 
@@ -455,12 +459,12 @@ def status(request, proposal_id= None):
                 if proposal.proposal_type == 'ABSTRACT':
                     subject = "SciPy India 2016 - Talk Proposal Accepted"
                     message = """Dear """+proposal.user.first_name+""",
-                    Congratulations. Your proposal for the talk titled '"""+ proposal.title+ """'is accepted. 
+                    Congratulations. Your proposal for the talk titled '"""+ proposal.title+ """' is accepted. 
                     You shall present the talk at the conference.\n\nYou will be notified regarding instructions of your talk via email.\n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
                 elif proposal.proposal_type == 'WORKSHOP':
                     subject = "SciPy India 2016 - Workshop Proposal Accepted"
                     message = """Dear """+proposal.user.first_name+""",
-                    Congratulations. Your proposal for the workshop titled '"""+ proposal.title+ """'is accepted. 
+                    Congratulations. Your proposal for the workshop titled '"""+ proposal.title+ """' is accepted. 
                     You shall conduct the workshop at the conference.\n\nYou will be notified regarding instructions of your workshop via email.\n\nThank You ! \n\nRegards,\nSciPy India 2016,\nFOSSEE - IIT Bombay"""
                 send_mail(subject, message, sender_email, to)
                 context.update(csrf(request))

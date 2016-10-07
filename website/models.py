@@ -3,10 +3,11 @@ from django.contrib.auth.models import User
 
 from social.apps.django_app.default.models import UserSocialAuth
 from scipy2016 import settings
+import os
 
 def get_document_dir(instance, filename):
     # ename, eext = instance.user.email.split("@")
-    fname, fext = filename.split(".")
+    fname, fext = os.path.splitext(filename)
     print "----------------->",instance.user
     return '%s/attachment/%s/%s.%s' % (instance.user, instance.proposal_type, fname+'_'+str(instance.user), fext)
 
