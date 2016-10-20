@@ -1,12 +1,11 @@
+<!DOCTYPE HTML>
 {% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE HTML>
 <html>
 	<head>
 		<title>{{ user.get_full_name|default:user.username }}</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 	<body>
@@ -22,7 +21,6 @@
 
 
 
-<div id="wrapper">
 {% block nav %}
 
 <div id="navbar-main"> 
@@ -74,7 +72,7 @@
 							</section>
 
 					</div>
-      
+      </div>
    
 {% endblock %}
 					

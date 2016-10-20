@@ -25,7 +25,6 @@
 {% endblock %}
 
 
-<div id="wrapper">
 {% block nav %}
 
 <div id="navbar-main"> 
@@ -66,12 +65,13 @@
         <!-- <h2>{{ user.get_full_name|default:user.username }} </h2> -->
         <h2><u>Proposal Guidelines</u></h2>
              <ul>
-                <li>The project you are willing to present should be an actual implementation rather than just an idea.
-                <li>Abstract should be of 300 to 700 words describing the topic, including its relevance to scientific computing.
-                <li>Proposals with an aim to promote a commercial product or service will be rejected.
-                <li>In your abstract mention about various tools/libraries used for development.
-                <li>Notification for selection/rejection of your proposal will be given through email.
-                <li>All selected proposals must be presented at the conference by at least one author.
+                <li>The project you are willing to present should be an actual implementation rather than just an idea.</li>
+                <li>Submissions need not necessarily be about an implementation, they could also be about experiences and usage of Python and Python-based tools and libraries for research or teaching.</li>
+                <li>Abstract should be of 300 to 700 words describing the topic, including its relevance to scientific computing or the use of Python in education.</li>
+                <li>Proposals with an aim to promote a commercial product or service will be rejected.</li>
+                <li>In your abstract mention the various tools/libraries used for development.</li>
+                <li>Notification for selection/rejection of your proposal will be given through email.</li>
+                <li>All selected proposals must be presented at the conference by at least one author.</li>
             </ul>
         <form  action="" method=POST enctype="multipart/form-data">
 <!--           <a style="color:red; ">{{ proposal_form.errors }}</a>

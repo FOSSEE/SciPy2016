@@ -112,7 +112,7 @@
         <form action="{% url 'website:comment_abstract' proposal.id %}" method='POST' enctype="multipart/form-data">
             {% csrf_token %}
             <textarea rows="5" cols="100" id="comment" class= "comment" name="comment" placeholder = "Add commnet here..."></textarea><br>
-            <input class="button special" style="background:#d44727" type="submit" class="button" value="Comment">
+            <input class="button special" style="background:#d44727" type="submit" value="Comment">
 
         </form>
      <!--     <form action="{% url 'website:status' proposal.id %}" method='POST'>{% csrf_token %}

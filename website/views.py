@@ -322,6 +322,8 @@ def abstract_details(request, proposal_id=None):
                 return render(request, 'abstract-details.html', context)
             else:
                 return render(request, 'cfp.html', context)
+        else:
+            return render(request, 'cfp.html', context)
     else:
         return render(request, 'cfp.html', context)
 
