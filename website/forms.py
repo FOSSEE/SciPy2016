@@ -70,6 +70,7 @@ class ProposalForm(forms.ModelForm):
                         error_messages = {'required':'About me field required.'},  
                         )
     attachment = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}),
+                        label = 'Please upload relevant documents (if any)',
                         required = False,)   
     phone = forms.CharField(min_length = 10, max_length = 12, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),required=False, validators = [RegexValidator(regex = '^[0-9-_+.]*$', message='Enter a Valid Phone Number',)],
                              # error_messages = {'required':'Title field required.'},  
@@ -117,6 +118,7 @@ class WorkshopForm(forms.ModelForm):
                         error_messages = {'required':'About Me field required.'},  
                         )
     attachment = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}),
+                        label = 'Please upload relevant documents (if any)',
                         required = False,)   
     phone = forms.CharField(min_length = 10, max_length = 12, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),required=False, validators = [RegexValidator(regex = '^[0-9-_+.]*$', message='Enter a Valid Phone Number',)],
                                 )
