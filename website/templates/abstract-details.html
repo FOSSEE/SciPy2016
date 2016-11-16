@@ -54,7 +54,7 @@
         		<p><b>Prerequisite: </b>&nbsp;{{ proposal.prerequisite }}</p>
         	{% endif%}
             <p><b>Date Created: </b>&nbsp;{{ proposal.date_created }}</p>       
-          {% if proposal.attachment.url %}
+          {% if url %}
            <p><b>Attachment: </b>&nbsp;
            <a href="{{ url }}" class="btn btn-info" target="_blank">{{filename}}</a></p>
            {% endif %}
