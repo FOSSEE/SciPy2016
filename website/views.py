@@ -311,17 +311,22 @@ def abstract_details(request, proposal_id=None):
             proposal = Proposal.objects.get(id=proposal_id)
             print "------------------> owner",proposal.user
             if proposal.user == user:
-                url = '/2016'+str(proposal.attachment.url) 
+                try:
+                    url = '/2016'+str(proposal.attachment.url) 
+                    context['url'] = url
+                except:
+                    pass
                 comments = Comments.objects.filter(proposal=proposal)
                 context['proposal'] = proposal
                 context['user'] = user
-                context['url'] = url
                 context['comments'] = comments
                 path, filename = os.path.split(str(proposal.attachment))
                 context['filename'] = filename
                 return render(request, 'abstract-details.html', context)
             else:
                 return render(request, 'cfp.html', context)
+        else:
+            return render(request, 'cfp.html', context)
     else:
         return render(request, 'cfp.html', context)
 
@@ -371,7 +376,11 @@ def comment_abstract(request, proposal_id = None):
     if user.is_authenticated():
         if user.is_superuser :
             proposal = Proposal.objects.get(id=proposal_id)
-            url = '/2016'+str(proposal.attachment.url) 
+            try:
+                url = '/2016'+str(proposal.attachment.url) 
+                context['url'] = url
+            except:
+                pass
             if request.method == 'POST':
                 comment = Comments()
                 comment.comment = request.POST['comment']
@@ -421,7 +430,6 @@ def comment_abstract(request, proposal_id = None):
                 context['rates'] = rates
                 context['proposal'] = proposal
                 context['comments'] = comments
-                context['url'] = url
                 path, filename = os.path.split(str(proposal.attachment))
                 context['filename'] = filename
                 context.update(csrf(request))
@@ -431,7 +439,6 @@ def comment_abstract(request, proposal_id = None):
                 rates = Ratings.objects.filter(proposal=proposal)
                 context['rates'] = rates
                 context['proposal'] = proposal
-                context['url'] = url
                 context['comments'] = comments
                 path, filename = os.path.split(str(proposal.attachment))
                 context['filename'] = filename

@@ -24,6 +24,8 @@ SECRET_KEY = 'w81ia+6)sak!)t@kv=@x267y78ceh4iu2c@o@2#8+h$kua3e9a'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
@@ -159,3 +161,10 @@ LOGIN_REDIRECT_URL = '/2016/cfp'
 
 
 # smtp
+ACCOUNT_ACTIVATION_DAYS = 7
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'testing@example.com'

@@ -70,8 +70,7 @@ class ProposalForm(forms.ModelForm):
                         error_messages = {'required':'About me field required.'},  
                         )
     attachment = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}),
-                        required = True,
-                        error_messages = {'required':'Attachment field required.'},)   
+                        required = False,)   
     phone = forms.CharField(min_length = 10, max_length = 12, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),required=False, validators = [RegexValidator(regex = '^[0-9-_+.]*$', message='Enter a Valid Phone Number',)],
                              # error_messages = {'required':'Title field required.'},  
                                 )
@@ -79,7 +78,7 @@ class ProposalForm(forms.ModelForm):
                         required = True,
                         error_messages = {'required':'Title field required.'},  
                             )
-    abstract = forms.CharField(min_length = 300, max_length = 700,  widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Abstract'}),
+    abstract = forms.CharField(min_length = 300,  widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Abstract'}),
                         required = True,
                         label = 'Abstract (Min. 300 char.)',
                         error_messages = {'required':'Abstract field required.'},  
@@ -118,15 +117,14 @@ class WorkshopForm(forms.ModelForm):
                         error_messages = {'required':'About Me field required.'},  
                         )
     attachment = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}),
-                        required = True,
-                        error_messages = {'required':'Attachment field required.'},)   
+                        required = False,)   
     phone = forms.CharField(min_length = 10, max_length = 12, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone'}),required=False, validators = [RegexValidator(regex = '^[0-9-_+.]*$', message='Enter a Valid Phone Number',)],
                                 )
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Title'}),
                         required = True,
                         error_messages = {'required':'Title field required.'},  
                             )
-    abstract = forms.CharField(min_length = 300 ,max_length = 700,widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Desciption'}),
+    abstract = forms.CharField(min_length = 300 ,widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Desciption'}),
                         required = True,
                         label = 'Description (Min. 300 char.)',
                         error_messages = {'required':'Abstract field required.'},  
