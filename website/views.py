@@ -61,6 +61,7 @@ def userregister(request):
         context['user'] = request.user
         return render_to_response('cfp.html', context)
 
+@csrf_exempt 
 def contact_us(request,next_url):
     pass
     # user = request.user
@@ -82,6 +83,7 @@ def contact_us(request,next_url):
     # return redirect(next_url,context)
 
 
+@csrf_exempt 
 def home(request):
     #pass
     context = {}
@@ -562,47 +564,56 @@ def status_change(request):
                 return render(request, 'view-abstracts.html', context)  
             elif 'dump' in request.POST:
                 delete_proposal = request.POST.getlist('delete_proposal')
+                blank = False
+                if delete_proposal == [] :
+                    blank = True
                 try:
-                    response = HttpResponse(content_type='text/csv')
-                    response['Content-Disposition'] = 'attachment; filename="Proposals.csv"'
-                    writer = csv.writer(response)
-                    header = [
-                                'name',
-                                'username',
-                                'email',
-                                'about_me',
-                                'phone',
-                                'title',
-                                'abstract',
-                                'prerequisite',
-                                'duration',
-                                'attachment',
-                                'date_created',
-                                'status',
-                                'proposal_type',
-                                'tags',
-                          ]
-                    writer.writerow(header)
-                    for proposal_id in delete_proposal:
-                        proposal = Proposal.objects.get(id = proposal_id)
-                        row = [
-                                '{0} {1}'.format(proposal.user.first_name, proposal.user.last_name),
-                                proposal.user.username,
-                                proposal.user.email,
-                                proposal.about_me,
-                                proposal.phone,
-                                proposal.title,
-                                proposal.abstract,
-                                proposal.prerequisite,
-                                proposal.duration,
-                                proposal.attachment,
-                                proposal.date_created,
-                                proposal.status,
-                                proposal.proposal_type,
-                                proposal.tags,
-                                ]
-                        writer.writerow(row)
-                    return response
+                    if blank == False:
+                        response = HttpResponse(content_type='text/csv')
+                        response['Content-Disposition'] = 'attachment; filename="Proposals.csv"'
+                        writer = csv.writer(response)
+                        header = [
+                                    'name',
+                                    'username',
+                                    'email',
+                                    'about_me',
+                                    'phone',
+                                    'title',
+                                    'abstract',
+                                    'prerequisite',
+                                    'duration',
+                                    'attachment',
+                                    'date_created',
+                                    'status',
+                                    'proposal_type',
+                                    'tags',
+                              ]
+                        writer.writerow(header)
+                        for proposal_id in delete_proposal:
+                            proposal = Proposal.objects.get(id = proposal_id)
+                            row = [
+                                    '{0} {1}'.format(proposal.user.first_name, proposal.user.last_name),
+                                    proposal.user.username,
+                                    proposal.user.email,
+                                    proposal.about_me,
+                                    proposal.phone,
+                                    proposal.title,
+                                    proposal.abstract,
+                                    proposal.prerequisite,
+                                    proposal.duration,
+                                    proposal.attachment,
+                                    proposal.date_created,
+                                    proposal.status,
+                                    proposal.proposal_type,
+                                    proposal.tags,
+                                    ]
+                            writer.writerow(row)
+                        return response
+                    else:
+                        proposals = Proposal.objects.all()
+                        context['proposals'] = proposals
+                        context['user'] = user
+                        return render(request, 'view-abstracts.html', context) 
                 except:
                     proposals = Proposal.objects.all()
                     context['proposals'] = proposals

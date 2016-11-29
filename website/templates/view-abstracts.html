@@ -76,8 +76,8 @@ You have not submitted any proposal. To submit proposal click <a href="{% url 'w
         {% endif %}
     </colgroup>
      {% if user.is_superuser  %}
-    <th> <center>Select
-           
+    <th> <center><input type="checkbox" onClick="toggle(this)" />
+           </center></th>
     <th>Speaker
       {% endif %}
     <th> Type
@@ -168,22 +168,17 @@ You have not submitted any proposal. To submit proposal click <a href="{% url 'w
       <script src="assets/js/jquery.scrolly.min.js"></script>
       <script src="assets/js/skel.min.js"></script>
       <script src="assets/js/util.js"></script>
-      <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
       <script src="assets/js/main.js"></script>
-
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/processing.js/1.4.1/processing-api.min.js"></script>
 
 <script>
-$(document).ready(function() {
-    var n1 = Math.round(Math.random() * 10 + 1);
-    var n2 = Math.round(Math.random() * 10 + 1);
-    $("#a").val(n1 + " + " + n2 + " = ");
-    $("#c").click(function() {
-        if (eval($("#a").val()) == $("#b").val()) {
-        } else {
-            alert("Write the correct value ");
-        }
-    });
-});
+function toggle(source) {
+  alert('hi');
+  checkboxes = document.getElementsByName('delete_proposal');
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = source.checked;
+  }
+}
 </script>
 </body>
 </html>

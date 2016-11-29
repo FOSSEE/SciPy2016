@@ -60,6 +60,12 @@
         	{% if proposal.prerequisite %}
         		<p><b>Prerequisite: </b>&nbsp;{{ proposal.prerequisite }}</p>
         	{% endif%}
+          <p><b>Duration: </b>&nbsp;{{ proposal.duration }} {% if proposal.proposal_type == "ABSTRACT"%} Mins {% else %}Hours {%endif%}</p>
+          {% if proposal.proposal_type == "ABSTRACT"%}
+          <p><b>Tags: </b>&nbsp;{{ proposal.tags }}</p>
+          {% else %}
+          <p><b>Level: </b>&nbsp;{{ proposal.tags }}</p>
+          {% endif %}
           {% if url %}
            <b>Attachment: </b>&nbsp;<a href="{{ url }}" class="btn btn-info" target="_blank">{{ filename }}</a>
            {% endif %}
