@@ -48,10 +48,10 @@
 			<section id="content" class="main">
 				<h3>{{ proposal.user.first_name }} {{ proposal.user.last_name }}</h3>
 			<p><b>Title: </b>&nbsp;{{ proposal.title }}</p>
-     		<p><b>About Me: </b>&nbsp;{{ proposal.about_me }}</p>
-        	<p><b>Abstract: </b>&nbsp;{{ proposal.abstract }}</p>
+     		<p><b>About Me: </b>&nbsp;{{ proposal.about_me | linebreaks }}</p>
+        	<p><b>Abstract: </b>&nbsp;{{ proposal.abstract |linebreaks }}</p>
         	{% if proposal.prerequisite %}
-        		<p><b>Prerequisite: </b>&nbsp;{{ proposal.prerequisite }}</p>
+        		<p><b>Prerequisite: </b>&nbsp;{{ proposal.prerequisite |linebreaks }}</p>
         	{% endif%}
             <p><b>Date Created: </b>&nbsp;{{ proposal.date_created }}</p>       
           {% if url %}
@@ -64,7 +64,7 @@
             <div>
                 <strong>Comment By:</strong>
                 {{ comment.user.first_name }} {{ comment.user.last_name }}
-                <p>{{ comment.comment|safe }}</p>
+                <p>{{ comment.comment| linebreaks }}</p>
             </div>
             <hr>
         {% endfor %}

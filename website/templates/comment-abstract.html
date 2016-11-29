@@ -48,7 +48,7 @@
 			<section id="content" class="main">
 				<h3>{{ proposal.user.first_name }} {{ proposal.user.last_name }}</h3>
 			<p><b>Title: </b>&nbsp;{{ proposal.title }}</p>
-     		<p><b>About Me: </b>&nbsp;{{ proposal.about_me }}</p>
+     		<p><b>About Me: </b>&nbsp;{{ proposal.about_me |linebreaks }}</p>
 
          {% if proposal.proposal_type == "ABSTRACT"%}
 
@@ -56,9 +56,9 @@
             {% else %}
           <p><b>Description:</b>&nbsp;
           {% endif %}
-            {{ proposal.abstract }}</p>
+            {{ proposal.abstract | linebreaks }}</p>
         	{% if proposal.prerequisite %}
-        		<p><b>Prerequisite: </b>&nbsp;{{ proposal.prerequisite }}</p>
+        		<p><b>Prerequisite: </b>&nbsp;{{ proposal.prerequisite| linebreaks }}</p>
         	{% endif%}
           <p><b>Duration: </b>&nbsp;{{ proposal.duration }} {% if proposal.proposal_type == "ABSTRACT"%} Mins {% else %}Hours {%endif%}</p>
           {% if proposal.proposal_type == "ABSTRACT"%}
@@ -106,7 +106,7 @@
             <div>
                 <strong>Comment By:</strong>
                 {{ comment.user.first_name }} {{ comment.user.last_name }}
-                <p>{{ comment.comment|safe }}</p>  
+                <p>{{ comment.comment| linebreaks }}</p>  
                <!--  {% if user == comment.user %}
                  <form action="" method='POST' enctype="multipart/form-data">
             {% csrf_token %} 
