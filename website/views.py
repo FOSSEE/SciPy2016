@@ -394,7 +394,7 @@ def comment_abstract(request, proposal_id = None):
                 sender_email = "scipy@fossee.in"
                 to = (proposal.user.email, "scipy@fossee.in" )
                 if proposal.proposal_type == 'ABSTRACT':
-                    subject = "SciPy India 216 - Comment on Your talk Proposal"
+                    subject = "SciPy India 2016 - Comment on Your talk Proposal"
                     message = """
                         Dear {0}, <br><br>
                         There is a comment posted on your proposal for the talk titled <b>{1}</b>.<br>
@@ -407,7 +407,7 @@ def comment_abstract(request, proposal_id = None):
                         'http://scipy.in/2016/abstract-details/' + str(proposal.id),
                         )
                 elif proposal.proposal_type =='WORKSHOP':
-                    subject = "SciPy India 216 - Comment on Your Workshop Proposal"
+                    subject = "SciPy India 2016 - Comment on Your Workshop Proposal"
                     message = """
                         Dear {0}, <br><br>
                         There is a comment posted on your proposal for the workshop titled <b>{1}</b>.<br>
@@ -502,7 +502,7 @@ def status(request, proposal_id= None):
                 sender_name = "SciPy India 2016"
                 sender_email = "scipy@fossee.in"
                 if proposal.proposal_type == 'ABSTRACT':
-                    subject = "SciPy India 216 - Talk Proposal Resumbmission"
+                    subject = "SciPy India 2016 - Talk Proposal Resumbmission"
                     message = """
                     Dear {0}, <br><br>
                     Thank you for showing interest & submitting a talk proposal at SciPy India 2016 conference for the talk titled <b>"{1}"</b>. You are requested to submit this talk proposal once again.<br>
@@ -515,7 +515,7 @@ def status(request, proposal_id= None):
                     'http://scipy.in/2016/view-abstracts/' 
                     )
                 elif proposal.proposal_type =='WORKSHOP':
-                    subject = "SciPy India 216 - Workshop Proposal Resubmission"
+                    subject = "SciPy India 2016 - Workshop Proposal Resubmission"
                     message = """
                     Thank you for showing interest & submitting a workshop proposal at SciPy India 2016 conference for the workshop titled <b>"{1}"</b>. You are requested to submit this talk proposal once        again.<br>
                     You will be notified regarding comments/selection/rejection of your workshop via email.
@@ -679,7 +679,7 @@ def status_change(request):
                     sender_email = "scipy@fossee.in"
                     to = (proposal.user.email, "scipy@fossee.in" )
                     if proposal.proposal_type == 'ABSTRACT':
-                        subject = "SciPy India 216 - Talk Proposal Resumbmission"
+                        subject = "SciPy India 2016 - Talk Proposal Resumbmission"
                         message = """
                         Dear {0}, <br><br>
                         Thank you for showing interest & submitting a talk proposal at SciPy India 2016 conference for the talk titled <b>"{1}"</b>. You are requested to submit this talk proposal once again.<br>
@@ -692,7 +692,7 @@ def status_change(request):
                         'http://scipy.in/2016/view-abstracts/' 
                         )
                     elif proposal.proposal_type =='WORKSHOP':
-                        subject = "SciPy India 216 - Workshop Proposal Resubmission"
+                        subject = "SciPy India 2016 - Workshop Proposal Resubmission"
                         message = """
                         Thank you for showing interest & submitting a workshop proposal at SciPy India 2016 conference for the workshop titled <b>"{1}"</b>. You are requested to submit this talk proposal once        again.<br>
                         You will be notified regarding comments/selection/rejection of your workshop via email.
