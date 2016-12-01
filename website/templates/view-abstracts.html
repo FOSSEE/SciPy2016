@@ -60,14 +60,14 @@ You have not submitted any proposal. To submit proposal click <a href="{% url 'w
     <table id = "myTable"  class="tablesorter">
           <colgroup>
                 {% if user.is_superuser  %}
+        <col width="5%" />
+        <col width="20%" />
         <col width="10%" />
-        <col width="20%" />
-        <col width="20%" />
-        <col width="20%" />
-        <col width="40%" />
+        <col width="30%" />
+        <col width="10%" />
         <col width="10%" />
         {% else %}
-        <col width="20%" />
+        <col width="5%" />
         <col width="70%" />
         <col width="10%" />
         <col width="10%" />
@@ -86,7 +86,7 @@ You have not submitted any proposal. To submit proposal click <a href="{% url 'w
     <th> View
       {% endif %}
       {% if user.is_superuser %}
-    <th> Ratings
+    <th><center> Duration</center>
       {% else %}
     <th> Comments
       {% endif %}
@@ -103,18 +103,19 @@ You have not submitted any proposal. To submit proposal click <a href="{% url 'w
             {{ proposal.user.get_full_name}}
         </td>
         {% endif %}
-        <td> {{proposal.proposal_type }} </td>
+        <td> {{proposal.proposal_type | truncatechars:6 }} </td>
        
       {% if user.is_superuser  %}
-        <td style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:.5px;"><a href="{% url 'website:comment_abstract' proposal.id %}">{{proposal.title }}</a> </td>
+        <td style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:.5px;"><a title="Title : {{proposal.title}}, Tags: {{proposal.tags}}" href="{% url 'website:comment_abstract' proposal.id %}">{{proposal.title}}</a> </td>
       {% else %}
        <td  style="white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:.5px;"> {{proposal.title}}</td>
          <td ><a href="{% url 'website:abstract_details' proposal.id %}">View</a> </td>
       {% endif %}
       <td>{% if user.is_superuser %}
-         {% for rating in proposal.ratings_set.all %}
-        {{ rating.rating}} - {{rating.user}}<br>
-        {% endfor %}
+         
+        <center>{{ proposal.duration }}
+        {% if proposal.proposal_type == 'ABSTRACT' %}
+        Mins{% else %} Hrs {% endif %}</center>
         {% else %}
           {{proposal.comments_set.count}}
         {% endif %}
@@ -142,7 +143,8 @@ You have not submitted any proposal. To submit proposal click <a href="{% url 'w
     {% endfor %}
     </table>
     {% if user.is_superuser  %}
-    <center><input type="submit" id="delete" class ="button special" style="background:#D44727;" value="Delete" name="delete"/>
+    <center>
+      <!-- <input type="submit" id="delete" class ="button special" style="background:#D44727;" value="Delete" name="delete"/> -->
     <input type="submit" id="dump" class ="button special" style="background:#D44727;" value="Export as csv" name="dump"/></center><br>
     <center>
     <input type="submit" id="accept" class ="button special" style="background:green;" value="Accept" name="accept"/>
