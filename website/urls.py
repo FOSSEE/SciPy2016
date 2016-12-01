@@ -10,6 +10,8 @@ urlpatterns = patterns('',
     url(r'^cfp/$', 'website.views.cfp', name='cfp'),
     # url(r'^submit-cfp/$', 'website.views.submitcfp', name='submitcfp'),
     # url(r'^submit-cfw/$', 'website.views.submitcfw', name='submitcfw'),
+    url(r'^submit-cfp/$', 'website.views.home', name='home'),
+    url(r'^submit-cfw/$', 'website.views.home', name='home'),
     url(r'^accounts/register/$', 'website.views.userregister', name='userregister'),
     url(r'^accounts/login/$', 'website.views.cfp', name='cfp'),
 
