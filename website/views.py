@@ -150,6 +150,7 @@ def submitcfp(request):
             if form.is_valid():
                 data = form.save(commit=False)
                 data.user = django_user
+                data.email = social_user.email
                 data.save()
                 context['proposal_submit'] = True
                 sender_name = "SciPy India 2016"
@@ -202,6 +203,7 @@ def submitcfw(request):
             if form.is_valid():
                 data = form.save(commit=False)
                 data.user = django_user
+                data.email = social_user.email
                 data.save()
                 context['proposal_submit'] = True
                 sender_name = "SciPy India 2016"
@@ -308,24 +310,27 @@ def abstract_details(request, proposal_id=None):
             proposals = Proposal.objects.all()
             context['proposals'] = proposals
             context['user'] = user
-            return render(request, 'abstract_details.html', context)
+            return render(request, 'cfp.html', context)
         elif user is not None:
-            proposal = Proposal.objects.get(id=proposal_id)
-            print "------------------> owner",proposal.user
-            if proposal.user == user:
-                try:
-                    url = '/2016'+str(proposal.attachment.url) 
-                    context['url'] = url
-                except:
-                    pass
-                comments = Comments.objects.filter(proposal=proposal)
-                context['proposal'] = proposal
-                context['user'] = user
-                context['comments'] = comments
-                path, filename = os.path.split(str(proposal.attachment))
-                context['filename'] = filename
-                return render(request, 'abstract-details.html', context)
-            else:
+            try:
+                proposal = Proposal.objects.get(id=proposal_id)
+                print "------------------> owner",proposal.user
+                if proposal.user == user:
+                    try:
+                        url = '/2016'+str(proposal.attachment.url) 
+                        context['url'] = url
+                    except:
+                        pass
+                    comments = Comments.objects.filter(proposal=proposal)
+                    context['proposal'] = proposal
+                    context['user'] = user
+                    context['comments'] = comments
+                    path, filename = os.path.split(str(proposal.attachment))
+                    context['filename'] = filename
+                    return render(request, 'abstract-details.html', context)
+                else:
+                    return render(request, 'cfp.html', context)
+            except:
                 return render(request, 'cfp.html', context)
         else:
             return render(request, 'cfp.html', context)
@@ -377,75 +382,78 @@ def comment_abstract(request, proposal_id = None):
     context = {}
     if user.is_authenticated():
         if user.is_superuser :
-            proposal = Proposal.objects.get(id=proposal_id)
             try:
-                url = '/2016'+str(proposal.attachment.url) 
-                context['url'] = url
+                proposal = Proposal.objects.get(id=proposal_id)
+                try:
+                    url = '/2016'+str(proposal.attachment.url) 
+                    context['url'] = url
+                except:
+                    pass
+                if request.method == 'POST':
+                    comment = Comments()
+                    comment.comment = request.POST['comment']
+                    comment.user = user
+                    comment.proposal = proposal
+                    comment.save()
+                    comments = Comments.objects.filter(proposal=proposal)
+                    sender_name = "SciPy India 2016"
+                    sender_email = "scipy@fossee.in"
+                    to = (proposal.user.email, "scipy@fossee.in" )
+                    if proposal.proposal_type == 'ABSTRACT':
+                        subject = "SciPy India 2016 - Comment on Your talk Proposal"
+                        message = """
+                            Dear {0}, <br><br>
+                            There is a comment posted on your proposal for the talk titled <b>{1}</b>.<br>
+                            Once we receive your response, you will be notified regarding further comments/acceptance/ rejection of your talk/workshop via email. 
+                            Visit this link {2} to view comments on your submission.<br><br>
+                            Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
+                            """.format(
+                            proposal.user.first_name,
+                            proposal.title, 
+                            'http://scipy.in/2016/abstract-details/' + str(proposal.id),
+                            )
+                    elif proposal.proposal_type =='WORKSHOP':
+                        subject = "SciPy India 2016 - Comment on Your Workshop Proposal"
+                        message = """
+                            Dear {0}, <br><br>
+                            There is a comment posted on your proposal for the workshop titled <b>{1}</b>.<br>
+                            Once we receive your response, you will be notified regarding further comments/acceptance/ rejection of your talk/workshop via email. 
+                            Visit this {2} link to view comments on your submission.<br><br>
+                            Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
+                            """.format(
+                            proposal.user.first_name,
+                            proposal.title, 
+                            'http://scipy.in/2016/abstract-details/' + str(proposal.id),
+                            )
+                    email = EmailMultiAlternatives(
+                        subject,'',
+                        sender_email, to,
+                        headers={"Content-type":"text/html;charset=iso-8859-1"}
+                    )
+                    email.attach_alternative(message, "text/html")
+                    email.send(fail_silently=True)
+                    proposal.status="Commented"
+                    proposal.save()
+                    rates = Ratings.objects.filter(proposal=proposal)
+                    context['rates'] = rates
+                    context['proposal'] = proposal
+                    context['comments'] = comments
+                    path, filename = os.path.split(str(proposal.attachment))
+                    context['filename'] = filename
+                    context.update(csrf(request))
+                    return render(request, 'comment-abstract.html', context)
+                else:
+                    comments = Comments.objects.filter(proposal=proposal)
+                    rates = Ratings.objects.filter(proposal=proposal)
+                    context['rates'] = rates
+                    context['proposal'] = proposal
+                    context['comments'] = comments
+                    path, filename = os.path.split(str(proposal.attachment))
+                    context['filename'] = filename
+                    context.update(csrf(request))
+                    return render(request, 'comment-abstract.html', context)
             except:
-                pass
-            if request.method == 'POST':
-                comment = Comments()
-                comment.comment = request.POST['comment']
-                comment.user = user
-                comment.proposal = proposal
-                comment.save()
-                comments = Comments.objects.filter(proposal=proposal)
-                sender_name = "SciPy India 2016"
-                sender_email = "scipy@fossee.in"
-                to = (proposal.user.email, "scipy@fossee.in" )
-                if proposal.proposal_type == 'ABSTRACT':
-                    subject = "SciPy India 2016 - Comment on Your talk Proposal"
-                    message = """
-                        Dear {0}, <br><br>
-                        There is a comment posted on your proposal for the talk titled <b>{1}</b>.<br>
-                        Once we receive your response, you will be notified regarding further comments/acceptance/ rejection of your talk/workshop via email. 
-                        Visit this link {2} to view comments on your submission.<br><br>
-                        Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
-                        """.format(
-                        proposal.user.first_name,
-                        proposal.title, 
-                        'http://scipy.in/2016/abstract-details/' + str(proposal.id),
-                        )
-                elif proposal.proposal_type =='WORKSHOP':
-                    subject = "SciPy India 2016 - Comment on Your Workshop Proposal"
-                    message = """
-                        Dear {0}, <br><br>
-                        There is a comment posted on your proposal for the workshop titled <b>{1}</b>.<br>
-                        Once we receive your response, you will be notified regarding further comments/acceptance/ rejection of your talk/workshop via email. 
-                        Visit this {2} link to view comments on your submission.<br><br>
-                        Thank You ! <br><br>Regards,<br>SciPy India 2016,<br>FOSSEE - IIT Bombay.
-                        """.format(
-                        proposal.user.first_name,
-                        proposal.title, 
-                        'http://scipy.in/2016/abstract-details/' + str(proposal.id),
-                        )
-                email = EmailMultiAlternatives(
-                    subject,'',
-                    sender_email, to,
-                    headers={"Content-type":"text/html;charset=iso-8859-1"}
-                )
-                email.attach_alternative(message, "text/html")
-                email.send(fail_silently=True)
-                proposal.status="Commented"
-                proposal.save()
-                rates = Ratings.objects.filter(proposal=proposal)
-                context['rates'] = rates
-                context['proposal'] = proposal
-                context['comments'] = comments
-                path, filename = os.path.split(str(proposal.attachment))
-                context['filename'] = filename
-                context.update(csrf(request))
-                return render(request, 'comment-abstract.html', context)
-            else:
-                comments = Comments.objects.filter(proposal=proposal)
-                rates = Ratings.objects.filter(proposal=proposal)
-                context['rates'] = rates
-                context['proposal'] = proposal
-                context['comments'] = comments
-                path, filename = os.path.split(str(proposal.attachment))
-                context['filename'] = filename
-                context.update(csrf(request))
-                return render(request, 'comment-abstract.html', context)
+                return render(request, 'cfp.html', context)
         else:
             return render(request, 'cfp.html', context)
     else:
