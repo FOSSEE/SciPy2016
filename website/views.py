@@ -272,33 +272,42 @@ def edit_proposal(request, proposal_id = None):
     user = request.user
     context = {}
     if user.is_authenticated():
-        proposal = Proposal.objects.get(id=proposal_id)
-        if proposal.proposal_type == 'ABSTRACT':
-            form = ProposalForm( instance=proposal)
-        else:
-            form = WorkshopForm( instance=proposal)
-        if request.method == 'POST':
-            if proposal.proposal_type == 'ABSTRACT':
-                form = ProposalForm( request.POST, request.FILES, instance=proposal)
+        try:
+            proposal = Proposal.objects.get(id=proposal_id)
+            if proposal.status == 'Edit':
+                if proposal.proposal_type == 'ABSTRACT':
+                    form = ProposalForm( instance=proposal)
+                else:
+                    form = WorkshopForm( instance=proposal)
             else:
-                form = WorkshopForm( request.POST, request.FILES, instance=proposal)
-            if form.is_valid():
-                data = form.save(commit = False)
-                data.user = user
-                proposal.status = 'Resubmitted'
-                data.save()
-                context.update(csrf(request))
-                proposals = Proposal.objects.filter(user = user).order_by('status')
-                context['proposals'] = proposals
-                return render(request, 'view-abstracts.html', context)
-            else:
-                context['user'] = user
-                context['form'] = form
-                context['proposal'] = proposal
-                return render(request, 'edit-proposal.html', context)
-        context['user'] = user
-        context['form'] = form
-        context['proposal'] = proposal
+                return render(request,'cfp.html')
+            if request.method == 'POST':
+                if proposal.status == 'Edit':
+                    if proposal.proposal_type == 'ABSTRACT':
+                        form = ProposalForm( request.POST, request.FILES, instance=proposal)
+                    else:
+                        form = WorkshopForm( request.POST, request.FILES, instance=proposal)
+                else:
+                    return render(request, 'cfp.html')
+                if form.is_valid():
+                    data = form.save(commit = False)
+                    data.user = user
+                    proposal.status = 'Resubmitted'
+                    data.save()
+                    context.update(csrf(request))
+                    proposals = Proposal.objects.filter(user = user).order_by('status')
+                    context['proposals'] = proposals
+                    return render(request, 'view-abstracts.html', context)
+                else:
+                    context['user'] = user
+                    context['form'] = form
+                    context['proposal'] = proposal
+                    return render(request, 'edit-proposal.html', context)
+            context['user'] = user
+            context['form'] = form
+            context['proposal'] = proposal
+        except:
+            render(request, 'cfp.html')
     return render(request, 'edit-proposal.html', context)
 
 @login_required
