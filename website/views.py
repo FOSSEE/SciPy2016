@@ -62,6 +62,10 @@ def userregister(request):
         return render_to_response('cfp.html', context)
 
 @csrf_exempt 
+def gallery(request):
+    return render(request, 'gallery.html')
+
+@csrf_exempt 
 def contact_us(request,next_url):
     pass
     # user = request.user
